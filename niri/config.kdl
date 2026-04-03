@@ -639,8 +639,10 @@ binds {
     // Instructions to DMS
     // Toggle the launcher/spotlight
     Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-    // Toggle clipboard
-    Mod+P { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    // Clipboard
+    Mod+Ctrl+P { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    // Power Menu
+    Mod+P { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
 }
 
 // Custom configs
