@@ -184,6 +184,9 @@ alias li='eza --icons'
 alias editZshrc="nvim ${dot_file_loc}/zsh/zshrc_sub"
 alias editNvimrc="nvim ${dot_file_loc}/nvim/init.vim"
 
+# Go to dotfile
+alias go_to_dotfiles="cd ${dot_file_loc}"
+
 # Convert pdfs to images:
 # 1-Image format, 2-Name of PDF file, 3-Name of image file
 function pdf2img () {
