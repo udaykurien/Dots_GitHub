@@ -1,0 +1,1 @@
+/home/echoes/Stuff/Private/Dots/nvim/init.vim

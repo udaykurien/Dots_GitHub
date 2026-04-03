@@ -1,0 +1,287 @@
+# CUSTOM ZSH ALIASES AND FUNCTIONS FOR Z-SHELL INCLUDED WITH BASE MANJARO INSTALLATION
+
+# Paths
+# CUDA paths
+export PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX
+
+# Global variables:
+venvLoc="PyVenv" # Location of python virtual environments
+counter=0 # General purpose counter var
+
+# Add folder for user binaries to path
+export PATH=$PATH:~/.local/bin 
+
+# Global ansi colors
+GREEN='\033[32;1m'
+RED='\033[0;31m'
+WHITE='\033[37;0;4m'
+WHITEBG='\033[37;100;1m'
+CYAN='\033[96m'
+CYANB='\033[96;1m'
+YELLOWB='\033[93;1m'
+RESET='\033[0m'
+
+# Quick aliasis:
+alias tt='tmux'
+# Eza binaries can be downloaded from releases at https://github.com/eza-community/eza
+alias ll='eza --icons=always'
+alias lll='eza --icons=always -l'
+alias xx='exit'
+
+# General purpose functions:
+# Loop:
+function monitor () {
+	echo -e "${YELLOWB}USAGE: monitor [command] [run_time] [refresh_interval]${RESET}"
+	cmnd=$1; net_time=$2; intrvl_time=$3
+	current_iter=0;	total_iter=$(($net_time/$intrvl_time))
+	while [ $current_iter -lt $total_iter ]
+	do
+		echo -e "${WHITEBG}$current_iter. Time - $(date +'%H:%M:%S')${RESET}"
+		eval $cmnd
+		current_iter=$((current_iter+1))
+		sleep $3
+	done
+}
+
+# Function to open manpages in new terminal
+#function superman() {
+#	term_name=$(basename $(cat /proc/$(xdotool getwindowpid $(xdotool getactivewindow))/cmdline))
+#	$term_name -e man $1 &
+#}
+
+# Function to print terminal 256 color scheme
+function print_colors() {
+	for i in {0..255}
+	do
+    		printf "\x1b[38;5;%smcolour%s\n" "${i}" "${i}"
+	done
+}
+
+# Cheat sheets
+cheats_loc=~/"Stuff/Private/Cheat_Sheets_And_Instructions/" 	# some back commands take ~ if placed within quotes. to ensure ~ expansion place it outside the quotes or use full path in quotes.
+alias list_cheats="tree $cheats_loc"
+alias browse_cheats="ranger $cheats_loc"
+function search_cheats() {
+	echo "Searching in $cheats_loc :"
+	cd $cheats_loc 						# change directory to truncate grep path output
+	find ./ -iname $1 
+	grep --color -ri $1 ./
+	cd - 1>/dev/null					# return to starting dir
+}
+
+# Terminal GenAI
+alias tgptd='tgpt --provider duckduckgo'
+
+# restart plasma shell
+alias restart_plasma='killall plasmashell; kstart plasmashell; exit'
+
+# change swap space
+alias swap_20g='~/Stuff/Github/SystemPrograms/swap_20g.sh'
+alias swap_8g='~/Stuff/Github/SystemPrograms/swap_8g.sh'
+
+# activities
+alias activity_info='qdbus --literal org.kde.ActivityManager /ActivityManager/Activities ListActivitiesWithInformation '
+alias activity_manager_loc='~/.local/share/kactivitymanagerd/'
+alias next_activity='qdbus org.kde.ActivityManager /ActivityManager/Activities org.kde.ActivityManager.Activities.NextActivity && kbl 880001 1'
+alias previous_activity='qdbus org.kde.ActivityManager /ActivityManager/Activities org.kde.ActivityManager.Activities.PreviousActivity && kbl'
+
+# screen resolution:
+alias max_res='xrandr --size 2560x1600'
+alias mid_res='xrandr --size 1920x1200'
+
+# nvme health:
+alias nvme-health='sudo nvme smart-log /dev/nvme1n1'
+
+# cpu temperature:
+alias cpu_temp='sensors | grep Tctl'
+
+# Battery mode:
+alias bat_thresh_status='cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+alias bat_thresh_on='echo 1 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode > /dev/null && cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+alias bat_thresh_off='echo 0 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode >> /dev/null && cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+
+# CPU boost:
+alias ryzen_boost_status='cat /sys/devices/system/cpu/cpufreq/boost'
+alias ryzen_boost_on='echo "1" | sudo tee /sys/devices/system/cpu/cpufreq/boost'
+alias ryzen_boost_off='echo "0" | sudo tee /sys/devices/system/cpu/cpufreq/boost'
+
+# Virtualization
+alias virt_daemons_start='sudo systemctl start libvirtd && sudo virsh net-start default'
+alias virt_daemons_stop='sudo systemctl stop libvirtd && sudo virsh net-destroy default'
+
+# Make python virtual environment in ~/PyVenv:
+function pyVenvMake () { python3 -m venv ~/$venvLoc/$1; }  
+# Activate python virtual environment in ~/PyVenv:
+function pyVenvActivate () { source ~/$venvLoc/$1/bin/activate; }
+# List python virtual environments in ~/PyVenv:
+alias pyVenvList="ls ~/$venvLoc/"
+# Go directly to python project directory:
+function jump2PyProj () { cd ~/Stuff/PythonPrograms/; }
+
+# Keyboard backlight:
+function kbl () {
+	pyVenvActivate l5p_kbl
+	python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py static ${1:-603030} ${2:-603030} ${3:-603030} ${4:-603030} --brightness ${5:-1}
+	deactivate
+}
+
+function kbl_off () {
+	pyVenvActivate l5p_kbl
+	python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py off
+	deactivate
+}
+
+alias kbl_pink='kbl 401010 401010 401010 401010'
+alias kbl_orange='kbl 581f00 581f00 581f00 581f00'
+alias kbl_orange_intense='kbl 9b1f00 9b1f00 9b1f00 9b1f00'
+alias kbl_blue='kbl 3E6390 3E6390 3E6390 3E6390'
+alias kbl_cyberpink='kbl EE39C6 EE39C6 EE39C6 EE39C6'
+alias kbl_red_low='kbl 440000 440000 440000 440000'
+alias kbl_red_mid='kbl 990000 990000 990000 990000'
+alias kbl_red_high='kbl ff0000 ff0000 ff0000 ff0000'
+alias kbl_red_blue='kbl 880000 880000 000088 000088'
+alias kbl_cyber_red_blue='kbl 660511 660511 112266 112266'
+alias kbl_leaf_green='kbl 224400 224400 224400 224400 1'
+alias kbl_white='kbl 886688 886688 886688 886688 1'
+alias kbl_white_low='kbl 443344 443344 443344 443344 1'
+
+alias ihaztastetherainbow='pyVenvActivate l5p_kbl && \
+      python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py static --brightness 1 008800 000088 880088 880000 \
+      && deactivate'
+
+# Reload zshrc:
+alias reloadZshrc='source ~/.zshrc'
+
+# apt & flatpak update
+alias apt-flatpak-update='sudo apt upgrade && flatpak update'
+
+# OCR incantation:
+alias grab_text='flameshot gui --raw | \
+  tesseract stdin stdout | \
+  xclip -in -selection clipboard'
+
+# yt-dlp:
+alias yt-dlp-def='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0'
+alias yt-dlp-audio-solver='yt-dlp --remote-components ejs:github --extract-audio --audio-format mp3 --audio-quality 0'
+alias yt-dlp-video-solver='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" --remote-components ejs:github'
+
+# Launch TUI music setup
+alias muzick='~/Stuff/Private/ShellScripts/Music_Center/tmux_music_center.sh'
+
+# shortwave:
+alias shortwave_cache="cd ~/.var/app/de.haeckerfelix.Shortwave/cache/Shortwave/recording"
+
+# Disable ls folder highlights and alias exa
+LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
+alias li='eza --icons'
+
+# Edit files:
+alias editZshrc='nvim ~/Stuff/Private/Dots/zshrc_manjaro/zshrc_sub'
+alias editVimrc='nvim ~/Stuff/Private/Dots/vimrc/vimrc'
+
+# Convert pdfs to images:
+# 1-Image format, 2-Name of PDF file, 3-Name of image file
+function pdf2img () {
+	echo "pdf2img <img_format> <pdf_file_name> <img_file_name>"
+	pdftoppm -"$1" "$2" "$3"
+}
+
+# Track ISS:
+alias trackISS='curl --silent http://api.open-notify.org/iss-now.json | jq'
+
+## Fix tilix:
+#if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#        source /etc/profile.d/vte.sh
+#fi
+
+# Open child instance of tilix:
+alias tille='tilix -e'
+# Open child instance of tilix for man pages:
+alias tillman='tilix -e man'
+
+# Open child instance of ptyxis for man pages:
+function superman() {
+	ptyxis -e man $1 &
+}
+
+# Source somethings for conda - zsh (?) compatiblity                                                                      
+alias conda_start='source ~/miniforge3/etc/profile.d/conda.sh && export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX'
+# Activate anaconda base environment
+alias conda_activate_base='eval "$(/home/nuclear/anaconda3/bin/conda shell.zsh hook)"' 
+# Set conda autoactivate off
+alias conda_auto_activate_off="conda config --set auto_activate_base false"
+# Set conda autoactivate on
+alias conda_auto_activate_on="conda config --set auto_activate_base true"
+# Make new environment
+alias conda_create="conda create --name"
+# Make environment from yml file : first line of yml is name of environment
+alias conda_create_from_yml="conda env create -f"
+# List environments
+alias conda_env_list="conda env list"
+
+# Connect to psql via postgres role
+alias postgres_psql='sudo -u postgres psql'
+# Connect to psql via nuclear role
+alias postgres_nuclear='sudo -u nuclear psql'
+# Create psql role
+alias postgres_createuser='sudo -u postgres createuser --interactive'
+
+# Make offline copy of webpage:
+alias weboffline='wget -E -H -k -K -p' # https://www.gnu.org/software/wget/manual/wget.html
+
+# Make notes
+alias notes='nvim ~/Stuff/QuickNotes/notes.html' 
+alias notes-texteditor='flatpak run org.gnome.TextEditor ~/Stuff/Notes/notes.html'
+
+# Zshrc plugins:
+#source ~/Github/SystemPrograms/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/Github/SystemPrograms/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Virtualization
+alias virsh_net_default="sudo virsh net-start default" # needed on Manjaro
+
+# Just for fun
+alias enter_the_matrix='cmatrix -ab'
+alias cow='fortune | cowsay | lolcat'
+alias meowy='printf "
+　　　　 　　 ＿＿
+　　　 　　／＞　　フ
+　　　 　　| 　_　 _ 1
+　 　　 　／ \`ミ＿xノ
+　　 　 /　　　 　 |
+　　　 /　 ヽ　　 ﾉ
+　 　 │　　|　|　|
+　／￣|　　 |　|　|
+　| (￣ヽ＿_ヽ_)__)
+　二つ
+" | lolcat'
+# Temporary:
+# ---------
+#alias twitter_dev_py='jump2PyProj && cd Twitter-Sentiment-Data-Analysis && pyVenvActivate Twitter-Exp && flatpak run com.github.Eloston.UngoogledChromium & sleep 2s && tilix -a session-add-down -x "jupyter-notebook --no-browser"'
+#
+## Create, compile and run C++ files
+#cpp_source_loc='/home/nuclear/Github/CppPrograms/learn-c-plus-plus/Source'
+#cpp_exec_loc='~/Github/CppPrograms/learn-c-plus-plus/Executables'
+#cpp_exec_loc='/home/nuclear/Github/CppPrograms/learn-c-plus-plus/Executables'
+#function createcpp () {
+#	touch $cpp_source_loc/$1.cpp
+#	echo '#include <iostream>' >> $cpp_source_loc/$1.cpp
+#	echo '' >> $cpp_source_loc/$1.cpp
+#	echo 'int main () {' >> $cpp_source_loc/$1.cpp 
+#	echo '' >> $cpp_source_loc/$1.cpp 
+#	echo '    /**/' >> $cpp_source_loc/$1.cpp 
+#	echo '' >> $cpp_source_loc/$1.cpp 
+#	echo '    return 0;' >> $cpp_source_loc/$1.cpp 
+#	echo '' >> $cpp_source_loc/$1.cpp 
+#	echo '}' >> $cpp_source_loc/$1.cpp 
+#}
+#function compilecpp() {
+#	g++ -std=c++20 $cpp_source_loc/$1.cpp -o $cpp_exec_loc/$1.o
+#}
+#function runcpp(){
+#	$cpp_exec_loc/$1.o 
+#}
+#
+alias centSem03='cd ~/Stuff/Centennial/Sem03/'

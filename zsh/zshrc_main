@@ -1,0 +1,40 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=2000
+unsetopt beep
+# End of lines configured by zsh-newuser-install
+
+# Some autocompletion settings
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+zstyle ':completion:*' correct yes
+zstyle ':completion:*' max-errors 2
+
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+
+zstyle ':completion:*' menu select
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Open new tab in cwd (for zsh)
+autoload -Uz add-zsh-hook
+
+function update_pwd() {
+  printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"
+}
+
+add-zsh-hook chpwd update_pwd
+update_pwd
+
+# My stuff
+source ~/Stuff/Private/Dots_GitHub/zsh/zshrc_sub
+source ~/Stuff/Github/SystemPrograms/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/Stuff/Github/SystemPrograms/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Start starship
+eval "$(starship init zsh)"
+#. "/home/echoes/.deno/env"
