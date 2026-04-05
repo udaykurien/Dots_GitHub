@@ -149,6 +149,7 @@ alias kbl_cyber_red_blue='kbl 660511 660511 112266 112266'
 alias kbl_leaf_green='kbl 224400 224400 224400 224400 1'
 alias kbl_white='kbl 886688 886688 886688 886688 1'
 alias kbl_white_low='kbl 443344 443344 443344 443344 1'
+alias kbl_purple_splotch='kbl 110044 222244 222244 110044'
 
 alias ihaztastetherainbow='pyVenvActivate l5p_kbl && \
       python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py static --brightness 1 008800 000088 880088 880000 \
