@@ -16,4 +16,5 @@ ln -s ~/Stuff/Private/Dots_GitHub/zsh/zshrc_main ~/.zshrc
 mkdir -p ~/.config/nvim/
 ln -s ~/Stuff/Private/Dots_GitHub/nvim/init.vim ~/.config/nvim/
 
-
+# starship
+ln -s ~/Stuff/Private/Dots_GitHub/starship/starship.toml ~/.config/starship.toml
