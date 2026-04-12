@@ -203,8 +203,8 @@ layout {
         // active-color "#ffc87f"
         // inactive-color "#505050"
 
-        active-color "#ffffff"
-        inactive-color "#000000"
+        active-color "#dddddd"
+        inactive-color "#444444"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
