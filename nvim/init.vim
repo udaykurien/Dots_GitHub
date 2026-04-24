@@ -12,7 +12,7 @@ set clipboard=unnamedplus
 call plug#begin('~/.local/share/nvim/site/plugged')
 " Plugin Section
  Plug 'ryanoasis/vim-devicons'
- Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
  Plug 'scrooloose/nerdtree'
  Plug 'preservim/nerdcommenter'
@@ -61,7 +61,7 @@ set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
-colorscheme ayu-dark         " Set colorscheme
+"colorscheme ayu-dark         " Set colorscheme
 "lua << EOF
 "require('onedark').setup({
 "    style = 'darker'
