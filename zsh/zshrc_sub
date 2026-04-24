@@ -33,6 +33,12 @@ alias ll='eza --icons=always'
 alias lll='eza --icons=always -l'
 alias xx='exit'
 
+# OS specific aliases
+# Nix
+alias editNixFlake="sudo nvim /etc/nixos/flake.nix"
+alias editNixConfig="sudo nvim /etc/nixos/configuration.nix"
+alias nixRebuild="sudo nixos-rebuild switch"
+
 # General purpose functions:
 # Loop:
 function monitor () {
