@@ -67,12 +67,12 @@
 #  services.desktopManager.plasma6.enable = true;
 
    # Enable GNOME Desktop Environment:
-   services.desktopManager.gnome.enable = true;
-   services.displayManager.gdm.enable = true;
-   services.displayManager.gdm.wayland = true;
-   
+   services.xserver.desktopManager.gnome.enable = true;
+   services.xserver.displayManager.gdm.enable = true;
+   services.xserver.displayManager.gdm.wayland = true;
+ 
    # Enable fractional scaling (Gnome < 50).
-   services.desktopManager.gnome.extraGSettingsOverrides = ''
+   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
      [org.gnome.mutter]
      experimental-features=['scale-monitor-framebuffer']
   '';
@@ -121,6 +121,18 @@
   
   # Enable flakes and experimental commands.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  # For pre-built cuda binary caches
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://cuda-maintainers.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    ];
+  };
 
   # Set up flatpaks
   services.flatpak.enable = true;
@@ -131,9 +143,13 @@
     name = "flathub";
     location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
   }];
-
+  
+  # Session variables are set on first log in
   environment.sessionVariables = {
-    XDG_DATA_DIRS = [ "/var/lib/flatpak/exports/share" "$HOME/.local/share/flatpak/exports/share" ];
+    XDG_DATA_DIRS = [ "/var/lib/flatpak/exports/share" "$HOME/.local/share/flatpak/exports/share" ]; # Flatpaks
+    AI_PROVIDER = "sky"; # Tgpt, update it when there is a better provider
+    CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
   };
 
   # Install firefox.
@@ -142,32 +158,59 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # To fix numpy and dll errors.
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib   # provides libstdc++.so.6
+      zlib
+      cudaPackages.cuda_cudart
+      cudaPackages.cudnn
+      cudaPackages.libcublas
+      cudaPackages.libcurand
+      cudaPackages.libcufft
+      cudaPackages.libcusolver
+      cudaPackages.libcusparse
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   	#vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  	zsh
-	starship
-	neovim
-	wget
+	adwaita-icon-theme
+    cudaPackages.cuda_cudart
+    cudaPackages.cuda_nvcc
+    cudaPackages.cudnn
+    cudaPackages.libcublas
+    cudaPackages.libcurand
+    cudaPackages.libcufft
+    cudaPackages.libcusolver
+    cudaPackages.libcusparse
 	curl
-	htop
+	deja-dup
+	eza
 	fastfetch
 	git
-	ncdu
-	eza
-	librewolf
-	adwaita-icon-theme
+    gnome-extension-manager
 	gnome-tweaks
-        gnome-extension-manager
-	yaru-theme
 	hicolor-icon-theme
-	deja-dup
-	wl-clipboard
-	python3
-	nodejs
+	htop
 	libreoffice
+	librewolf
+	ncdu
+	neovim
+	nodejs
+	pdfarranger
+	python3
+	resources
+	starship
+	tgpt
+	wget
+	wl-clipboard
+	yaru-theme
 	zed-editor
+  	zsh
   ];
 
   # Fonts.
