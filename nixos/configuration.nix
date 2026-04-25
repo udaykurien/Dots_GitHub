@@ -13,6 +13,17 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # Splash
+  boot.plymouth = {
+   enable = true;
+   theme = "cuts";
+   themePackages = with pkgs; [
+     (adi1090x-plymouth-themes.override {
+       selected_themes = [ "cuts" ];
+     })
+   ];
+  };
 
   # Nvidia driver
   hardware.graphics.enable = true;
@@ -38,8 +49,8 @@
   };
   
   # Boot params
-  boot.kernelParams = [ "acpi_backlight=native" ]; # Get backlight control to work
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelParams = [ "acpi_backlight=native" "quiet" "splash" "nvidia-drm.modeset=1" ]; # Get backlight control to work
+  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
   boot.initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
   networking.hostName = "nixos"; # Define your hostname.
@@ -67,12 +78,16 @@
 #  services.desktopManager.plasma6.enable = true;
 
    # Enable GNOME Desktop Environment:
-   services.xserver.desktopManager.gnome.enable = true;
-   services.xserver.displayManager.gdm.enable = true;
-   services.xserver.displayManager.gdm.wayland = true;
- 
+   services.desktopManager.gnome.enable = true;
+   services.displayManager.gdm.enable = true;
+   services.displayManager.gdm.wayland = true;
+   
+   # Enable virtualization.
+   virtualisation.libvirtd.enable = true;
+   programs.virt-manager.enable = true;
+
    # Enable fractional scaling (Gnome < 50).
-   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+   services.desktopManager.gnome.extraGSettingsOverrides = ''
      [org.gnome.mutter]
      experimental-features=['scale-monitor-framebuffer']
   '';
@@ -110,7 +125,7 @@
   users.users.echoes = {
     isNormalUser = true;
     description = "echoes";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  kdePackages.kate
@@ -118,20 +133,19 @@
     ptyxis
     ];
   };
-  
-  # Enable flakes and experimental commands.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # For pre-built cuda binary caches
+ 
+  # Nix settings.
   nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
     substituters = [
-      "https://cache.nixos.org"
-      "https://cuda-maintainers.cachix.org"
+      "https://cache.nixos.org/"
+      "https://cache.nixos-cuda.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
+    download-buffer-size = 524288000;
   };
 
   # Set up flatpaks
@@ -178,7 +192,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   	#vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-	adwaita-icon-theme
+	adw-gtk3
+    adwaita-icon-theme
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvcc
     cudaPackages.cudnn
@@ -193,23 +208,31 @@
 	fastfetch
 	git
     gnome-extension-manager
+    gnomeExtensions.user-themes
 	gnome-tweaks
-	hicolor-icon-theme
+	gparted
+    hicolor-icon-theme
 	htop
 	libreoffice
 	librewolf
 	ncdu
 	neovim
 	nodejs
-	pdfarranger
+    pdfarranger
 	python3
 	resources
-	starship
+	signal-desktop-bin
+    starship
+    stremio-linux-shell
 	tgpt
-	wget
-	wl-clipboard
+    tree
+    vimPlugins.vim-plug
+	vscodium
+    wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
+    wget
+    wl-clipboard
 	yaru-theme
-	zed-editor
+	unstable.zed-editor
   	zsh
   ];
 
