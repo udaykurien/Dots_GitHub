@@ -232,6 +232,12 @@
 	fastfetch
 	git
     gnome-extension-manager
+    gnomeExtensions.caffeine
+    gnomeExtensions.clipboard-history
+    gnomeExtensions.color-picker
+    gnomeExtensions.gtile
+    gnomeExtensions.just-perfection
+    gnomeExtensions.vitals
     gnomeExtensions.user-themes
 	gnome-tweaks
 	gparted
