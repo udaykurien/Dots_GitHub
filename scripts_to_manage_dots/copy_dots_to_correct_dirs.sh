@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # niri
 mkdir -p /home/echoes/.config/niri
