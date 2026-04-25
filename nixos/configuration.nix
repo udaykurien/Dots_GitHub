@@ -10,22 +10,45 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  
-  # Splash
-  boot.plymouth = {
-   enable = true;
-   theme = "cuts";
-   themePackages = with pkgs; [
-     (adi1090x-plymouth-themes.override {
-       selected_themes = [ "cuts" ];
-     })
-   ];
+#  # Bootloader.
+#  boot.loader.systemd-boot.enable = true;
+#  boot.loader.efi.canTouchEfiVariables = true;
+#  boot.loader.systemd-boot.configurationLimit = 3; # Keep only last n generations of boot entries in /boot
+#  
+#  # Splash
+#  boot.plymouth = {
+#   enable = true;
+#   theme = "connect";
+#   themePackages = with pkgs; [
+#     (adi1090x-plymouth-themes.override {
+#       selected_themes = [ "connect" ];
+#     })
+#   ];
+#  };
+
+  # Boot settings.
+  boot = {
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    initrd.systemd.enable = true;
+    initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
+    kernelParams = [ "acpi_backlight=native" "quiet" "splash" "udev.log_priority=3" "rd.systemd.show_status=false" "nvidia-drm.modeset=1" ];
+    loader.systemd-boot.enable = true;
+    loader.systemd-boot.configurationLimit = 3;
+    loader.efi.canTouchEfiVariables = true;
+    plymouth = {
+      enable = true;
+      theme = "connect";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "connect" ];
+        })
+      ];
+    };
   };
 
-  # Nvidia driver
+  # Nvidia driver.
   hardware.graphics.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
@@ -48,11 +71,12 @@
     nvidiaBusId = "PCI:1:0:0";
   };
   
-  # Boot params
-  boot.kernelParams = [ "acpi_backlight=native" "quiet" "splash" "nvidia-drm.modeset=1" ]; # Get backlight control to work
-  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-
-  boot.initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
+#  # Boot params
+#  boot.kernelParams = [ "acpi_backlight=native" "quiet" "splash" "nvidia-drm.modeset=1" ]; # Get backlight control to work
+#  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+#
+#  boot.initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
+  
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
