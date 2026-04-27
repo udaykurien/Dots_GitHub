@@ -16,7 +16,7 @@
     initrd.verbose = false;
     initrd.systemd.enable = true;
     initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-    initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
+#    initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
     kernelParams = [ "acpi_backlight=native" "quiet" "splash" "udev.log_priority=3" "rd.systemd.show_status=false" "nvidia-drm.modeset=1" ];
     loader.systemd-boot.enable = true;
     loader.systemd-boot.configurationLimit = 3;
@@ -236,14 +236,17 @@
 	gparted
     hicolor-icon-theme
 	htop
+    id3v2
 	libreoffice
 	librewolf
 	ncdu
 	neovim
 	nodejs
     obsidian
+    obs-studio
     pdfarranger
 	python3
+    python313Packages.yt-dlp-ejs
 	resources
 	signal-desktop-bin
     starship
@@ -256,6 +259,7 @@
     wget
     wl-clipboard
 	yaru-theme
+    yt-dlp
 	unstable.zed-editor
   	zsh
   ];
@@ -272,6 +276,7 @@
     { appId = "de.haeckerfelix.Shortwave"; origin = "flathub"; }
     { appId = "com.stremio.Stremio"; origin = "flathub"; }
     { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
+    { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
