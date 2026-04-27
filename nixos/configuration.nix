@@ -10,22 +10,6 @@
       ./hardware-configuration.nix
     ];
 
-#  # Bootloader.
-#  boot.loader.systemd-boot.enable = true;
-#  boot.loader.efi.canTouchEfiVariables = true;
-#  boot.loader.systemd-boot.configurationLimit = 3; # Keep only last n generations of boot entries in /boot
-#  
-#  # Splash
-#  boot.plymouth = {
-#   enable = true;
-#   theme = "connect";
-#   themePackages = with pkgs; [
-#     (adi1090x-plymouth-themes.override {
-#       selected_themes = [ "connect" ];
-#     })
-#   ];
-#  };
-
   # Boot settings.
   boot = {
     consoleLogLevel = 0;
@@ -71,12 +55,6 @@
     nvidiaBusId = "PCI:1:0:0";
   };
   
-#  # Boot params
-#  boot.kernelParams = [ "acpi_backlight=native" "quiet" "splash" "nvidia-drm.modeset=1" ]; # Get backlight control to work
-#  boot.initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-#
-#  boot.initrd.luks.devices."luks-1783d8d4-c954-45a9-9496-d27748ef5ef8".device = "/dev/disk/by-uuid/1783d8d4-c954-45a9-9496-d27748ef5ef8";
-  
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -101,19 +79,22 @@
 #  services.displayManager.sddm.enable = true;
 #  services.desktopManager.plasma6.enable = true;
 
-   # Enable GNOME Desktop Environment:
-   services.desktopManager.gnome.enable = true;
-   services.displayManager.gdm.enable = true;
-   services.displayManager.gdm.wayland = true;
-   
-   # Enable virtualization.
-   virtualisation.libvirtd.enable = true;
-   programs.virt-manager.enable = true;
+  # Enable GNOME Desktop Environment:
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
+  
+  # Enable virtualization.
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
-   # Enable fractional scaling (Gnome < 50).
-   services.desktopManager.gnome.extraGSettingsOverrides = ''
-     [org.gnome.mutter]
-     experimental-features=['scale-monitor-framebuffer']
+  # Enable Docker.
+   virtualisation.docker.enable = true;
+  
+  # Enable fractional scaling (Gnome < 50).
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer']
   '';
 
   # Configure keymap in X11
@@ -149,7 +130,7 @@
   users.users.echoes = {
     isNormalUser = true;
     description = "echoes";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  kdePackages.kate
@@ -160,6 +141,8 @@
  
   # Nix settings.
   nix.settings = {
+    max-jobs = 6;
+    cores = 1;
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
       "https://cache.nixos.org/"
@@ -174,6 +157,7 @@
 
   # Set up flatpaks
   services.flatpak.enable = true;
+  services.flatpak.update.onActivation = true;
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
@@ -189,6 +173,11 @@
     CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
     LD_LIBRARY_PATH = "/run/opengl-driver/lib";
   };
+  
+  # udev rules.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c965", MODE="0666"
+  '';
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -202,6 +191,7 @@
     libraries = with pkgs; [
       stdenv.cc.cc.lib   # provides libstdc++.so.6
       zlib
+      libusb1
       cudaPackages.cuda_cudart
       cudaPackages.cudnn
       cudaPackages.libcublas
@@ -228,9 +218,12 @@
     cudaPackages.libcusparse
 	curl
 	deja-dup
-	eza
+    eza
 	fastfetch
-	git
+	file
+    gimp-with-plugins
+    git
+    gnomeExtensions.appindicator
     gnome-extension-manager
     gnomeExtensions.caffeine
     gnomeExtensions.clipboard-history
@@ -248,16 +241,17 @@
 	ncdu
 	neovim
 	nodejs
+    obsidian
     pdfarranger
 	python3
 	resources
 	signal-desktop-bin
     starship
-    stremio-linux-shell
 	tgpt
     tree
     vimPlugins.vim-plug
-	vscodium
+	vlc
+    vscodium
     wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
     wget
     wl-clipboard
@@ -276,6 +270,8 @@
   # Flatpak apps.
   services.flatpak.packages = [
     { appId = "de.haeckerfelix.Shortwave"; origin = "flathub"; }
+    { appId = "com.stremio.Stremio"; origin = "flathub"; }
+    { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
