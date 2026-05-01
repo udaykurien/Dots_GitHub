@@ -218,6 +218,7 @@
     cudaPackages.libcusparse
 	curl
 	deja-dup
+    exiftool
     eza
 	fastfetch
 	file
@@ -282,6 +283,7 @@
     { appId = "com.stremio.Stremio"; origin = "flathub"; }
     { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
     { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
+    { appId = "io.github.revisto.drum-machine"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
