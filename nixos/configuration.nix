@@ -208,6 +208,8 @@
   	#vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	adw-gtk3
     adwaita-icon-theme
+    binutils
+    cmus
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvcc
     cudaPackages.cudnn
@@ -222,6 +224,7 @@
     eza
 	fastfetch
 	file
+    foliate
     gimp-with-plugins
     git
     gnomeExtensions.appindicator
@@ -241,6 +244,7 @@
     lshw
 	libreoffice
 	librewolf
+    nasm
     ncdu
 	neovim
 	nodejs
@@ -251,11 +255,13 @@
 	psmisc
     python3
     python313Packages.yt-dlp-ejs
-	resources
+	ranger
+    resources
 	rubberband
     signal-desktop-bin
     starship
 	tgpt
+    tmux
     tree
     usbutils
     vimPlugins.vim-plug
@@ -284,6 +290,7 @@
     { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
     { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
     { appId = "io.github.revisto.drum-machine"; origin = "flathub"; }
+    { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
