@@ -5,8 +5,9 @@
 dot_file_loc='~/Stuff/Private/Dots_GitHub'
 
 # CUDA paths
-export PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# export PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}}
+# export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib:/run/opengl-driver/lib:$LD_LIBRARY_PATH
 export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX
 
 # Global variables:
@@ -26,8 +27,13 @@ CYANB='\033[96;1m'
 YELLOWB='\033[93;1m'
 RESET='\033[0m'
 
-# Quick aliasis:
+# Tmux:
 alias tt='tmux'
+
+if command -v tmux > /dev/null 2>&1 && [ -z "$TMUX" ]; then
+    tmux new-session
+fi
+
 # Eza binaries can be downloaded from releases at https://github.com/eza-community/eza
 alias ll='eza --icons=always'
 alias lll='eza --icons=always -l'
