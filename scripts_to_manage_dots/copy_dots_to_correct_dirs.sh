@@ -1,3 +1,5 @@
+# nix
+sudo ln -s /home/echoes/Stuff/Private/Dots_GitHub/nixos /etc/nixos
 
 # niri
 mkdir -p /home/echoes/.config/niri
@@ -11,9 +13,13 @@ ln -s ~/Stuff/Private/Dots_GitHub/hyprland/hyprpaper.conf /home/echoes/.config/h
 # zshrc
 ln -s ~/Stuff/Private/Dots_GitHub/zsh/zshrc_main ~/.zshrc
 
-# nvmim
+# nvim
 mkdir -p ~/.config/nvim/
 ln -s ~/Stuff/Private/Dots_GitHub/nvim/init.vim ~/.config/nvim/
 
 # starship
 ln -s ~/Stuff/Private/Dots_GitHub/starship/starship.toml ~/.config/starship.toml
+
+# tmux
+ln -s ~/Stuff/Private/Dots_GitHub/tmux/tmux.conf ~/.tmux.conf
+
