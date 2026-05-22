@@ -205,8 +205,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  	#vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-	adw-gtk3
+    adw-gtk3
     adwaita-icon-theme
     binutils
     blanket
@@ -219,16 +218,19 @@
     cudaPackages.libcufft
     cudaPackages.libcusolver
     cudaPackages.libcusparse
-	curl
-	deja-dup
+    curl
+    deja-dup
+    eloquent
     exfatprogs
     exiftool
     eza
-	fastfetch
-	file
+    fastfetch
+    file
     foliate
     gimp-with-plugins
     git
+    gnome-boxes
+    gnome-disk-utility
     gnomeExtensions.appindicator
     gnome-extension-manager
     gnomeExtensions.caffeine
@@ -238,44 +240,45 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.vitals
     gnomeExtensions.user-themes
-	gnome-tweaks
-	gparted
+    gnome-tweaks
+    gparted
     hicolor-icon-theme
-	htop
+    htop
     id3v2
-	libreoffice
-	librewolf
+    libreoffice
+    librewolf
     localsend
     lshw
     nasm
     ncdu
-	neovim
-	nodejs
+    neovim
+    nodejs
     obsidian
     obs-studio
     pciutils
     pdfarranger
-	psmisc
+    planify
+    psmisc
     python3
     python313Packages.yt-dlp-ejs
-	ranger
+    ranger
     resources
     rubberband
     signal-desktop-bin
     starship
-	tgpt
+    tgpt
     tmux
     tree
     usbutils
     vimPlugins.vim-plug
-	vlc
+    vlc
     vscodium
     wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
     wget
     wl-clipboard
-	yaru-theme
+    yaru-theme
     yt-dlp
-	unstable.zed-editor
+    unstable.zed-editor
   	zsh
   ];
 
@@ -294,6 +297,7 @@
     { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
     { appId = "io.github.revisto.drum-machine"; origin = "flathub"; }
     { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
+    { appId = "io.github.shonebinu.Defuse"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
