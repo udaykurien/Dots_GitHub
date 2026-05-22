@@ -18,6 +18,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
  Plug 'preservim/nerdcommenter'
  Plug 'mhinz/vim-startify'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'sheerun/vim-polyglot'
 
  " Themes
  Plug 'Shatur/neovim-ayu'
@@ -33,7 +34,9 @@ call plug#begin('~/.local/share/nvim/site/plugged')
  Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
  Plug 'joshdick/onedark.vim'
  Plug 'arcticicestudio/nord-vim'
-call plug#end()
+ Plug 'vague-theme/vague.nvim'
+ Plug 'daltonmenezes/aura-theme', { 'rtp': 'packages/neovim' }
+ call plug#end()
 
 
 set nocompatible            " disable compatibility to old-time vi
@@ -61,14 +64,6 @@ set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
-"colorscheme ayu-dark         " Set colorscheme
-"lua << EOF
-"require('onedark').setup({
-"    style = 'darker'
-"})
-"require('onedark').load()
-"EOF
+colorscheme ayu         " Set colorscheme
 
-" Keybindings
-" Open/close nerdtree file explorer
 nnoremap <C-n> :NERDTreeToggle<CR>
