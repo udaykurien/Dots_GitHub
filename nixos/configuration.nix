@@ -217,6 +217,7 @@
     adwaita-icon-theme
     binutils
     blanket
+    btop
     cmus
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvcc
