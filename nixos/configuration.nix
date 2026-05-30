@@ -90,20 +90,26 @@
   # Enable GNOME Desktop Environment:
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
+# services.displayManager.gdm.wayland = true;
 
   # Enable virtualization.
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
   # Enable Docker.
-   virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
-  # Enable fractional scaling (Gnome < 50).
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.mutter]
-    experimental-features=['scale-monitor-framebuffer']
-  '';
+  # Enable niri
+  programs.niri.enable = true;
+  
+  # Enable DMS
+  programs.dms-shell.enable = true;
+
+#  # Enable fractional scaling (Gnome < 50).
+#  services.desktopManager.gnome.extraGSettingsOverrides = ''
+#    [org.gnome.mutter]
+#    experimental-features=['scale-monitor-framebuffer']
+#  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -274,7 +280,7 @@
     ranger
     resources
     rubberband
-    signal-desktop-bin
+#   signal-desktop-bin
     starship
     tgpt
     tmux
@@ -287,7 +293,8 @@
     wl-clipboard
     yaru-theme
     yt-dlp
-    pkgs-unstable.zed-editor
+#    pkgs-unstable.zed-editor
+    zed-editor
     zsh
   ];
 
@@ -309,6 +316,7 @@
     { appId = "io.github.shonebinu.Defuse"; origin = "flathub"; }
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
     { appId = "com.vscodium.codium"; origin = "flathub"; }
+    { appId = "org.signal.Signal"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
