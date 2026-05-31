@@ -104,6 +104,10 @@
   
   # Enable DMS
   programs.dms-shell.enable = true;
+  programs.dsearch = {
+    enable = true;
+    systemd.enable = true;
+  };
 
 #  # Enable fractional scaling (Gnome < 50).
 #  services.desktopManager.gnome.extraGSettingsOverrides = ''
@@ -223,6 +227,7 @@
     adwaita-icon-theme
     binutils
     blanket
+    brightnessctl
     btop
     cmus
     cudaPackages.cuda_cudart
