@@ -202,6 +202,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
+  # Install steam
+  programs.steam.enable = true;
 
   # To fix numpy and dll errors.
   programs.nix-ld = {
@@ -247,6 +250,7 @@
     fastfetch
     file
     foliate
+    gamescope 
     gimp-with-plugins
     git
     gnome-boxes
@@ -296,6 +300,7 @@
     wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
     wget
     wl-clipboard
+    xwayland-satellite
     yaru-theme
     yt-dlp
 #    pkgs-unstable.zed-editor
@@ -317,7 +322,7 @@
     { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
     { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
     { appId = "io.github.revisto.drum-machine"; origin = "flathub"; }
-    { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
+#   { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
     { appId = "io.github.shonebinu.Defuse"; origin = "flathub"; }
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
     { appId = "com.vscodium.codium"; origin = "flathub"; }
