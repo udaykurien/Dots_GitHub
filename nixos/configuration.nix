@@ -148,7 +148,7 @@
   users.users.echoes = {
     isNormalUser = true;
     description = "echoes";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "input" ]; # input - for evdev in autokbl
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  kdePackages.kate
@@ -197,6 +197,19 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c965", MODE="0666"
   '';
 
+  # Systemd service for auto kbl
+systemd.services.l5p-autobl = {
+  description = "L5P Keyboard Backlight Auto Controller";
+  wantedBy = [ "multi-user.target" ];
+  after = [ "graphical-session.target" ];
+  serviceConfig = {
+    ExecStart = "/run/current-system/sw/bin/python3 /home/echoes/Stuff/Github/SystemPrograms/l5p-kbl-autorun/NixOS/l5p_kbl_auto_on_off.py";
+    Restart = "on-failure";
+    User = "echoes";
+    Environment = "LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib";
+  };
+};
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -226,6 +239,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    (python3.withPackages (ps: with ps; [ evdev pyusb ]))
     adw-gtk3
     adwaita-icon-theme
     binutils
