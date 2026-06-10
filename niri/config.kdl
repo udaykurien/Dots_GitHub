@@ -205,8 +205,8 @@ layout {
         // active-color "#ffc87f"
         // inactive-color "#505050"
 
-        active-color "#8bc34a"
-        inactive-color "#888888"
+        active-color "#ffffff"
+        inactive-color "#000000"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -642,7 +642,7 @@ binds {
     // Toggle the launcher/spotlight
     Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     // Clipboard
-    Mod+Ctrl+P { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+Ctrl+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     // Power Menu
     Mod+P { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
 }
