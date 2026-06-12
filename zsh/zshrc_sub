@@ -43,7 +43,8 @@ alias xx='exit'
 # Nix
 alias editNixFlake="sudo nvim /etc/nixos/flake.nix"
 alias editNixConfig="sudo nvim /etc/nixos/configuration.nix"
-alias nixRebuild="sudo nixos-rebuild switch"
+alias nixRebuild="sudo nixos-rebuild switch --flake .#SpiritBox"
+alias nixUpdate="cd ~/Stuff/Private/Dots_GitHub/nixos && sudo nix flake update && nixRebuild && cd -"
 alias open-localsend='sudo iptables -I nixos-fw 1 -p tcp --dport 53317 -j nixos-fw-accept && sudo iptables -I nixos-fw 1 -p udp --dport 53317 -j nixos-fw-accept'
 alias close-localsend='sudo iptables -D nixos-fw -p tcp --dport 53317 -j nixos-fw-accept && sudo iptables -D nixos-fw -p udp --dport 53317 -j nixos-fw-accept'
 
