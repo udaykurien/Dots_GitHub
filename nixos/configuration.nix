@@ -257,6 +257,7 @@ systemd.services.l5p-autobl = {
     cudaPackages.libcusparse
     curl
     deja-dup
+    discord
     eloquent
     exfatprogs
     exiftool
@@ -308,6 +309,7 @@ systemd.services.l5p-autobl = {
     tgpt
     tmux
     tree
+    unzip
     usbutils
     vimPlugins.vim-plug
     vlc
