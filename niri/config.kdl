@@ -651,7 +651,7 @@ binds {
 // --------------
 
 // No decorations
-prefer-no-csd
+// prefer-no-csd
 
 
 // Some cursor thingy
