@@ -160,7 +160,7 @@
   # Nix settings.
   nix.settings = {
     max-jobs = 6;
-    cores = 1;
+    cores = 4;
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
       "https://cache.nixos.org/"
