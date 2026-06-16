@@ -179,6 +179,14 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
+  # Give flatpak apps access to gtk theme directories
+  services.flatpak.overrides.settings = {
+    global.Context.filesystems = [
+      "xdg-config/gtk-3.0:ro"
+      "xdg-config/gtk-4.0:ro"
+    ];
+  };
+
   services.flatpak.remotes = [{
     name = "flathub";
     location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
@@ -293,6 +301,7 @@ systemd.services.l5p-autobl = {
     nasm
     ncdu
     neovim
+    noctalia-shell
     nodejs
     obs-studio
     pciutils
