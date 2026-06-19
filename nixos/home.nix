@@ -3,6 +3,7 @@
 {
   imports = [
     ./home/neovim.nix
+    ./home/zsh.nix
   ];
 
   home.username = "echoes";
