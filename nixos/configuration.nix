@@ -176,8 +176,10 @@
   # Set up flatpaks
   services.flatpak.enable = true;
   services.flatpak.update.onActivation = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  
+  # Niri module already adss these xdg's, so no need to include them here
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
   # Give flatpak apps access to gtk theme directories
   services.flatpak.overrides.settings = {
@@ -274,6 +276,8 @@ systemd.services.l5p-autobl = {
     file
     foliate
     gamescope 
+    gcc
+    gnumake
     gimp-with-plugins
     git
     gnome-boxes
@@ -290,18 +294,20 @@ systemd.services.l5p-autobl = {
     gnome-tweaks
     gnumake
     gparted
+    # grim
+    # grimblast
     hicolor-icon-theme
     htop
     id3v2
     jdk21
+    # kooha
     libreoffice
     librewolf
     localsend
     lshw
     nasm
     ncdu
-    neovim
-    noctalia-shell
+    # noctalia-shell
     nodejs
     obs-studio
     pciutils
@@ -314,10 +320,12 @@ systemd.services.l5p-autobl = {
     resources
     rubberband
 #   signal-desktop-bin
+#   slurp
     starship
     tgpt
     tmux
     tree
+    tree-sitter
     unzip
     usbutils
     vimPlugins.vim-plug
