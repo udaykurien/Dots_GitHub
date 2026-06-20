@@ -47,8 +47,8 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -200,12 +200,15 @@
     AI_PROVIDER = "sky"; # Tgpt, update it when there is a better provider
     CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
     LD_LIBRARY_PATH = "/run/opengl-driver/lib";
+    WLR_DRM_DEVICES = "/dev/dri/card1"; # Offload niri to integrated graphics instead of nvidia
   };
 
   # udev rules.
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c965", MODE="0666"
-  '';
+    # Power off NVIDIA GPU when not in use
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
+'';
 
   # Systemd service for auto kbl
 systemd.services.l5p-autobl = {
