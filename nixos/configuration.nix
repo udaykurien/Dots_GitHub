@@ -373,6 +373,7 @@ systemd.services.l5p-autobl = {
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
     { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
+    { appId = "com.brave.Browser"; origin = "flathub"; }
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
