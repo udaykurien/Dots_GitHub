@@ -37,7 +37,7 @@
       nord-vim
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       vim.filetype.add({
         extension = {
           kdl = 'kdl',

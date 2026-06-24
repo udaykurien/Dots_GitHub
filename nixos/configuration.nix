@@ -315,7 +315,6 @@ systemd.services.l5p-autobl = {
     jdk21
     # kooha
     libreoffice
-    librewolf
     localsend
     lshw
     nasm
@@ -339,6 +338,7 @@ systemd.services.l5p-autobl = {
     tmux
     tree
     tree-sitter
+    tuxguitar
     unzip
     usbutils
     vimPlugins.vim-plug
@@ -374,6 +374,7 @@ systemd.services.l5p-autobl = {
     { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
     { appId = "com.brave.Browser"; origin = "flathub"; }
+    { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
