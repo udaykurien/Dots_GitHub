@@ -315,6 +315,7 @@ systemd.services.l5p-autobl = {
 #    gnomeExtensions.vitals
 #    gnomeExtensions.user-themes
 #    gnome-tweaks
+    gnome-text-editor
     gnumake
     gparted
     # grim
