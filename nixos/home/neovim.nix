@@ -23,6 +23,7 @@
       vim-polyglot
 
       # Themes
+      kanagawa-nvim
       neovim-ayu
       rose-pine
       vscode-nvim
@@ -53,6 +54,10 @@
     })
   '';
 
+  extraLuaConfig = ''
+    vim.cmd.colorscheme("kanagawa-dragon")
+  '';
+
     extraConfig = ''
       let g:python3_host_prog = '${pkgs.python3}/bin/python3'
       set clipboard=unnamedplus
@@ -79,7 +84,6 @@
       set cursorcolumn
       set ttyfast
 
-      colorscheme ayu
       nnoremap <C-n> :NERDTreeToggle<CR>
     '';
   };
