@@ -52,9 +52,7 @@
         pcall(vim.treesitter.start)
       end,
     })
-  '';
-
-  extraLuaConfig = ''
+    
     vim.cmd.colorscheme("kanagawa-dragon")
   '';
 
