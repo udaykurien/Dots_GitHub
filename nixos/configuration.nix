@@ -141,7 +141,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa.support32Bit = lib.mkForce false; # Reset to true when openblas build bug is resolved
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -331,7 +331,7 @@ systemd.services.l5p-autobl = {
     nasm
     nautilus
     ncdu
-    # noctalia-shell
+    noctalia-shell
     nodejs
     obs-studio
     pciutils
