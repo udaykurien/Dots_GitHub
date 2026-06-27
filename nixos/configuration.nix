@@ -90,14 +90,13 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+#  # Enable the KDE Plasma Desktop Environment.
+#  services.displayManager.sddm.enable = true;
+#  services.desktopManager.plasma6.enable = true;
 
-#  # Enable GNOME Desktop Environment:
-#  services.desktopManager.gnome.enable = true;
-#  services.displayManager.gdm.enable = true;
-# services.displayManager.gdm.wayland = true;
+  # Enable GNOME Desktop Environment:
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Enable virtualization.
   virtualisation.libvirtd.enable = true;
@@ -305,16 +304,16 @@ systemd.services.l5p-autobl = {
     git
     gnome-boxes
     gnome-disk-utility
-#    gnomeExtensions.appindicator
-#    gnome-extension-manager
-#    gnomeExtensions.caffeine
-#    gnomeExtensions.clipboard-history
-#    gnomeExtensions.color-picker
-#    gnomeExtensions.gtile
-#    gnomeExtensions.just-perfection
-#    gnomeExtensions.vitals
-#    gnomeExtensions.user-themes
-#    gnome-tweaks
+    gnomeExtensions.appindicator
+    gnome-extension-manager
+    gnomeExtensions.caffeine
+    gnomeExtensions.clipboard-history
+    gnomeExtensions.color-picker
+    gnomeExtensions.gtile
+    gnomeExtensions.just-perfection
+    gnomeExtensions.vitals
+    gnomeExtensions.user-themes
+    gnome-tweaks
     gnome-text-editor
     gnumake
     gparted

@@ -652,6 +652,10 @@ binds {
     Mod+P { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
     // Notepad
     Mod+N { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+
+    // Instructions to Noctalia
+    // Toggle launcher
+    // Mod+Space hotkey-overlay-title="Run Application Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
 }
 
 // Custom configs
