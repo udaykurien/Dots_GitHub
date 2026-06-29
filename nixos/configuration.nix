@@ -168,7 +168,7 @@
 
   # Nix settings.
   nix.settings = {
-    max-jobs = 6;
+    max-jobs = 3;
     cores = 4;
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
@@ -332,6 +332,7 @@ systemd.services.l5p-autobl = {
     ncdu
     noctalia-shell
     nodejs
+    nvme-cli
     obs-studio
     pciutils
     pdfarranger
