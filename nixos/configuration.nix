@@ -321,6 +321,7 @@ systemd.services.l5p-autobl = {
     # grimblast
     hicolor-icon-theme
     htop
+    hyprland
     id3v2
     jdk21
     # kooha

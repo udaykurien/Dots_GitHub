@@ -8,8 +8,12 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    caelestia-shell = {                                    # ← add this
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, caelestia-shell, ... }:
   let
     system = "x86_64-linux";
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -26,7 +30,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
           home-manager.users.echoes = import ./home.nix;
-          home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+          home-manager.extraSpecialArgs = { inherit pkgs-unstable system caelestia-shell; };
         }
       ];
     };
