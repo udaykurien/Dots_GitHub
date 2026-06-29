@@ -277,6 +277,7 @@ systemd.services.l5p-autobl = {
     blanket
     brightnessctl
     btop
+    cmatrix
     cmus
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvcc
