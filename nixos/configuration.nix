@@ -82,24 +82,24 @@
   networking.networkmanager.dns = "none";
   networking.nameservers = [ "127.0.0.1" ];
 
-services.unbound = {
-  enable = true;
-  settings = {
-    server = {
-      local-zone = ''"use-application-dns.net." static'';
+  services.unbound = {
+    enable = true;
+    settings = {
+      server = {
+        local-zone = ''"use-application-dns.net." static'';
+      };
+      forward-zone = [{
+        name = ".";
+        forward-tls-upstream = true;
+        forward-addr = [
+          "9.9.9.9@853#dns.quad9.net"
+          "149.112.112.112@853#dns.quad9.net"
+          "2620:fe::fe@853#dns.quad9.net"
+          "2620:fe::9@853#dns.quad9.net"
+        ];
+      }];
     };
-    forward-zone = [{
-      name = ".";
-      forward-tls-upstream = true;
-      forward-addr = [
-        "9.9.9.9@853#dns.quad9.net"
-        "149.112.112.112@853#dns.quad9.net"
-        "2620:fe::fe@853#dns.quad9.net"
-        "2620:fe::9@853#dns.quad9.net"
-      ];
-    }];
   };
-};
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
