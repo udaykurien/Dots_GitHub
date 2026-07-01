@@ -176,21 +176,17 @@
 
       # Set keyboard backlight
       function kbl() {
-        pyVenvActivate l5p_kbl
         python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py static \
           ''${1:-603030} \
           ''${2:-603030} \
           ''${3:-603030} \
           ''${4:-603030} \
           --brightness ''${5:-1}
-        deactivate
       }
 
       # Turn off keyboard backlight
       function kbl_off () {
-        pyVenvActivate l5p_kbl
         python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py off
-        deactivate
       }
     '';
   };
