@@ -312,6 +312,13 @@ systemd.services.l5p-autobl = {
     curl
     deja-dup
     discord
+    ## DOOM EMACS dependencies ##
+    emacs
+    ripgrep
+    fd
+    gnutls
+    (aspellWithDicts (dicts: with dicts; [ en ]))
+    #############################
     eloquent
     exfatprogs
     exiftool

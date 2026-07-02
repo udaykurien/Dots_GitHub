@@ -9,7 +9,11 @@
   home.username = "echoes";
   home.homeDirectory = "/home/echoes";
   home.stateVersion = "26.05"; # match your NixOS release
-
-  # let Home Manager manage itself
+  
+  home.sessionPath = [
+    "$HOME/.config/emacs/bin"
+  ];
+ 
+ # let Home Manager manage itself
   programs.home-manager.enable = true;
 }

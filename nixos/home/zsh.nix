@@ -111,7 +111,7 @@
     #---------------------------------------
 
     sessionVariables = {
-
+      
       LD_LIBRARY_PATH = "/run/current-system/sw/share/nix-ld/lib:/run/opengl-driver/lib:\${LD_LIBRARY_PATH}";
 
       XLA_FLAGS = "--xla_gpu_cuda_data_dir=\${CONDA_PREFIX}";
@@ -134,6 +134,9 @@
     #---------------------------------------
 
     initContent = ''
+      # Doom emacs config location
+      export PATH="$HOME/.config/emacs/bin:$PATH"
+
       # Disable dir highlight
       export LS_COLORS=$LS_COLORS:'ow=1;34:'
 
