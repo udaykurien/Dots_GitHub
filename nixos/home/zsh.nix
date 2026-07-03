@@ -134,8 +134,10 @@
     #---------------------------------------
 
     initContent = ''
-      # Doom emacs config location
+      # Doom emacs location (to run doom <command> globally)
       export PATH="$HOME/.config/emacs/bin:$PATH"
+
+      # Doom dir
 
       # Disable dir highlight
       export LS_COLORS=$LS_COLORS:'ow=1;34:'
