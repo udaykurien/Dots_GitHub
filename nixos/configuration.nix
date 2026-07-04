@@ -119,6 +119,11 @@
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
+
   # Enable virtualization.
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
@@ -171,6 +176,32 @@
     #media-session.enable = true;
   };
 
+  # Set up mpd for mpc music player
+  services.mpd = {
+    enable = true;
+    settings = {
+      music_directory = "/home/echoes/Music/";
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "My PipeWire Output";
+#          type = "pulse";
+#          name = "Pulseaudio";
+#          server = "127.0.0.1";
+        }
+      ];
+    };
+    # Optional:
+    startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+  };
+
+  # Fix mpd - pipwire interaction bug as per NixOS wiki (https://wiki.nixos.org/wiki/MPD)
+  services.mpd.user = "echoes";
+  systemd.services.mpd.environment = {
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.echoes.uid}";
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -179,6 +210,7 @@
   users.users.echoes = {
     isNormalUser = true;
     description = "echoes";
+    uid = 1000;
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "input" ]; # input - for evdev in autokbl
     shell = pkgs.zsh;
     packages = with pkgs; [
@@ -311,7 +343,7 @@ systemd.services.l5p-autobl = {
     cudaPackages.libcusparse
     curl
     deja-dup
-    discord
+#    discord
     ## DOOM EMACS dependencies ##
     emacs
     ripgrep
@@ -357,10 +389,15 @@ systemd.services.l5p-autobl = {
     libreoffice
     librewolf
     localsend
+    lynis
+    macchanger
+    mpc
+    ncmpcpp
     lshw
     nasm
     nautilus
     ncdu
+    neovim
     noctalia-shell
     nodejs
     nvme-cli
@@ -369,6 +406,7 @@ systemd.services.l5p-autobl = {
     pdfarranger
     planify
     psmisc
+    pyradio
     python3
     python313Packages.yt-dlp-ejs
     pywalfox-native
@@ -401,9 +439,9 @@ systemd.services.l5p-autobl = {
 
   # Fonts.
   fonts.packages = with pkgs; [
-	ibm-plex
-	fira-code
-	nerd-fonts.fira-code
+    ibm-plex
+    fira-code
+    nerd-fonts.fira-code
   ];
 
   # Flatpak apps.
@@ -416,7 +454,7 @@ systemd.services.l5p-autobl = {
 #   { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
     { appId = "io.github.shonebinu.Defuse"; origin = "flathub"; }
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
-    { appId = "com.vscodium.codium"; origin = "flathub"; }
+#    { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
     { appId = "com.brave.Browser"; origin = "flathub"; }
 #   { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
