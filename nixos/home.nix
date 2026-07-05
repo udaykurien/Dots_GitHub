@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./home/neovim.nix
+    #    ./home/neovim.nix
     ./home/zsh.nix
   ];
 
@@ -13,6 +13,8 @@
   home.sessionPath = [
     "$HOME/.config/emacs/bin"
   ];
+
+  xdg.configFile."fastfetch/config.jsonc".source = ./home/fastfetch_config.jsonc;
  
  # let Home Manager manage itself
   programs.home-manager.enable = true;
