@@ -132,6 +132,12 @@
 
   # Enable niri
   programs.niri.enable = true;
+
+  # Enable mango
+  programs.mangowc.enable = true;
+  
+  # Enable hyprland
+  programs.hyprland.enable = true;
   
   # Enable DMS
   programs.dms-shell.enable = true;
