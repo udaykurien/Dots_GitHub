@@ -135,7 +135,10 @@
   programs.niri.enable = true;
 
   # Enable mango
-  programs.mangowc.enable = true;
+  programs.mangowc={
+    enable = true;
+    package = pkgs-unstable.mango;
+  };
   
   # # Enable hyprland
   # programs.hyprland.enable = true;
@@ -392,6 +395,7 @@ systemd.services.l5p-autobl = {
     id3v2
     jdk21
     # kooha
+    kitty
     libreoffice
     librewolf
     localsend
@@ -404,7 +408,7 @@ systemd.services.l5p-autobl = {
     nautilus
     ncdu
     neovim
-    noctalia-shell
+    # noctalia-shell
     nodejs
     nvme-cli
     obs-studio
