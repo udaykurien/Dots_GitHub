@@ -1,0 +1,10 @@
+theme = Hybrid
+# theme = dankcolors
+font-size = 10
+font-family = "FiraCode Nerd Font Mono"
+
+keybind = ctrl+shift+o=toggle_tab_overview
+
+custom-shader = ./shaders/cursor_blaze.glsl
+custom-shader = ./shaders/cursor_blaze_no_trail.glsl
+custom-shader-animation = always
