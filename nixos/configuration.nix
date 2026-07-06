@@ -118,6 +118,7 @@
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
+  # Add some malware protection
   services.clamav = {
     daemon.enable = true;
     updater.enable = true;
@@ -136,8 +137,8 @@
   # Enable mango
   programs.mangowc.enable = true;
   
-  # Enable hyprland
-  programs.hyprland.enable = true;
+  # # Enable hyprland
+  # programs.hyprland.enable = true;
   
   # Enable DMS
   programs.dms-shell.enable = true;
@@ -410,6 +411,7 @@ systemd.services.l5p-autobl = {
     pciutils
     pdfarranger
     planify
+    playerctl
     psmisc
     pyradio
     python3
