@@ -284,28 +284,28 @@
 '';
 
   # Systemd service for auto kbl
-systemd.services.l5p-autobl = {
-  description = "L5P Keyboard Backlight Auto Controller";
-  wantedBy = [ "multi-user.target" ];
-  after = [ "graphical-session.target" ];
-  serviceConfig = {
-    ExecStart = "/run/current-system/sw/bin/python3 /home/echoes/Stuff/Github/SystemPrograms/l5p-kbl-autorun/NixOS/l5p_kbl_auto_on_off.py";
-    Restart = "on-failure";
-    User = "echoes";
-    Environment = "LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib";
+  systemd.services.l5p-autobl = {
+    description = "L5P Keyboard Backlight Auto Controller";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "/run/current-system/sw/bin/python3 /home/echoes/Stuff/Github/SystemPrograms/l5p-kbl-autorun/NixOS/l5p_kbl_auto_on_off.py";
+      Restart = "on-failure";
+      User = "echoes";
+      Environment = "LD_LIBRARY_PATH=/run/current-system/sw/share/nix-ld/lib";
+    };
   };
-};
 
   # Install firefox.
   programs.firefox = {
-  enable = true;
-  policies = {
-    DNSOverHTTPS = {
-      Enabled = false;
-      Locked = true;
+    enable = true;
+    policies = {
+      DNSOverHTTPS = {
+        Enabled = false;
+        Locked = true;
+      };
     };
   };
-};
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -390,12 +390,14 @@ systemd.services.l5p-autobl = {
     gparted
     # grim
     # grimblast
+    helix
     hicolor-icon-theme
     htop
     id3v2
     jdk21
     # kooha
     kitty
+    libnotify
     libreoffice
     librewolf
     localsend
@@ -403,6 +405,7 @@ systemd.services.l5p-autobl = {
     macchanger
     mpc
     ncmpcpp
+    lazygit
     lshw
     nasm
     nautilus
