@@ -137,7 +137,7 @@
   # Enable mango
   programs.mangowc={
     enable = true;
-    package = pkgs-unstable.mango;
+    # package = pkgs-unstable.mango;
   };
   
   # # Enable hyprland
