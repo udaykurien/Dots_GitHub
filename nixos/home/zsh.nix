@@ -193,6 +193,14 @@
       function kbl_off () {
         python3 ~/Stuff/Github/SystemPrograms/l5p-kbl/l5p_kbl.py off
       }
+
+      # Kitty zsh fix (don't ask for close confirmation when only zsh is running)
+      if test -n "$KITTY_INSTALLATION_DIR"; then
+        export KITTY_SHELL_INTEGRATION="enabled"
+        autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+        kitty-integration
+        unfunction kitty-integration
+      fi
     '';
   };
 
