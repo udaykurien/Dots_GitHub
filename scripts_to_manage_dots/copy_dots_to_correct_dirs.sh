@@ -17,9 +17,14 @@ ln -s ~/Stuff/Private/Dots_GitHub/zsh/zshrc_main ~/.zshrc
 mkdir -p ~/.config/nvim/
 ln -s ~/Stuff/Private/Dots_GitHub/nvim/init.vim ~/.config/nvim/
 
+# kitty
+ln -s ~/Stuff/Private/Dots_GitHub/kitty ~/.config/kitty
+
+# ghostty
+ln -s ~/Stuff/Private/Dots_GitHub/ghostty ~/.config/ghostty
+
 # starship
 ln -s ~/Stuff/Private/Dots_GitHub/starship/starship.toml ~/.config/starship.toml
 
 # tmux
 ln -s ~/Stuff/Private/Dots_GitHub/tmux/tmux.conf ~/.tmux.conf
-
