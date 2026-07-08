@@ -465,13 +465,13 @@
     { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
     { appId = "org.musicbrainz.Picard"; origin = "flathub"; }
     { appId = "io.github.revisto.drum-machine"; origin = "flathub"; }
-#   { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
+    # { appId = "com.valvesoftware.Steam"; origin = "flathub"; }
     { appId = "io.github.shonebinu.Defuse"; origin = "flathub"; }
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
-#    { appId = "com.vscodium.codium"; origin = "flathub"; }
+    # { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
-    { appId = "com.brave.Browser"; origin = "flathub"; }
-#   { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
+    # { appId = "com.brave.Browser"; origin = "flathub"; }
+    # { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
