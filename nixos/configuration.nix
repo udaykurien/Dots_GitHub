@@ -116,7 +116,9 @@
 
   # Enable GNOME Desktop Environment:
   services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = true;
+  
+  # Set greeter
+  services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
 
   # Add some malware protection
   services.clamav = {
