@@ -8,8 +8,11 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager,noctalia, ... }:
   let
     system = "x86_64-linux";
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -19,6 +22,7 @@
       specialArgs = { inherit pkgs-unstable; };
       modules = [
         ./configuration.nix
+        noctalia.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
         {
