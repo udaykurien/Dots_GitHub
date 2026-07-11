@@ -37,3 +37,11 @@ hl.bind(main_mod .. " + m", function()
         window_to_swap = nil
     end
 end)
+
+-- Handle marked windows being closer
+hl.on("window.close", function(win)
+    if win and win.address == window_to_swap then
+        window_to_swap = nil
+        hl.notification.create({ text = "Mark cleared (window closed)", timeout = notification_on_time })
+    end
+end)
