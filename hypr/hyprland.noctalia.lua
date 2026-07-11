@@ -193,5 +193,5 @@ hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" 
 ------------------
 ---- SCRIPTS -----
 ------------------
-require("hyprscripts/swap_windows")
+require("hyprscripts/swap_windows_v2")
 require("hyprscripts/cycle_layouts")
