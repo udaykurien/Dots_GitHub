@@ -26,7 +26,8 @@ hl.bind(main_mod .. " + m", function()
         if win and win.address then
             window_to_swap = win.address
             hl.dispatch(hl.dsp.window.tag({ tag = "+marked", window = "address:" .. window_to_swap }))
-            hl.notification.create({ text = "Marked: " .. win.address, timeout = notification_on_time })
+            hl.notification.create({ text = "Marked:\n" .. window_to_swap, timeout = notification_on_time })
+            -- hl.exec_cmd("notify-send -t 2000 'Swap Windows' 'Window markded: '" .. win.address)
         else
             hl.notification.create({ text = "Window or address not found", timeout = notification_on_time })
         end
@@ -34,6 +35,7 @@ hl.bind(main_mod .. " + m", function()
         hl.dispatch(hl.dsp.window.swap({ target = "address:" .. window_to_swap }))
         hl.dispatch(hl.dsp.focus({ window = "address:" .. window_to_swap }))
         hl.dispatch(hl.dsp.window.tag({ tag = "-marked", window = "address:" .. window_to_swap }))
+        hl.notification.create({ text = "Swapped:\n" .. window_to_swap, timeout = notification_on_time })
         window_to_swap = nil
     end
 end)
