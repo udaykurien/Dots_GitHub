@@ -171,6 +171,24 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 hl.bind("CTRL + " .. main_mod .. " + left", hl.dsp.focus({ workspace = "-1" }))
 hl.bind("CTRL + " .. main_mod .. " + right", hl.dsp.focus({ workspace = "+1" }))
 
+-- Numbered (1-9) workspace binds
+for i=1, 9, 1 do
+    hl.bind("CTRL + " .. main_mod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+end
+
+hl.bind("CTRL + " .. main_mod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+
+-- Workspace names
+for i=1, 4, 1 do
+    hl.workspace_rule({ workspace = i, default_name = i .. "!C" }) -- Casual 1 - Casual 4
+end
+
+for i=5, 9, 1 do
+    hl.workspace_rule({workspace = i, default_name = i .. "|W" }) -- Work 5 - Work 9
+end
+
+hl.workspace_rule({ workspace = 10, default_name = "10|M" }) -- Music 1o
+
 -- Move windows between workspaces
 hl.bind("CTRL + SHIFT + " .. main_mod .. " + left", hl.dsp.window.move({ workspace = "-1" }))
 hl.bind("CTRL + SHIFT + " .. main_mod .. " + right", hl.dsp.window.move({ workspace = "+1" }))
