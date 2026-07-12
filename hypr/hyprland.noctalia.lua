@@ -53,6 +53,7 @@ local main_mod = cfg.main_mod -- Sets "Windows" key as main modifier
 ------------------
 
 hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+hl.bind(main_mod .. " + s", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
 hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 hl.bind(main_mod .. " + P", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
