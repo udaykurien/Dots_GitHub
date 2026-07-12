@@ -1,0 +1,173 @@
+config_version = 1
+
+[bar.default]
+capsule = true
+capsule_opacity = 0.59999998658895493
+capsule_padding = 8.0
+capsule_radius = 8
+capsule_thickness = 0.64999998919665813
+center = [ "cpu", "temp", "ram", "control-center", "sysmon", "battery", "network_rx" ]
+end = [
+    "tray",
+    "volume",
+    "input_volume",
+    "brightness",
+    "network",
+    "bluetooth",
+    "notifications",
+    "notes",
+    "clipboard",
+    "session"
+]
+font_family = "IBM Plex Sans Text"
+margin_ends = 0
+padding = 6
+radius = 0
+radius_bottom_left = 8
+radius_bottom_right = 8
+scale = 0.95000000670552254
+shadow = false
+start = [ "launcher", "privacy", "clock", "audio_visualizer", "workspaces" ]
+thickness = 42
+
+[battery]
+warning_threshold = 25
+
+[location]
+address = "whitby, canada"
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1024.0
+    cy = 1161.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+[plugins]
+enabled = [ "noctalia/bongocat", "noctalia/notes", "noctalia/example" ]
+
+[shell]
+font_family = "IBM Plex Sans Text"
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+[theme]
+builtin = "Eldritch"
+community_palette = "Cream"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-rainbow"
+
+[wallpaper]
+directory = "/home/echoes/Pictures"
+
+    [wallpaper.default]
+    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+
+    [wallpaper.last]
+    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+
+[widget.audio_visualizer]
+color_1 = "on_surface"
+color_2 = "on_surface"
+show_when_idle = true
+
+[widget.brightness]
+scroll_step = 1
+show_label = false
+
+[widget.cat]
+audio_spectrum = true
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.clock]
+format = "{:%H:%M  •  %a, %d }"
+
+[widget.control-center]
+anchor = true
+glyph = "cat"
+
+[widget.cpu]
+display = "text"
+
+[widget.input_volume]
+color = "error"
+mute_color = "on_surface"
+scroll_step = 1
+show_label = false
+
+[widget.media]
+hide_when_no_media = true
+max_length = 140
+title_scroll = "always"
+
+[widget.network]
+show_label = false
+
+[widget.network_rx]
+display = "text"
+
+[widget.notes]
+type = "noctalia/notes:notes"
+
+[widget.privacy]
+active_color = "error"
+hide_inactive = true
+
+[widget.ram]
+display = "text"
+
+[widget.sysmon]
+display = "text"
+stat = "disk_pct"
+
+[widget.temp]
+display = "text"
+glyph = "temperature"
+
+[widget.tray]
+drawer = true
+match_adjacent_spacing = true
+
+[widget.volume]
+scroll_step = 1
+show_label = false
+
+[widget.workspaces]
+active_pill_size = 2.0
+display = "name"
+focused_output_only = true
+max_label_chars = 5
+occupied_color = "#BEBEBE"
+scale = 1.1000000000000001
