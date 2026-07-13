@@ -1,8 +1,9 @@
-config_version = 1
+config_version = 2
 
 [bar.default]
+background_opacity = 0.89999997988343239
 capsule = true
-capsule_opacity = 0.59999998658895493
+capsule_opacity = 0.89999997988343239
 capsule_padding = 8.0
 capsule_radius = 8
 capsule_thickness = 0.64999998919665813
@@ -15,20 +16,21 @@ end = [
     "network",
     "bluetooth",
     "notifications",
+    "caffeine",
     "notes",
     "clipboard",
     "session"
 ]
-font_family = "IBM Plex Sans Text"
+font_family = "IBM Plex Sans"
 margin_ends = 0
 padding = 6
 radius = 0
 radius_bottom_left = 8
 radius_bottom_right = 8
-scale = 0.95000000670552254
 shadow = false
-start = [ "launcher", "privacy", "clock", "audio_visualizer", "workspaces" ]
+start = [ "launcher", "privacy", "clock", "weather", "audio_visualizer", "workspaces" ]
 thickness = 42
+widget_spacing = 4
 
 [battery]
 warning_threshold = 25
@@ -36,15 +38,38 @@ warning_threshold = 25
 [location]
 address = "whitby, canada"
 
+[lockscreen]
+fingerprint = false
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@WL-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 640.0
+    cy = 601.0
+    output = "WL-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@WL-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
@@ -66,11 +91,22 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_login_button = true
         show_password_hint = true
 
+[notification]
+background_opacity = 0.89999997988343239
+position = "top_center"
+
+[osd]
+background_opacity = 0.89999997988343239
+
 [plugins]
 enabled = [ "noctalia/bongocat", "noctalia/notes", "noctalia/example" ]
 
 [shell]
+external_ip_enabled = true
 font_family = "IBM Plex Sans Text"
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
 
     [shell.launcher]
     session_search = true
@@ -89,13 +125,13 @@ wallpaper_scheme = "m3-rainbow"
 directory = "/home/echoes/Pictures"
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/PreviousPictures/galen-crout-175291.jpg"
+    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
 
 [widget.audio_visualizer]
 color_1 = "on_surface"
@@ -144,6 +180,7 @@ type = "noctalia/notes:notes"
 [widget.privacy]
 active_color = "error"
 hide_inactive = true
+icon_spacing = 8
 
 [widget.ram]
 display = "text"
@@ -158,6 +195,7 @@ glyph = "temperature"
 
 [widget.tray]
 drawer = true
+drawer_columns = 5
 match_adjacent_spacing = true
 
 [widget.volume]
@@ -166,8 +204,7 @@ show_label = false
 
 [widget.workspaces]
 active_pill_size = 2.0
-display = "name"
 focused_output_only = true
+hide_when_empty = true
 max_label_chars = 5
-occupied_color = "#BEBEBE"
 scale = 1.1000000000000001
