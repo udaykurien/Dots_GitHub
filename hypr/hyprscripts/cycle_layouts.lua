@@ -26,6 +26,9 @@ hl.bind(main_mod .. " + period", function ()
         end
     end
 
+    -- hl.exec_cmd("notify-send -t 5000 'Layout:\n'" .. next_layout)
+    hl.notification.create({ text = "Layout:\n" .. next_layout, timeout = 5000 })
+
 	if workspace.special then
 		hl.workspace_rule({ workspace = tostring(workspace.name), layout = next_layout })
 	else
