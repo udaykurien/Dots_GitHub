@@ -25,6 +25,13 @@ hl.monitor({
 })
 
 ------------------
+--- X SCALING ----
+------------------
+
+-- Disable scaling on x-wayland apps to sop pixellated look
+hl.config({ xwayland = { force_zero_scaling = true } })
+
+------------------
 ---- AUTOSTART ---
 ------------------
 
