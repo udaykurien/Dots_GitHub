@@ -1,14 +1,19 @@
 ----------------------
 -- SHARED SETTINGS ---
 ----------------------
+
 local cfg = require("config")
 
 ------------------
 -- ENVIRONMENT ---
 ------------------
 
+hl.env("HYPRCURSOR_THEME", "Adwaita")
+hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Multi-GPU/
@@ -44,6 +49,8 @@ hl.config({ xwayland = { force_zero_scaling = true } })
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
 
+    -- hl.exec_cmd("systemctl --user start hyprpolkitagent") -- Uncomment if not using a shell polkit (e.g. noctalia polkit)
+
     -- Force a display refresh on startup
     hl.dispatch(hl.dsp.dpms({ action = "disable" }))
     hl.timer(function()
@@ -55,7 +62,7 @@ end)
 ------- MOD ------
 ------------------
 
-local main_mod = cfg.main_mod -- Sets "Windows" key as main modifier
+local main_mod = cfg.main_mod -- Sets Super key as main modifier
 
 ------------------
 ---- NOC BINDS ---
@@ -104,22 +111,18 @@ hl.layer_rule({
   blur_popups = true,
 })
 
-hl.env("HYPRCURSOR_THEME", "Adwaita")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("XCURSOR_THEME", "Adwaita")
-hl.env("XCURSOR_SIZE", "24")
-
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
 -- Set programs that you use
-local terminal    = "ghostty"
+local terminal    = "kitty"
 
 ---------------
 ---- INPUT ----
 ---------------
 
+-- Workspace switching gesture settings
 hl.config({
     gestures = {
         workspace_swipe_min_speed_to_force = 5,
@@ -127,10 +130,18 @@ hl.config({
     },
 })
 
+-- Workspace switching gestures
 hl.gesture({
     fingers = 4,
     direction = "horizontal",
     action = "workspace",
+})
+
+-- Window switching for scrolling layout
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "scroll_move",
 })
 
 ---------------------
@@ -188,15 +199,15 @@ end
 hl.bind("CTRL + " .. main_mod .. " + 0", hl.dsp.focus({ workspace = 10 }))
 
 -- Workspace names
-for i=1, 4, 1 do
+for i=2, 5, 1 do
     hl.workspace_rule({ workspace = i, default_name = i .. "!C" }) -- Casual 1 - Casual 4
 end
 
-for i=5, 9, 1 do
+for i=6, 10, 1 do
     hl.workspace_rule({workspace = i, default_name = i .. "|W" }) -- Work 5 - Work 9
 end
 
-hl.workspace_rule({ workspace = 10, default_name = "10|M" }) -- Music 1o
+hl.workspace_rule({ workspace = 1, default_name = "1|M" }) -- Music 1o
 
 -- Move windows between workspaces
 hl.bind("CTRL + SHIFT + " .. main_mod .. " + left", hl.dsp.window.move({ workspace = "-1" }))
