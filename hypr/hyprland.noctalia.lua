@@ -223,3 +223,6 @@ hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" 
 ------------------
 require("hyprscripts/swap_windows_v2")
 require("hyprscripts/cycle_layouts")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
