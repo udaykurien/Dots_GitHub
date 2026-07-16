@@ -59,6 +59,20 @@ hl.on("hyprland.start", function()
 end)
 
 ------------------
+--- ANIMATION ----
+------------------
+
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/#curves
+-- See https://easings.net/#
+
+-- hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } )
+-- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
+hl.curve( "easeOutSine", { type = "bezier", points = { {0.61, 1}, {0.88, 1} } })
+hl.animation({ leaf = "global", enabled = true, speed = 3, bezier = "easeOutSine" })
+hl.animation({ leaf = "border", enabled = true, speed = 3, bezier = "easeOutSine" })
+-- hl.animation({ leaf = "borderangle", enabled = true, speed = 0, bezier = "overshoot", style = "loop" })
+
+------------------
 ------- MOD ------
 ------------------
 
