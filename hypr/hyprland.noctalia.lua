@@ -95,10 +95,19 @@ hl.config({
     general = {
         gaps_in = 3,
         gaps_out = 6,
-        border_size = 2,
+        border_size = 3,
         resize_on_border = true,
         col = {
-            active_border = {colors = {"rgba(ddddddff)", "rgba(ddddddff)"}, angle = 45},
+            -- active_border = {colors = {"rgba(33ccffcc)", "rgba(00ff99cc)"}, angle = 45},
+            -- active_border = "rgba(eeeeeeee)";
+            active_border = {
+                colors = {
+                    "rgb(4AD6A4)",
+                    "rgb(6CA6D7)",
+                    "rgb(9462BB)"
+                },
+                angle = 45,
+            },
             inactive_border = "rgba(595959aa)";
         },
     },
@@ -124,6 +133,14 @@ hl.layer_rule({
   blur = true,
   blur_popups = true,
 })
+
+-- hl.layer_rule({
+--   name = "noctalia",
+--   match = {namespace = "noctalia-background-.*$"},
+--   ignore_alpha = 0.5,
+--   blur = true,
+--   blur_popups = true,
+-- })
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -249,5 +266,9 @@ hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" 
 require("hyprscripts/swap_windows_v2")
 require("hyprscripts/cycle_layouts")
 
+------------------
+---- NOCTALIA ----
+------------------
+
 -- For Noctalia Color templates
-require("noctalia").apply_theme()
+-- require("noctalia").apply_theme()
