@@ -1,39 +1,56 @@
 config_version = 2
 
 [bar.default]
-background_opacity = 0.89999997988343239
 capsule = true
-capsule_opacity = 0.89999997988343239
+capsule_opacity = 0.84999998100101948
 capsule_padding = 8.0
 capsule_radius = 8
 capsule_thickness = 0.64999998919665813
 center = [ "cpu", "temp", "ram", "control-center", "sysmon", "battery", "network_rx" ]
 end = [
     "tray",
-    "volume",
-    "input_volume",
-    "brightness",
-    "network",
-    "bluetooth",
-    "notifications",
-    "caffeine",
     "notes",
     "clipboard",
+    "caffeine",
+    "notifications",
+    "brightness",
+    "volume",
+    "input_volume",
+    "bluetooth",
+    "network",
     "session"
 ]
 font_family = "IBM Plex Sans"
 margin_ends = 0
-padding = 6
+padding = 2
 radius = 0
 radius_bottom_left = 8
 radius_bottom_right = 8
 shadow = false
 start = [ "launcher", "privacy", "clock", "weather", "audio_visualizer", "workspaces" ]
 thickness = 42
-widget_spacing = 4
+widget_spacing = 2
 
 [battery]
 warning_threshold = 25
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
 
 [location]
 address = "whitby, canada"
@@ -91,15 +108,18 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
         show_login_button = true
         show_password_hint = true
 
+[nightlight]
+enabled = true
+temperature_night = 5000
+
 [notification]
 background_opacity = 0.89999997988343239
-position = "top_center"
 
 [osd]
 background_opacity = 0.89999997988343239
 
 [plugins]
-enabled = [ "noctalia/bongocat", "noctalia/notes", "noctalia/example" ]
+enabled = [ "noctalia/bongocat", "noctalia/notes", "noctalia/example", "noctalia/timer" ]
 
 [shell]
 external_ip_enabled = true
@@ -115,23 +135,35 @@ screen_time_enabled = true
     open_near_click_control_center = true
 
 [theme]
-builtin = "Eldritch"
+builtin = "Ayu"
 community_palette = "Cream"
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "hyprland", "qt" ]
+    community_ids = [ "steam" ]
+
 [wallpaper]
 directory = "/home/echoes/Pictures"
+transition = [ "disc", "fade", "wipe", "zoom" ]
+transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
+    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
+    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/PreviousPictures/bioshock-5-wallhaven-od538p.jpg"
+    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
+
+[widget.active_window]
+max_length = 115
+min_length = 115
+show_empty_label = true
+title_scroll = "always"
 
 [widget.audio_visualizer]
 color_1 = "on_surface"
@@ -194,7 +226,6 @@ display = "text"
 glyph = "temperature"
 
 [widget.tray]
-drawer = true
 drawer_columns = 5
 match_adjacent_spacing = true
 
@@ -202,8 +233,11 @@ match_adjacent_spacing = true
 scroll_step = 1
 show_label = false
 
+[widget.weather]
+show_condition = false
+
 [widget.workspaces]
-active_pill_size = 2.0
+active_pill_size = 1.7000000000000002
 focused_output_only = true
 hide_when_empty = true
 max_label_chars = 5
