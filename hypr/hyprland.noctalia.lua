@@ -17,7 +17,7 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Multi-GPU/
-hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
+-- hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
 ------------------
 ---- MONITORS ----
@@ -25,10 +25,10 @@ hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-    output   = "eDP-1",
-    mode     = "2560x1600@165",
-    position = "auto",
-    scale    = "1.25",
+    output          = "eDP-1",
+    mode            = "2560x1600@165",
+    position        = "auto",
+    scale           = "1.25",
 })
 
 ------------------
@@ -49,9 +49,9 @@ hl.config({ xwayland = { force_zero_scaling = true } })
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
 
-    -- hl.exec_cmd("systemctl --user start hyprpolkitagent") -- Uncomment if not using a shell polkit (e.g. noctalia polkit)
+    hl.exec_cmd("systemctl --user start hyprpolkitagent") -- Uncomment if not using a shell polkit (e.g. noctalia polkit)
 
-    -- Force a display refresh on startup
+    -- Force a display refresh on startup (removes ghost cursor from gdm greeter)
     hl.dispatch(hl.dsp.dpms({ action = "disable" }))
     hl.timer(function()
         hl.dispatch(hl.dsp.dpms({ action = "enable" }))
@@ -65,12 +65,11 @@ end)
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/#curves
 -- See https://easings.net/#
 
--- hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } )
--- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
+hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } )
 hl.curve( "easeOutSine", { type = "bezier", points = { {0.61, 1}, {0.88, 1} } })
-hl.animation({ leaf = "global", enabled = true, speed = 3, bezier = "easeOutSine" })
-hl.animation({ leaf = "border", enabled = true, speed = 3, bezier = "easeOutSine" })
--- hl.animation({ leaf = "borderangle", enabled = true, speed = 0, bezier = "overshoot", style = "loop" })
+-- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
+hl.animation({ leaf = "global", enabled = true, speed = 5, bezier = "easeOutSine" })
+hl.animation({ leaf = "border", enabled = true, speed = 1.5, bezier = "easeOutSine" })
 
 ------------------
 ------- MOD ------
@@ -99,15 +98,15 @@ hl.config({
         resize_on_border = true,
         col = {
             -- active_border = {colors = {"rgba(33ccffcc)", "rgba(00ff99cc)"}, angle = 45},
-            -- active_border = "rgba(eeeeeeee)";
-            active_border = {
-                colors = {
-                    "rgb(4AD6A4)",
-                    "rgb(6CA6D7)",
-                    "rgb(9462BB)"
-                },
-                angle = 45,
-            },
+            active_border = "rgba(eeeeeeee)";
+            -- active_border = {
+            --     colors = {
+            --         "rgb(4AD6A4)",
+            --         "rgb(6CA6D7)",
+            --         "rgb(9462BB)"
+            --     },
+            --     angle = 45,
+            -- },
             inactive_border = "rgba(595959aa)";
         },
     },
@@ -147,7 +146,7 @@ hl.layer_rule({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "kitty"
+local terminal    = "ghostty"
 
 ---------------
 ---- INPUT ----
@@ -168,12 +167,12 @@ hl.gesture({
     action = "workspace",
 })
 
--- Window switching for scrolling layout
-hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "scroll_move",
-})
+-- -- Window switching for scrolling layout
+-- hl.gesture({
+--     fingers = 3,
+--     direction = "horizontal",
+--     action = "scroll_move",
+-- })
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -191,8 +190,14 @@ hl.bind(main_mod .. " + SHIFT + D", function()
   hl.dispatch(hl.dsp.dpms({ action = "disable" }))
 end)
 
+-- hl.bind(main_mod .. " + D", function()
+--   hl.dispatch(hl.dsp.dpms({ action = "enable" }))
+-- end)
+
 hl.bind(main_mod .. " + D", function()
-  hl.dispatch(hl.dsp.dpms({ action = "enable" }))
+  hl.timer(function()
+    hl.dispatch(hl.dsp.dpms({ action = "enable" }))
+  end, { timeout = 500, type = "oneshot" })
 end)
 
 -- Essential binds
@@ -271,4 +276,4 @@ require("hyprscripts/cycle_layouts")
 ------------------
 
 -- For Noctalia Color templates
--- require("noctalia").apply_theme()
+require("noctalia").apply_theme()
