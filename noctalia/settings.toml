@@ -4,8 +4,8 @@ config_version = 2
 capsule = true
 capsule_opacity = 0.84999998100101948
 capsule_padding = 8.0
-capsule_radius = 8
-capsule_thickness = 0.64999998919665813
+capsule_radius = 10
+capsule_thickness = 0.71999998763203621
 center = [ "cpu", "temp", "ram", "control-center", "sysmon", "battery", "network_rx" ]
 end = [
     "tray",
@@ -26,10 +26,10 @@ padding = 2
 radius = 0
 radius_bottom_left = 8
 radius_bottom_right = 8
+scale = 0.90000000596046448
 shadow = false
 start = [ "launcher", "privacy", "clock", "weather", "audio_visualizer", "workspaces" ]
 thickness = 42
-widget_spacing = 2
 
 [battery]
 warning_threshold = 25
@@ -137,7 +137,6 @@ screen_time_enabled = true
 [theme]
 builtin = "Ayu"
 community_palette = "Cream"
-mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
@@ -151,13 +150,13 @@ transition = [ "disc", "fade", "wipe", "zoom" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
+    path = "/home/echoes/Pictures/Wallpapers/11-0-Color-Day-thumbnails1.jpg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
+    path = "/home/echoes/Pictures/Wallpapers/11-0-Color-Day-thumbnails1.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
+    path = "/home/echoes/Pictures/Wallpapers/11-0-Color-Day-thumbnails1.jpg"
 
 [widget.active_window]
 max_length = 115
