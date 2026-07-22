@@ -472,6 +472,8 @@
     { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
     # { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
+    { appId = "io.github.Foldex.AdwSteamGtk"; origin = "flathub"; }
+    # { appId = "io.github.celluloid_player.Celluloid"; origin = "flathub"; }
     # { appId = "com.brave.Browser"; origin = "flathub"; }
     # { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
   ];
