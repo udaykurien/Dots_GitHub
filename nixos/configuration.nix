@@ -22,9 +22,13 @@
     
     kernelParams = [ "acpi_backlight=native" "quiet" "splash" "udev.log_priority=3" "rd.systemd.show_status=false" "nvidia-drm.modeset=1" "amd_pstate=active" ];
     # kernel.sysfs.devices.system.cpu.cpufreq.boost = "0"; # Disable Ryzen 7 5800H boost - but also locks power management from within linux
-    loader.systemd-boot.enable = true;
-    loader.systemd-boot.configurationLimit = 3;
-    loader.efi.canTouchEfiVariables = true;
+
+    loader = { 
+      systemd-boot.enable = true;
+      systemd-boot.configurationLimit = 5;
+      efi.canTouchEfiVariables = true;
+    };
+
     plymouth = {
       enable = true;
       theme = "connect";
