@@ -16,7 +16,7 @@ radius_bottom_left = 8
 radius_bottom_right = 8
 scale = 0.90000000596046448
 shadow = false
-start = [ "launcher", "privacy", "clock", "weather", "caffeine", "notifications", "group:g1", "workspaces" ]
+start = [ "launcher", "privacy", "clock", "weather", "notifications", "caffeine", "group:g1", "workspaces" ]
 thickness = 42
 
     [[bar.default.capsule_group]]
@@ -110,16 +110,13 @@ enabled = true
 temperature_night = 5000
 
 [notification]
-background_opacity = 0.89999997988343239
 position = "top_left"
-
-[osd]
-background_opacity = 0.89999997988343239
 
 [plugins]
 enabled = []
 
 [shell]
+avatar_path = "/run/current-system/sw/share/pixmaps/faces/gamepad.jpg"
 external_ip_enabled = true
 font_family = "IBM Plex Sans Text"
 polkit_agent = true
@@ -128,17 +125,15 @@ screen_time_enabled = true
     [shell.launcher]
     session_search = true
 
-    [shell.panel]
-    open_near_click_control_center = true
-
 [theme]
-builtin = "Gruvbox"
-community_palette = "Cream"
+builtin = "Ayu"
+community_palette = "Flexoki"
+mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "hyprland", "qt" ]
+    builtin_ids = [ "gtk3", "gtk4", "hyprland", "mango", "qt" ]
     community_ids = [ "steam" ]
 
 [wallpaper]
@@ -149,13 +144,45 @@ transition = [ "disc", "fade", "wipe", "zoom" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-colorized-cyan-purple-wallhaven-8g9wyy.png"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-colorized-cyan-purple-wallhaven-8g9wyy.png"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
 
     [wallpaper.monitors.eDP-1]
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-wallhaven-8g9wyy.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v2-8g9wyy.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-8g9wyy.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-colorized-cyan-purple-wallhaven-8g9wyy.png"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-hAw1GVf.jpg"
+    theme_mode = "auto"
 
 [widget.active_window]
 max_length = 115
@@ -195,7 +222,7 @@ scroll_step = 1
 
 [widget.media]
 album_art_only = true
-art_size = 20
+art_size = 18
 max_length = 140
 title_scroll = "always"
 
