@@ -13,9 +13,13 @@
   # Boot settings.
   boot = {
     consoleLogLevel = 0;
-    initrd.verbose = false;
-    initrd.systemd.enable = true;
-    initrd.kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    
+    initrd = {
+      verbose = false;
+      systemd.enable = true;
+      kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    };
+    
     kernelParams = [ "acpi_backlight=native" "quiet" "splash" "udev.log_priority=3" "rd.systemd.show_status=false" "nvidia-drm.modeset=1" "amd_pstate=active" ];
     # kernel.sysfs.devices.system.cpu.cpufreq.boost = "0"; # Disable Ryzen 7 5800H boost - but also locks power management from within linux
     loader.systemd-boot.enable = true;
