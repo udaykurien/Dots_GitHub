@@ -12,6 +12,8 @@
 
   # Boot settings.
   boot = {
+    kernelPackages = pkgs.linuxPackages; # Default kernel
+    # kernelPackages = pkgs.linuxPackages_zen; # Zen kernel
     consoleLogLevel = 0;
     
     initrd = {
