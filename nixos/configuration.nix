@@ -152,7 +152,8 @@
   services.desktopManager.gnome.enable = true;
   
   # Set greeter
-  services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
+  # services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
+  services.displayManager.sddm.enable = true;
 
   # Add some malware protection
   services.clamav = {
