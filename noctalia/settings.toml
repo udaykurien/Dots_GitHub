@@ -1,5 +1,8 @@
 config_version = 2
 
+[audio]
+enable_sounds = true
+
 [bar.default]
 capsule = true
 capsule_opacity = 0.84999998100101948
@@ -7,16 +10,28 @@ capsule_padding = 8.0
 capsule_radius = 10
 capsule_thickness = 0.71999998763203621
 center = [ "cpu", "temp", "ram", "control-center", "sysmon", "battery", "network_rx" ]
-end = [ "tray", "clipboard", "bluetooth", "network", "brightness", "volume", "input_volume", "session" ]
+end = [
+    "tray",
+    "notifications",
+    "widget",
+    "notes",
+    "clipboard",
+    "caffeine",
+    "bluetooth",
+    "network",
+    "brightness",
+    "volume",
+    "input_volume"
+]
 font_family = "IBM Plex Sans"
 margin_ends = 0
-padding = 2
+padding = 4
 radius = 0
 radius_bottom_left = 8
 radius_bottom_right = 8
 scale = 0.90000000596046448
 shadow = false
-start = [ "launcher", "privacy", "clock", "weather", "notifications", "caffeine", "group:g1", "workspaces" ]
+start = [ "privacy", "clock", "weather", "bar", "group:g1", "workspaces" ]
 thickness = 42
 
     [[bar.default.capsule_group]]
@@ -30,6 +45,34 @@ thickness = 42
 
 [battery]
 warning_threshold = 25
+
+[control_center]
+sidebar = "full"
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "dark_mode"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+[dock]
+auto_hide = true
+border_width = 3.5
+concave_edge_corners = false
+icon_size = 30
+reserve_space = false
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -109,11 +152,8 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
 enabled = true
 temperature_night = 5000
 
-[notification]
-position = "top_left"
-
 [plugins]
-enabled = []
+enabled = [ "noctalia/bongocat", "noctalia/timer", "noctalia/notes", "oldirtty/color_picker" ]
 
 [shell]
 avatar_path = "/run/current-system/sw/share/pixmaps/faces/gamepad.jpg"
@@ -125,15 +165,17 @@ screen_time_enabled = true
     [shell.launcher]
     session_search = true
 
+    [shell.panel]
+    open_near_click_control_center = true
+
 [theme]
 builtin = "Ayu"
 community_palette = "Flexoki"
-mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "hyprland", "mango", "qt" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "mango", "qt" ]
     community_ids = [ "steam" ]
 
 [wallpaper]
@@ -180,10 +222,6 @@ transition_on_startup = true
     theme_mode = "auto"
     wallpaper_scheme = "m3-rainbow"
 
-    [[wallpaper.favorite]]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-hAw1GVf.jpg"
-    theme_mode = "auto"
-
 [widget.active_window]
 max_length = 115
 min_length = 115
@@ -196,13 +234,20 @@ color_1 = "on_surface"
 color_2 = "on_surface"
 show_when_idle = true
 
+[widget.bar]
+type = "noctalia/timer:bar"
+
 [widget.brightness]
 scroll_step = 1
+show_label = false
 
 [widget.cat]
 audio_spectrum = true
 tappy_mode = true
 type = "noctalia/bongocat:cat"
+
+[widget.clipboard]
+enabled = false
 
 [widget.clock]
 format = "{:%H:%M  •  %a, %d }"
@@ -219,6 +264,10 @@ display = "text"
 color = "error"
 mute_color = "on_surface"
 scroll_step = 1
+show_label = false
+
+[widget.launcher]
+enabled = false
 
 [widget.media]
 album_art_only = true
@@ -226,8 +275,15 @@ art_size = 18
 max_length = 140
 title_scroll = "always"
 
+[widget.network]
+show_label = false
+vpn_status = "both"
+
 [widget.network_rx]
 display = "text"
+
+[widget.notes]
+type = "noctalia/notes:notes"
 
 [widget.privacy]
 active_color = "error"
@@ -237,9 +293,16 @@ icon_spacing = 8
 [widget.ram]
 display = "text"
 
+[widget.session]
+enabled = false
+
 [widget.sysmon]
 display = "text"
-stat = "disk_pct"
+stat = "disk_used_pct"
+
+[widget.taskbar]
+only_active_workspace = true
+workspace_group_capsule = false
 
 [widget.temp]
 display = "text"
@@ -251,13 +314,15 @@ match_adjacent_spacing = true
 
 [widget.volume]
 scroll_step = 1
+show_label = false
 
 [widget.weather]
 show_condition = false
 
+[widget.widget]
+type = "oldirtty/color_picker:widget"
+
 [widget.workspaces]
-active_pill_size = 1.7000000000000002
+active_pill_size = 2.0
 focused_output_only = true
-hide_when_empty = true
-max_label_chars = 5
-scale = 1.1000000000000001
+scale = 1.05
