@@ -309,6 +309,7 @@ hl.config({
 ------------------
 require("hyprscripts/swap_windows_v2")
 require("hyprscripts/cycle_layouts")
+require("hyprscripts/resize_windows")
 
 ------------------
 ---- NOCTALIA ----
