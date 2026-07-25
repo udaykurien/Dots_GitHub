@@ -16,6 +16,7 @@ hl.env("QT_QPA_PLATFORM", "wayland")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
+hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh", true)
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Multi-GPU/
 -- hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
@@ -48,13 +49,34 @@ hl.config({ xwayland = { force_zero_scaling = true } })
 -- Or execute your favorite apps at launch like this:
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
+    hl.exec_cmd("udiskie --tray")
+    
+    -- NOTE: Failsafe, incase gcr-ssh-agent doesn't auto enable as per configurations.nix.
+    
+    hl.exec_cmd("systemctl --user enable --now gcr-ssh-agent.socket")
+    
+    -- NOTE: Hyprland polkit should be enabled if shell polkit isn't.
 
-    hl.exec_cmd("systemctl --user start hyprpolkitagent") -- Uncomment if not using a shell polkit (e.g. noctalia polkit)
+    -- hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    
+    -- NOTE: Force display refresh on gdm login to remove ghost cursor. Option B is fragile.
+    
+    -- -- Option A
+    -- hl.exec_cmd([[hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' && sleep 1 && hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })']])
+    
+    -- -- Option B
+    -- hl.dispatch(hl.dsp.dpms({ action = "disable" }))
+    -- hl.timer(function()
+    --     hl.dispatch(hl.dsp.dpms({ action = "disable" }))
+    -- end, { timeout = 1000, type = "oneshot" })
 
-    -- Force a display refresh on startup (removes ghost cursor from gdm greeter)
-    hl.dispatch(hl.dsp.dpms({ action = "disable" }))
-    hl.timer(function()
-        hl.dispatch(hl.dsp.dpms({ action = "enable" }))
+end)
+
+-- Testing
+hl.bind("SUPER + N", function()
+    hl.notification.create({ text = "keybind fired", duration = 2000 })
+    local t = hl.timer(function()
+        hl.notification.create({ text = "timer fired", duration = 2000 })
     end, { timeout = 1000, type = "oneshot" })
 end)
 
@@ -70,6 +92,7 @@ hl.curve( "easeOutSine", { type = "bezier", points = { {0.61, 1}, {0.88, 1} } })
 -- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
 hl.animation({ leaf = "global", enabled = true, speed = 5, bezier = "easeOutSine" })
 hl.animation({ leaf = "border", enabled = true, speed = 1.5, bezier = "easeOutSine" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "easeOutSine", style = "slidevert" })
 
 ------------------
 ------- MOD ------
@@ -94,7 +117,7 @@ hl.config({
     general = {
         gaps_in = 3,
         gaps_out = 6,
-        border_size = 3,
+        border_size = 2,
         resize_on_border = true,
         col = {
             -- active_border = {colors = {"rgba(33ccffcc)", "rgba(00ff99cc)"}, angle = 45},
@@ -151,6 +174,14 @@ local terminal    = "ghostty"
 ---------------
 ---- INPUT ----
 ---------------
+-- 2 finger scrolling (keep natural/reverse scrolling consistent with gesture directions)
+hl.config({
+    input = {
+        touchpad = {
+            natural_scroll = true,
+        },
+    },
+})
 
 -- Workspace switching gesture settings
 hl.config({
@@ -163,7 +194,7 @@ hl.config({
 -- Workspace switching gestures
 hl.gesture({
     fingers = 4,
-    direction = "horizontal",
+    direction = "vertical",
     action = "workspace",
 })
 
@@ -224,8 +255,8 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- Workspace switching
-hl.bind("CTRL + " .. main_mod .. " + left", hl.dsp.focus({ workspace = "-1" }))
-hl.bind("CTRL + " .. main_mod .. " + right", hl.dsp.focus({ workspace = "+1" }))
+hl.bind("CTRL + " .. main_mod .. " + up", hl.dsp.focus({ workspace = "-1" }))
+hl.bind("CTRL + " .. main_mod .. " + down", hl.dsp.focus({ workspace = "+1" }))
 
 -- Numbered (1-9) workspace binds
 for i=1, 9, 1 do
@@ -246,8 +277,8 @@ end
 hl.workspace_rule({ workspace = 1, default_name = "1|M" }) -- Music 1o
 
 -- Move windows between workspaces
-hl.bind("CTRL + SHIFT + " .. main_mod .. " + left", hl.dsp.window.move({ workspace = "-1" }))
-hl.bind("CTRL + SHIFT + " .. main_mod .. " + right", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind("CTRL + SHIFT + " .. main_mod .. " + up", hl.dsp.window.move({ workspace = "-1" }))
+hl.bind("CTRL + SHIFT + " .. main_mod .. " + down", hl.dsp.window.move({ workspace = "+1" }))
 
 -- Focus windows
 hl.bind(main_mod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -265,6 +296,14 @@ hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right"
 hl.bind(main_mod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "up"    }))
 hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down"  }))
 
+------------------
+---- LAYOUTS -----
+------------------
+hl.config({
+    dwindle = {
+        force_split = 2,
+    },
+})
 ------------------
 ---- SCRIPTS -----
 ------------------
