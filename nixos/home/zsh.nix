@@ -11,6 +11,11 @@
     #---------------------------------------
 
     shellAliases = {
+      # Locations
+      dots = "cd ~/Stuff/Private/Dots_GitHub/";
+      dotsNix = "cd ~/Stuff/Private/Dots_GitHub/nixos/";
+      dotsHypr = "cd ~/Stuff/Private/Dots_GitHub/hypr/";
+
       # Tmux
       tt = "tmux";
 
@@ -24,8 +29,8 @@
       # Nix flake updates
       editNixFlake = "sudo nvim /etc/nixos/flake.nix";
       editNixConfig = "sudo nvim /etc/nixos/configuration.nix";
-      nixRebuild = "sudo nixos-rebuild switch --flake .#SpiritBox";
-      nixUpdate = "cd ~/Stuff/Private/Dots_GitHub/nixos && sudo nix flake update && nixRebuild && cd -";
+      nixRebuild = "dotsNix && sudo nixos-rebuild switch --flake .#SpiritBox";
+      nixUpdate = "dotsNix && sudo nix flake update && nixRebuild && cd -";
 
       # Ports for localsend
       open-localsend = "sudo iptables -I nixos-fw 1 -p tcp --dport 53317 -j nixos-fw-accept && sudo iptables -I nixos-fw 1 -p udp --dport 53317 -j nixos-fw-accept";
