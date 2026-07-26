@@ -20,7 +20,7 @@ hl.window_rule({
 })
 
 -- Mark window to swap
-hl.bind(main_mod .. " + m", function()
+hl.bind(main_mod .. " + s", function()
     if not window_to_swap then
         local win = hl.get_active_window()
         if win and win.address then
