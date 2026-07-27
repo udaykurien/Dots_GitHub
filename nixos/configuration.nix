@@ -403,6 +403,8 @@
     blanket
     brightnessctl
     btop
+    cava
+    celluloid
     cmatrix
     cmus
     cudaPackages.cuda_cudart
@@ -415,7 +417,7 @@
     cudaPackages.libcusparse
     curl
     deja-dup
-#    discord
+    # discord
     ## DOOM EMACS dependencies ##
     emacs
     ripgrep
@@ -423,12 +425,15 @@
     gnutls
     (aspellWithDicts (dicts: with dicts; [ en ]))
     #############################
+    easyeffects
     eloquent
     exfatprogs
     exiftool
     eza
     fastfetch
+    ffmpeg
     file
+    flat-remix-icon-theme
     foliate
 #    gamescope 
     gcc
@@ -436,7 +441,25 @@
     gnumake
     gimp-with-plugins
     git
+    ### GNOME CORE APPS (START) ###
+    nautilus
+    papers
+    gnome-calculator
+    gnome-calendar
+    snapshot
+    gnome-clocks
+    gnome-characters
+    baobab
+    simple-scan
+    loupe
+    gnome-text-editor
+    showtime
+    gnome-weather
+    decibels
+    resources
+    ### GNOME CORE APPS (END) #####
     gnome-boxes
+    gnome-control-center
     gnome-disk-utility
     gnomeExtensions.appindicator
     gnome-extension-manager
@@ -448,7 +471,6 @@
     gnomeExtensions.vitals
     gnomeExtensions.user-themes
     gnome-tweaks
-    gnome-text-editor
     gnumake
     gparted
     # grim
@@ -456,10 +478,14 @@
     helix
     hicolor-icon-theme
     htop
+    hyprpicker
     id3v2
+    imv
     jdk21
+    jq
     # kooha
     kitty
+    kdePackages.qtstyleplugin-kvantum
     libnotify
     libreoffice
     librewolf
@@ -471,12 +497,11 @@
     lazygit
     lshw
     nasm
-    nautilus
     ncdu
     neovim
-    # noctalia-shell
     nodejs
     nvme-cli
+    # nwg-look
     obs-studio
     pciutils
     pdfarranger
@@ -487,14 +512,17 @@
     python3
     python313Packages.yt-dlp-ejs
     pywalfox-native
+    libsForQt5.qt5ct
+    qt6Packages.qt6ct
     ranger
-    resources
     rubberband
 #   signal-desktop-bin
 #   slurp
+    sddm-astronaut
     starship
     tcpdump
     tgpt
+    thunar
     tmux
     tree
     tree-sitter
@@ -510,6 +538,7 @@
     yaru-theme
     yt-dlp
 #    pkgs-unstable.zed-editor
+    zathura
     zed-editor
     zsh
   ];
