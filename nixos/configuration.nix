@@ -153,12 +153,25 @@
   
   # Set greeter
   # services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
-  services.displayManager.sddm.enable = true;
+  
+  # SDDM Minimal
+  # services.displayManager.sddm.enable = true;
 
-  # Add some malware protection
-  services.clamav = {
-    daemon.enable = true;
-    updater.enable = true;
+  # Themed (silent) SDDM
+  programs.silentSDDM = {
+    enable = true;
+    theme = "nord";
+    settings = {
+      General = {
+        scale = 1.25;
+      };
+      "LoginScreen.LoginArea.Avatar" = { 
+        shape = "circle";
+      };
+      "LoginScreen.VirtualKeyboard" = {
+        start-hidden = false;
+      };
+    };
   };
 
   # Enable virtualization.
