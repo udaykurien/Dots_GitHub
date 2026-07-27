@@ -304,7 +304,14 @@
 
   # Session variables are set on first log in
   environment.sessionVariables = {
-    XDG_DATA_DIRS = [ "/var/lib/flatpak/exports/share" "$HOME/.local/share/flatpak/exports/share" ]; # Flatpaks
+    XDG_DATA_DIRS = [ 
+      "/var/lib/flatpak/exports/share" 
+      "$HOME/.local/share/flatpak/exports/share" 
+      # NOTE: > Temporary fix for firefox render problem begin ---
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      # NOTE: --- Temporary fix for firefox render problem end <
+    ];
     AI_PROVIDER = "sky"; # Tgpt, update it when there is a better provider
     CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
     LD_LIBRARY_PATH = "/run/opengl-driver/lib";
