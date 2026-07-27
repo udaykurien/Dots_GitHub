@@ -1,4 +1,4 @@
-config_version = 2
+config_version = 7
 
 [audio]
 enable_sounds = true
@@ -8,8 +8,8 @@ capsule = true
 capsule_opacity = 0.84999998100101948
 capsule_padding = 8.0
 capsule_radius = 10
-capsule_thickness = 0.71999998763203621
-center = [ "cpu", "temp", "ram", "control-center", "sysmon", "battery", "network_rx" ]
+capsule_thickness = 0.65999998897314072
+center = [ "cpu", "temp", "group:g2", "control-center", "disk", "battery", "group:g3" ]
 end = [
     "tray",
     "notifications",
@@ -17,13 +17,12 @@ end = [
     "notes",
     "clipboard",
     "caffeine",
+    "brightness",
     "bluetooth",
     "network",
-    "brightness",
     "volume",
     "input_volume"
 ]
-font_family = "IBM Plex Sans"
 margin_ends = 0
 padding = 4
 radius = 0
@@ -32,16 +31,31 @@ radius_bottom_right = 8
 scale = 0.90000000596046448
 shadow = false
 start = [ "privacy", "clock", "weather", "bar", "group:g1", "workspaces" ]
-thickness = 42
+thickness = 44
 
     [[bar.default.capsule_group]]
     enabled = true
     fill = "surface_variant"
     id = "g1"
-    members = [ "media", "audio_visualizer" ]
+    members = [ "media", "audio_visualizer", "cat_2" ]
     opacity = 0.84999996423721313
     padding = 8.0
-    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "ram", "swap" ]
+    opacity = 0.84999996423721313
+    padding = 8.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "network_rx", "network_tx" ]
+    opacity = 0.84999996423721313
+    padding = 8.0
 
 [battery]
 warning_threshold = 25
@@ -99,9 +113,14 @@ address = "whitby, canada"
 fingerprint = false
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
+widget_order = [
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-login-box@WL-1",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -109,8 +128,8 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@WL-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 229.0
+    box_width = 720.0
     cx = 640.0
     cy = 601.0
     output = "WL-1"
@@ -121,18 +140,22 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = true
+        show_session_buttons = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 70.0
+    box_height = 103.0
     box_width = 400.0
     cx = 1024.0
-    cy = 1161.0
+    cy = 747.5
     output = "eDP-1"
     rotation = 0.0
     type = "login_box"
@@ -141,22 +164,66 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = true
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
+        show_media = false
+        show_session_buttons = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1024.0
+    cy = 640.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        clock_style = "digital"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 512.0
+    box_width = 512.0
+    cx = 1024.0
+    cy = 256.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        background_color = "surface"
+        background_opacity = 0.80000000000000004
+        background_padding = 10
+        background_radius = 12
+        bar_width = 0.59999999999999998
+        bloom_intensity = 0.5
+        fade_when_idle = true
+        inner_diameter = 0.69999999999999996
+        primary_color = "primary"
+        ring_opacity = 0.80000000000000004
+        rotation_speed = 0.5
+        secondary_color = "secondary"
+        sensitivity = 1.5
+        visualization_mode = "bars_rings"
+        wave_thickness = 1.0
 
 [nightlight]
 enabled = true
 temperature_night = 5000
 
 [plugins]
-enabled = [ "noctalia/bongocat", "noctalia/timer", "noctalia/notes", "oldirtty/color_picker" ]
+enabled = [ "noctalia/bongocat", "noctalia/timer", "noctalia/notes", "oldirtty/color_picker", "noctalia/wallhaven" ]
 
 [shell]
-avatar_path = "/run/current-system/sw/share/pixmaps/faces/gamepad.jpg"
+avatar_path = "/run/current-system/sw/share/pixmaps/faces/cat.jpg"
 external_ip_enabled = true
 font_family = "IBM Plex Sans Text"
 polkit_agent = true
@@ -170,56 +237,77 @@ screen_time_enabled = true
 
 [theme]
 builtin = "Ayu"
-community_palette = "Flexoki"
+community_palette = "Neon Surf"
+custom_palette = "mass-effect-ketevstudio-wallhaven-3lxde3-rb"
+mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "mango", "qt" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "mango", "niri", "qt" ]
     community_ids = [ "steam" ]
 
 [wallpaper]
 directory = "/home/echoes/Pictures"
 fill_color = "shadow"
-fill_mode = "fit"
 transition = [ "disc", "fade", "wipe", "zoom" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
 
     [wallpaper.monitors.eDP-1]
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
-
-    [[wallpaper.favorite]]
-    palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-wallhaven-8g9wyy.png"
-    theme_mode = "auto"
-    wallpaper_scheme = "m3-content"
-
-    [[wallpaper.favorite]]
-    palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v2-8g9wyy.png"
-    theme_mode = "auto"
+    theme_mode = "dark"
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-8g9wyy.png"
-    theme_mode = "auto"
-    wallpaper_scheme = "m3-content"
-
-    [[wallpaper.favorite]]
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-value-invert-colorized-cyan-purple-wallhaven-8g9wyy.png"
-    theme_mode = "auto"
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
-    theme_mode = "auto"
+    path = "/home/echoes/Pictures/from-afar-reddit-e2uf39kip0wa1.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/abstract-dreamscope-dimensions-u5.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-5wrpg9.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-gpmv53.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/03. Gruvbox Retro.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/b-586.jpg"
+    theme_mode = "dark"
     wallpaper_scheme = "m3-rainbow"
 
 [widget.active_window]
@@ -229,7 +317,7 @@ show_empty_label = true
 title_scroll = "always"
 
 [widget.audio_visualizer]
-bands = 14
+bands = 12
 color_1 = "on_surface"
 color_2 = "on_surface"
 show_when_idle = true
@@ -238,10 +326,18 @@ show_when_idle = true
 type = "noctalia/timer:bar"
 
 [widget.brightness]
-scroll_step = 1
 show_label = false
 
+    [widget.brightness.actions]
+    scroll_down = "brightness-down 1%"
+    scroll_up = "brightness-up 1%"
+
 [widget.cat]
+audio_spectrum = true
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.cat_2]
 audio_spectrum = true
 tappy_mode = true
 type = "noctalia/bongocat:cat"
@@ -258,6 +354,9 @@ color = "primary"
 glyph = "navigation-filled"
 
 [widget.cpu]
+display = "text"
+
+[widget.disk]
 display = "text"
 
 [widget.input_volume]
@@ -282,6 +381,9 @@ vpn_status = "both"
 [widget.network_rx]
 display = "text"
 
+[widget.network_tx]
+display = "text"
+
 [widget.notes]
 type = "noctalia/notes:notes"
 
@@ -292,9 +394,13 @@ icon_spacing = 8
 
 [widget.ram]
 display = "text"
+stat = "ram_pct"
 
 [widget.session]
 enabled = false
+
+[widget.swap]
+display = "text"
 
 [widget.sysmon]
 display = "text"
@@ -313,8 +419,11 @@ drawer_columns = 5
 match_adjacent_spacing = true
 
 [widget.volume]
-scroll_step = 1
 show_label = false
+
+    [widget.volume.actions]
+    scroll_down = "volume-down 1%"
+    scroll_up = "volume-up 1%"
 
 [widget.weather]
 show_condition = false
@@ -323,6 +432,5 @@ show_condition = false
 type = "oldirtty/color_picker:widget"
 
 [widget.workspaces]
-active_pill_size = 2.0
 focused_output_only = true
-scale = 1.05
+style = "minimal"
