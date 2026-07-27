@@ -5,6 +5,12 @@
     #    ./home/neovim.nix
     ./home/zsh.nix
   ];
+  
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "qt6ct";
+  #   style.name = "breeze";
+  # };
 
   home.username = "echoes";
   home.homeDirectory = "/home/echoes";
@@ -14,8 +20,6 @@
     "$HOME/.config/emacs/bin"
   ];
 
-  xdg.configFile."fastfetch/config.jsonc".source = ./home/fastfetch_config.jsonc;
- 
  # let Home Manager manage itself
   programs.home-manager.enable = true;
 }
