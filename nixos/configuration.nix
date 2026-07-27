@@ -351,6 +351,12 @@
     };
   };
 
+  # Install z-oxide
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true; # or enableZshIntegration / enableFishIntegration
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
