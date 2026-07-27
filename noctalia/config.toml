@@ -1,0 +1,12 @@
+# settings.toml is noctalia owned. It resides in ~/.local/state/noctalia/settings.toml
+# config.toml is user owned it resides in ~/.config/noctalia/*.toml
+
+[widget.swap]
+type = "sysmon"
+stat = "swap_pct"
+glyph = "memory"
+
+[widget.disk]
+type = "sysmon"
+stat = "disk_used_pct"
+glyph = "storage"
