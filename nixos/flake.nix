@@ -8,11 +8,15 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+   };
     noctalia = {
       url = "github:noctalia-dev/noctalia";
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager,noctalia, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, noctalia, silentSDDM, ... }:
   let
     system = "x86_64-linux";
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -23,6 +27,7 @@
       modules = [
         ./configuration.nix
         noctalia.nixosModules.default
+        silentSDDM.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
         {
