@@ -1,5 +1,6 @@
 # settings.toml is noctalia owned. It resides in ~/.local/state/noctalia/settings.toml
 # config.toml is user owned it resides in ~/.config/noctalia/*.toml
+# How to make custom widgets: https://docs.noctalia.dev/v5/bar/widgets/
 
 [widget.swap]
 type = "sysmon"
@@ -10,3 +11,13 @@ glyph = "memory"
 type = "sysmon"
 stat = "disk_used_pct"
 glyph = "storage"
+
+[widget.textdot]
+type = "text"
+text = "•"
+interactive = false
+
+[widget.textspace]
+type = "text"
+text = " "
+interactive = false
