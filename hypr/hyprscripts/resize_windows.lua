@@ -8,11 +8,12 @@ local main_mod = cfg.main_mod
 
 local window_to_resize = nil
 local win = nil
-local notification_on_time = 2000
+local notification_on_time = 4000
+local border_color = "rgb(FF00AA)"
 
 hl.window_rule({
     match = { tag = "marked_for_resize" },
-    border_color = "rgb(FF00AA) rgb(FF00AA)",
+    border_color = border_color .. " " .. border_color,
     border_size = 2,
 })
 
@@ -20,12 +21,12 @@ hl.window_rule({
 hl.bind(main_mod .. " + R", function()
     win = hl.get_active_window()
     if not win or not win.address then
-        hl.notification.create({ text = "Resize submap not activated.", timeout = notification_on_time})
+        hl.notification.create({ icon = 3, timeout = notification_on_time, color = border_color, text = "Resize submap could not be activated." })
         return
     end
     window_to_resize = win.address
     hl.dispatch(hl.dsp.window.tag({ tag = "+marked_for_resize", window = "address:" .. window_to_resize }))
-    hl.notification.create({ text = "Resize submap active on: " .. win.address, timeout = notification_on_time})
+    hl.notification.create({ icon = 1, timeout = notification_on_time, color = border_color, text = "Resize submap is active on: " .. win.address })
     hl.dispatch(hl.dsp.submap("resize"))
 end)
 
@@ -49,7 +50,7 @@ hl.define_submap("resize", function()
     -- Use `reset` to go back to the global submap
     local function unmark_resize()
         hl.dispatch(hl.dsp.window.tag({ tag = "-marked_for_resize", window = "address:" .. window_to_resize }))
-        hl.notification.create({ text = "Resize submap cleared from: " .. win.address, timeout = notification_on_time})
+        hl.notification.create({ icon = 1, timeout = notification_on_time, color = border_color, text = "Resize submap is inactive" })
         window_to_resize = nil
     end
 
