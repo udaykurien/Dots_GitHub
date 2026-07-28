@@ -1,11 +1,13 @@
 window-decoration = client
 
 theme = Hybrid
+# theme = Hybrid
 #theme = Neobones Dark
 # theme = dankcolors
 font-size = 11
 font-family = "FiraCode Nerd Font Mono"
 background-opacity=1.0
+# background = #131313
 
 keybind = ctrl+shift+o=toggle_tab_overview
 
