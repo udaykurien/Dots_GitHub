@@ -21,3 +21,7 @@ interactive = false
 type = "text"
 text = " "
 interactive = false
+
+# Hide network/wifi applet and bluemand from sys tray as there are already dedicated widgets for them
+[widget.tray]
+hidden = ["blueman", "network"]
