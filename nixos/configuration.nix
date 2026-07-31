@@ -102,6 +102,25 @@
     enable = true;
     powerOnBoot = true;
   };
+  services.blueman.enable = true;
+
+  # External drives / USB disks
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true; #For Thunar, XFCE
+
+  # Power / battery
+  services.upower.enable = true;
+
+  # Key rings and PAM
+  services.gnome.gnome-keyring.enable = true; # Daemon itself
+  services.gnome.gcr-ssh-agent.enable = false; # For ssh since it's been shifted out of gnome-keyring. Set to false for ssh.startAgent to run without conflicts
+  programs.ssh.startAgent = true; 
+  security.pam.services.sddm.enableGnomeKeyring = true; # Unlock gnome-keyring when authenticated by sddm
+  programs.seahorse.enable = true; # GUI to inspect/manage keys
+  
+  # Sushi - Nautilus image previewer
+  services.gnome.sushi.enable = true;
 
   networking.hostName = "SpiritBox"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
