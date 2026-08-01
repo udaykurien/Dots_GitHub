@@ -1,0 +1,515 @@
+config_version = 10
+
+[audio]
+enable_sounds = true
+
+[bar.default]
+capsule = true
+capsule_opacity = 0.84999998100101948
+capsule_padding = 8.0
+capsule_radius = 10
+capsule_thickness = 0.6699999887496233
+center = [ "group:g2", "temp", "cpu", "control-center", "disk", "battery", "group:g3" ]
+end = [ "tray", "widget", "clipboard", "caffeine", "notes", "group:g4", "session", "output_volume" ]
+margin_ends = 0
+padding = 4
+radius = 0
+scale = 0.90000000596046448
+shadow = false
+start = [ "launcher", "privacy", "clock", "weather", "bar", "group:g1", "workspaces" ]
+thickness = 42
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "media", "audio_visualizer", "cat_2" ]
+    opacity = 0.84999996423721313
+    padding = 8.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "ram", "textdot", "swap" ]
+    opacity = 0.84999996423721313
+    padding = 8.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "network_rx", "textdot", "network_tx" ]
+    opacity = 0.84999996423721313
+    padding = 8.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g4"
+    members = [
+        "notifications",
+        "textspace",
+        "brightness",
+        "textspace",
+        "input_volume",
+        "textspace",
+        "textspace",
+        "bluetooth",
+        "textspace",
+        "network"
+    ]
+    opacity = 0.84999996423721313
+    padding = 8.0
+    radius = 10.0
+
+[battery]
+warning_threshold = 25
+
+[control_center]
+sidebar = "full"
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "dark_mode"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+[dock]
+auto_hide = true
+border_width = 3.5
+concave_edge_corners = false
+icon_size = 30
+reserve_space = false
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+address = "whitby, canada"
+
+[lockscreen]
+fingerprint = false
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-login-box@WL-1",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@WL-1"]
+    box_height = 229.0
+    box_width = 720.0
+    cx = 640.0
+    cy = 601.0
+    output = "WL-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@WL-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 103.0
+    box_width = 400.0
+    cx = 1024.0
+    cy = 755.5
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = false
+        show_session_buttons = true
+        show_weather = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1024.0
+    cy = 640.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        clock_style = "digital"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 512.0
+    box_width = 512.0
+    cx = 1024.0
+    cy = 256.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        background_color = "surface"
+        background_opacity = 0.80000000000000004
+        background_padding = 10
+        background_radius = 12
+        bar_width = 0.59999999999999998
+        bloom_intensity = 0.5
+        fade_when_idle = true
+        inner_diameter = 0.69999999999999996
+        primary_color = "primary"
+        ring_opacity = 0.80000000000000004
+        rotation_speed = 0.5
+        secondary_color = "secondary"
+        sensitivity = 1.5
+        visualization_mode = "all"
+        wave_thickness = 1.0
+
+[nightlight]
+enabled = true
+temperature_night = 5000
+
+[plugins]
+enabled = [
+    "noctalia/bongocat",
+    "noctalia/timer",
+    "noctalia/notes",
+    "oldirtty/color_picker",
+    "noctalia/wallhaven",
+    "noctalia/screen_recorder"
+]
+
+[shell]
+avatar_path = "/run/current-system/sw/share/pixmaps/faces/cat.jpg"
+external_ip_enabled = true
+font_family = "IBM Plex Sans Text"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+[theme]
+builtin = "Ayu"
+community_palette = "Neon Surf"
+custom_palette = "mass-effect-ketevstudio-wallhaven-3lxde3-rb"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-rainbow"
+
+    [theme.templates]
+    builtin_ids = [ "cava", "hyprland", "mango", "niri" ]
+    community_ids = [ "steam" ]
+
+[wallpaper]
+directory = "/home/echoes/Pictures"
+fill_color = "shadow"
+transition = [ "disc", "fade", "wipe", "zoom" ]
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+
+    [wallpaper.last]
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-invert-colorize-cyan-purple-v3-8g9wyy.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/blue-abstract-5120x2880-25119.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/from-afar-reddit-e2uf39kip0wa1.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/abstract-dreamscope-dimensions-u5.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-5wrpg9.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-gpmv53.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/03. Gruvbox Retro.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/b-586.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/42-wallhaven-7pr99e.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Wallpapers/3311419.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favourites/DUNE-DESKTOP-WALLPAPER-4K.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/1805991.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/230913a86ddd5b60a5a08ee49ebb11fe.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/air-ship-whale.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/alexy-egorov-surreal-horrorwallhaven-j3wg3y.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/Favorites/alexy-egorov-surreal-horrorwallhaven-j3wg3y.jpg"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/wp5587066-programming-desktop-wallpapers.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/whale the OG.jpeg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallpapersden.com_dark-starfield-hd-minimal-space_3840x2025.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+[widget.active_window]
+max_length = 115
+min_length = 115
+show_empty_label = true
+title_scroll = "always"
+
+[widget.audio_visualizer]
+bands = 12
+color_1 = "secondary"
+color_2 = "secondary"
+interactive = false
+show_when_idle = true
+
+[widget.bar]
+type = "noctalia/timer:bar"
+
+[widget.brightness]
+show_label = false
+
+    [widget.brightness.actions]
+    scroll_down = "brightness-down 1%"
+    scroll_up = "brightness-up 1%"
+
+[widget.cat]
+audio_spectrum = true
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.cat_2]
+audio_spectrum = true
+enabled = false
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.clipboard]
+enabled = false
+
+[widget.clock]
+format = "{:%H:%M  •  %a, %d }"
+
+[widget.control-center]
+anchor = true
+color = "primary"
+glyph = "navigation-filled"
+
+[widget.cpu]
+display = "text"
+
+[widget.disk]
+display = "text"
+
+[widget.input_volume]
+color = "error"
+mute_color = "on_surface"
+scroll_step = 1
+show_label = false
+
+[widget.launcher]
+glyph = "menu-2"
+
+[widget.media]
+album_art_only = true
+art_size = 18
+max_length = 140
+title_scroll = "always"
+
+[widget.network]
+show_label = false
+vpn_status = "both"
+
+[widget.network_rx]
+display = "text"
+network_speed_compact = true
+
+[widget.network_tx]
+display = "text"
+network_speed_compact = true
+
+[widget.notes]
+type = "noctalia/notes:notes"
+
+[widget.privacy]
+active_color = "error"
+hide_inactive = true
+icon_spacing = 8
+
+[widget.ram]
+display = "text"
+stat = "ram_pct"
+visualization = "none"
+
+[widget.swap]
+display = "text"
+
+[widget.sysmon]
+show_value = true
+stat = "disk_used_pct"
+visualization = "none"
+
+[widget.taskbar]
+only_active_workspace = true
+workspace_group_capsule = false
+
+[widget.temp]
+display = "text"
+glyph = "temperature"
+visualization = "none"
+
+[widget.tray]
+drawer_columns = 5
+match_adjacent_spacing = true
+
+[widget.volume.actions]
+scroll_down = "volume-down 1%"
+scroll_up = "volume-up 1%"
+
+[widget.weather]
+show_condition = false
+
+[widget.widget]
+type = "oldirtty/color_picker:widget"
+
+[widget.workspaces]
+focused_color = "on_surface"
+focused_output_only = true
+style = "minimal"

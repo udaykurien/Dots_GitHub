@@ -1,0 +1,347 @@
+config_version = 11
+
+[bar.default]
+background_opacity = 0.89999997988343239
+capsule = true
+capsule_opacity = 0.84999998100101948
+capsule_radius = 10
+capsule_thickness = 0.69999998807907104
+center = [ "group:g1", "temp", "cpu", "control-center", "disk", "battery", "group:g2" ]
+end = [ "tray", "group:g5", "notes", "group:g6", "group:g4", "session" ]
+font_family = "IBM Plex Sans Text"
+margin_ends = 0
+padding = 8
+radius = 0
+radius_bottom_left = 8
+radius_bottom_right = 8
+scale = 0.90000000596046448
+shadow = false
+start = [ "launcher", "privacy", "clock", "weather", "bar", "group:g3", "workspaces" ]
+thickness = 40
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "ram", "textdot", "swap" ]
+    opacity = 0.85000002384185791
+    padding = 6.0
+    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "network_rx", "textdot", "network_tx" ]
+    opacity = 0.85000002384185791
+    padding = 6.0
+    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "media", "audio_visualizer" ]
+    opacity = 0.85000002384185791
+    padding = 6.0
+    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g4"
+    members = [
+        "brightness",
+        "textspace",
+        "input_volume",
+        "textspace",
+        "volume",
+        "textspace",
+        "bluetooth",
+        "textspace",
+        "network"
+    ]
+    opacity = 0.85000002384185791
+    padding = 6.0
+    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g5"
+    members = [ "widget", "textspace", "screenshot" ]
+    opacity = 0.84999996423721313
+    padding = 6.0
+    radius = 10.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g6"
+    members = [ "caffeine", "textspace", "notifications" ]
+    opacity = 0.84999996423721313
+    padding = 6.0
+    radius = 10.0
+
+[control_center]
+sidebar = "full"
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "system"
+
+[dock]
+background_opacity = 0.89999997988343239
+cross_axis_padding = 4
+enabled = true
+icon_size = 32
+main_axis_padding = 8
+pinned = [
+    "ghostty",
+    "files",
+    "firefox",
+    "librewolf",
+    "net.nokyan.Resources",
+    "steam",
+    " de.haeckerfelix.Shortwave",
+    "com.stremio.Stremio",
+    "easyeffects",
+    "noctalia"
+]
+radius = 12
+reserve_space = false
+show_dots = true
+smart_auto_hide = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+address = "whitby, canada"
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1024.0
+    cy = 787.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1024.0
+    cy = 640.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 560.0
+    box_width = 640.0
+    cx = 1018.0
+    cy = 290.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        visualization_mode = "all"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1024.0
+    cy = 992.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "noctalia/timer:desktop"
+
+[plugins]
+enabled = [
+    "noctalia/bongocat",
+    "oldirtty/color_picker",
+    "noctalia/notes",
+    "noctalia/screen_recorder",
+    "noctalia/timer",
+    "noctalia/wallhaven"
+]
+
+[shell]
+font_family = "IBM Plex Sans Text"
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+[theme]
+source = "wallpaper"
+wallpaper_scheme = "m3-rainbow"
+
+    [theme.templates]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "mango", "niri", "qt", "starship" ]
+    community_ids = [ "papirus-icons" ]
+
+[wallpaper]
+directory = "/home/echoes/Pictures"
+
+    [wallpaper.default]
+    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+
+    [wallpaper.last]
+    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/Cyberpunk-2077-goodies/steelbook_arts/02_voodoo_boys.png"
+    theme_mode = "auto"
+
+[widget.audio_visualizer]
+color_1 = "secondary"
+color_2 = "secondary"
+interactive = false
+show_when_idle = true
+
+[widget.bar]
+type = "noctalia/timer:bar"
+
+[widget.brightness]
+show_label = false
+
+[widget.clock]
+format = "{:%H:%M}  •  {:%a}, {:%d}"
+
+[widget.control-center]
+anchor = true
+color = "primary"
+glyph = "navigation-filled"
+
+[widget.cpu]
+visualization = "none"
+
+[widget.disk]
+visualization = "none"
+
+[widget.input_volume]
+color = "error"
+mute_color = "on_surface"
+show_label = false
+
+[widget.launcher]
+enabled = false
+glyph = "menu-2"
+
+[widget.media]
+album_art_only = true
+
+[widget.network]
+show_label = false
+
+[widget.network_rx]
+network_speed_compact = true
+visualization = "none"
+
+[widget.network_tx]
+network_speed_compact = true
+visualization = "none"
+
+[widget.notes]
+type = "noctalia/notes:notes"
+
+[widget.privacy]
+active_color = "error"
+hide_inactive = true
+
+[widget.ram]
+stat = "ram_pct"
+visualization = "none"
+
+[widget.session]
+enabled = false
+
+[widget.swap]
+visualization = "none"
+
+[widget.temp]
+visualization = "none"
+
+[widget.tray]
+match_adjacent_spacing = true
+
+[widget.volume]
+show_label = false
+
+[widget.weather]
+show_condition = false
+
+[widget.widget]
+type = "oldirtty/color_picker:widget"
+
+[widget.workspaces]
+style = "minimal"

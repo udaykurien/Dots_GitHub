@@ -2,26 +2,29 @@ config_version = 10
 
 [bar.default]
 capsule = true
-capsule_opacity = 0.84999998100101948
+capsule_opacity = 0.89999997988343239
 capsule_radius = 10
 capsule_thickness = 0.69999998807907104
-center = [ "group:g1", "temp", "cpu", "control-center", "disk", "battery", "group:g2" ]
-end = [ "tray", "group:g5", "notes", "group:g6", "group:g4", "session" ]
+center = [ "clock", "weather" ]
+end = [ "tray", "widget_2", "group:g2", "group:g1" ]
 font_family = "IBM Plex Sans Text"
 margin_ends = 0
 padding = 8
+position = "left"
 radius = 0
+radius_bottom_right = 12
+radius_top_right = 12
 scale = 0.90000000596046448
 shadow = false
-start = [ "launcher", "privacy", "clock", "weather", "bar", "group:g3", "workspaces" ]
-thickness = 40
+start = [ "control-center", "privacy", "caffeine", "workspaces" ]
+thickness = 42
 
     [[bar.default.capsule_group]]
     enabled = true
     fill = "surface_variant"
     id = "g1"
-    members = [ "ram", "textdot", "swap" ]
-    opacity = 0.85000002384185791
+    members = [ "brightness", "spacer_1", "volume", "spacer_1", "bluetooth", "spacer_1", "network" ]
+    opacity = 0.89999997615814209
     padding = 6.0
     radius = 10.0
 
@@ -29,54 +32,8 @@ thickness = 40
     enabled = true
     fill = "surface_variant"
     id = "g2"
-    members = [ "network_rx", "textdot", "network_tx" ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
-
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g3"
-    members = [ "media", "audio_visualizer" ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
-
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g4"
-    members = [
-        "brightness",
-        "textspace",
-        "input_volume",
-        "textspace",
-        "volume",
-        "textspace",
-        "bluetooth",
-        "textspace",
-        "network"
-    ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
-
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g5"
-    members = [ "widget", "textspace", "screenshot" ]
-    opacity = 0.84999996423721313
-    padding = 6.0
-    radius = 10.0
-
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g6"
-    members = [ "caffeine", "textspace", "notifications" ]
-    opacity = 0.84999996423721313
+    members = [ "media", "spacer_1", "notifications" ]
+    opacity = 0.89999997615814209
     padding = 6.0
     radius = 10.0
 
@@ -101,14 +58,58 @@ sidebar = "full"
     [[control_center.shortcuts]]
     type = "system"
 
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 96.0
+    box_width = 224.0
+    cx = 1840.0
+    cy = 1152.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = false
+        center_text = true
+        format = "{:%H:%M}\\n{:%a}, {:%d}"
+
 [dock]
-concave_edge_corners = false
-icon_size = 30
-pinned = [ "firefox", "ghostty" ]
-radius = 12
+auto_hide = true
+background_opacity = 0.89999997988343239
+cross_axis_padding = 4
+enabled = true
+icon_size = 32
+item_spacing = 4
+launcher_position = "start"
+main_axis_padding = 6
+pinned = [
+    "firefox",
+    "signal",
+    "noctalia",
+    "Files",
+    "steam",
+    "Easy Effects",
+    " com.github.tchx84.Flatseal",
+    "com.stremio.Stremio",
+    " de.haeckerfelix.Shortwave"
+]
+radius_bottom_left = 12
+radius_bottom_right = 12
+radius_top_left = 12
+radius_top_right = 12
 reserve_space = false
 show_dots = true
-smart_auto_hide = true
+
+[hot_corners.top_left]
+action = "window_switcher"
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -205,6 +206,9 @@ widget_order = [
     rotation = 0.0
     type = "noctalia/timer:desktop"
 
+[notification]
+position = "top_left"
+
 [plugins]
 enabled = [
     "noctalia/bongocat",
@@ -220,6 +224,9 @@ font_family = "IBM Plex Sans Text"
 
     [shell.panel]
     open_near_click_control_center = true
+
+    [shell.session]
+    grid = true
 
 [theme]
 source = "wallpaper"
@@ -251,25 +258,16 @@ color_2 = "secondary"
 interactive = false
 show_when_idle = true
 
-[widget.bar]
-type = "noctalia/timer:bar"
-
 [widget.brightness]
 show_label = false
 
 [widget.clock]
-format = "{:%H:%M}  •  {:%a}, {:%d}"
+format = "{:%H:%M} "
 
 [widget.control-center]
 anchor = true
 color = "primary"
 glyph = "navigation-filled"
-
-[widget.cpu]
-visualization = "none"
-
-[widget.disk]
-visualization = "none"
 
 [widget.input_volume]
 color = "error"
@@ -284,15 +282,6 @@ album_art_only = true
 
 [widget.network]
 show_label = false
-vpn_status = "both"
-
-[widget.network_rx]
-network_speed_compact = true
-visualization = "none"
-
-[widget.network_tx]
-network_speed_compact = true
-visualization = "none"
 
 [widget.notes]
 type = "noctalia/notes:notes"
@@ -301,15 +290,8 @@ type = "noctalia/notes:notes"
 active_color = "error"
 hide_inactive = true
 
-[widget.ram]
-stat = "ram_pct"
-visualization = "none"
-
-[widget.swap]
-visualization = "none"
-
-[widget.temp]
-visualization = "none"
+[widget.spacer_1]
+type = "spacer"
 
 [widget.tray]
 match_adjacent_spacing = true
@@ -323,5 +305,8 @@ show_condition = false
 [widget.widget]
 type = "oldirtty/color_picker:widget"
 
+[widget.widget_2]
+type = "oldirtty/color_picker:widget"
+
 [widget.workspaces]
-style = "minimal"
+active_pill_size = 1.5
