@@ -8,15 +8,17 @@ local cfg = require("config")
 -- ENVIRONMENT ---
 ------------------
 
+hl.env("TZDIR", "/etc/zoneinfo")
 hl.env("HYPRCURSOR_THEME", "Adwaita")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORM", "wayland")
-hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+-- hl.env("QT_QPA_PLATFORMTHEME", "qt6ct") -- set to kde in nix config
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
-hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh", true)
+-- hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh", true)
+hl.env("WLR_NO_HARWARE_CURSORS", "1")
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Multi-GPU/
 -- hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
@@ -49,7 +51,11 @@ hl.config({ xwayland = { force_zero_scaling = true } })
 -- Or execute your favorite apps at launch like this:
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
+    -- hl.exec_cmd("systemctl --user import-environment")
+    -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
     hl.exec_cmd("udiskie --tray")
+    -- hl.exec_cmd("easyeffects --gapplication-service")
+    hl.exec_cmd("flatpak run org.signal.Signal --start-in-tray")
     
     -- NOTE: Failsafe, incase gcr-ssh-agent doesn't auto enable as per configurations.nix.
     
@@ -89,10 +95,41 @@ end)
 
 hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } )
 hl.curve( "easeOutSine", { type = "bezier", points = { {0.61, 1}, {0.88, 1} } })
+hl.curve( "easeInOutCubic", { type = "bezier", points = { {0.65, 0}, {0.35, 1} } })
 -- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
-hl.animation({ leaf = "global", enabled = true, speed = 5, bezier = "easeOutSine" })
+hl.animation({ leaf = "global", enabled = true, speed = 4, bezier = "easeOutSine" })
 hl.animation({ leaf = "border", enabled = true, speed = 1.5, bezier = "easeOutSine" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "easeOutSine", style = "slidevert" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "easeOutSine", style = "slidevert" })
+
+-- -- Mango style animations
+-- -- Curves matching mango's animation_curve values (cubic-bezier control points)
+-- hl.curve("mangoOpen",  { type = "bezier", points = { {0.46, 1.0}, {0.29, 1} } })  -- snappy ease-out
+-- hl.curve("mangoClose", { type = "bezier", points = { {0.08, 0.92}, {0, 1} } })    -- slower ease-in
+--
+-- -- -- Global animations toggle
+-- -- hl.config({
+-- --     animations = { enabled = true }
+-- -- })
+--
+-- -- Window open: fast slide-in (mango: 400ms)
+-- hl.animation({ leaf = "windowsIn",  enabled = true, speed = 4, bezier = "mangoOpen",  style = "slide" })
+--
+-- -- Window close: slower slide-out (mango: 800ms)
+-- hl.animation({ leaf = "windowsOut", enabled = true, speed = 8, bezier = "mangoClose", style = "slide" })
+--
+-- -- Window move/resize: keep snappy, no slide needed
+-- hl.animation({ leaf = "windowsMove", enabled = true, speed = 3.5, bezier = "mangoOpen" })
+--
+-- -- Fade in/out paired with the slides (mango fades alongside its slide)
+-- hl.animation({ leaf = "fadeIn",  enabled = true, speed = 4, bezier = "mangoOpen" })
+-- hl.animation({ leaf = "fadeOut", enabled = true, speed = 8, bezier = "mangoClose" })
+--
+-- -- Workspace switch: mango-style slide between tags
+-- hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "mangoOpen", style = "slidevert" })
+--
+-- -- Layer surfaces (rofi, waybar, notifications) — mango uses zoom for launchers, fade for bars
+-- hl.animation({ leaf = "layersIn",  enabled = true, speed = 3, bezier = "mangoOpen",  style = "popin" })
+-- hl.animation({ leaf = "layersOut", enabled = true, speed = 4, bezier = "mangoClose", style = "fade" })
 
 ------------------
 ------- MOD ------
@@ -103,11 +140,13 @@ local main_mod = cfg.main_mod -- Sets Super key as main modifier
 ------------------
 ---- NOC BINDS ---
 ------------------
+local ipc = "noctalia msg"
 
-hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
-hl.bind(main_mod .. " + s", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
-hl.bind(main_mod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
-hl.bind(main_mod .. " + P", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(ipc .. " " .. "panel-toggle launcher"))
+hl.bind(main_mod .. " + c", hl.dsp.exec_cmd(ipc .. " " .. "panel-toggle control-center"))
+hl.bind(main_mod .. " + V", hl.dsp.exec_cmd(ipc .. " " .. "panel-toggle clipboard"))
+hl.bind(main_mod .. " + P", hl.dsp.exec_cmd(ipc .. " " .. "panel-toggle session"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd(ipc .. " " .. "window-switcher"))
 
 ---------------------
 --- LOOK AND FEEL ---
@@ -137,10 +176,10 @@ hl.config({
         rounding = 8,
         blur = {
             enabled   = true,
-            size      = 7,
+            size      = 6,
             passes    = 3,
-            vibrancy  = 1,
-            ignore_opacity = true,
+            vibrancy  = 0.1696,
+            -- ignore_opacity = true,
         },
     },
 })
@@ -151,7 +190,7 @@ hl.layer_rule({
     namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd)$",
   },
   -- no_anim = true,
-  ignore_alpha = 0.5,
+  ignore_alpha = 0.3,
   blur = true,
   blur_popups = true,
 })
@@ -232,31 +271,31 @@ hl.bind(main_mod .. " + D", function()
 end)
 
 -- Essential binds
-hl.bind(main_mod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind("SUPER + SHIFT + E", hl.dsp.exit())
-hl.bind(main_mod .. " + Q", hl.dsp.window.close())
+hl.bind(cfg.hypr_exit, hl.dsp.exit())
+hl.bind(cfg.terminal_open, hl.dsp.exec_cmd(terminal))
+hl.bind(cfg.win_close, hl.dsp.window.close())
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("SHIFT+XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("SHIFT+XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -n2 set 1%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -n2 set 5%-"),                  { locked = true, repeating = true })
-hl.bind("SHIFT+XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -n2 set 1%-"),                  { locked = true, repeating = true })
+hl.bind(cfg.speaker_raise_volume_large, hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind(cfg.speaker_raise_volume_small, hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+"), { locked = true, repeating = true })
+hl.bind(cfg.speaker_lower_volume_large, hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+hl.bind(cfg.speaker_lower_volume_small, hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"),      { locked = true, repeating = true })
+hl.bind(cfg.speaker_toggle_volume_mute,        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+hl.bind(cfg.mic_toggle_volume_mute,     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+hl.bind(cfg.screen_raise_brightness_large,  hl.dsp.exec_cmd("brightnessctl -n2 set 5%+"),                  { locked = true, repeating = true })
+hl.bind(cfg.screen_raise_brightness_small,  hl.dsp.exec_cmd("brightnessctl -n2 set 1%+"),                  { locked = true, repeating = true })
+hl.bind(cfg.screen_lower_brightness_large,hl.dsp.exec_cmd("brightnessctl -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind(cfg.screen_lower_brightness_small,hl.dsp.exec_cmd("brightnessctl -n2 set 1%-"),                  { locked = true, repeating = true })
 
 -- Requires playerctl
-hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+hl.bind(cfg.media_next,  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+hl.bind(cfg.media_pause, hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind(cfg.media_play,  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind(cfg.media_previous,  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- Workspace switching
-hl.bind("CTRL + " .. main_mod .. " + up", hl.dsp.focus({ workspace = "-1" }))
-hl.bind("CTRL + " .. main_mod .. " + down", hl.dsp.focus({ workspace = "+1" }))
+hl.bind(cfg.ws_prev, hl.dsp.focus({ workspace = "-1" }))
+hl.bind(cfg.ws_next, hl.dsp.focus({ workspace = "+1" }))
 
 -- Numbered (1-9) workspace binds
 for i=1, 9, 1 do
@@ -276,25 +315,28 @@ end
 
 hl.workspace_rule({ workspace = 1, default_name = "1|M" }) -- Music 1o
 
--- Move windows between workspaces
-hl.bind("CTRL + SHIFT + " .. main_mod .. " + up", hl.dsp.window.move({ workspace = "-1" }))
-hl.bind("CTRL + SHIFT + " .. main_mod .. " + down", hl.dsp.window.move({ workspace = "+1" }))
-
 -- Focus windows
-hl.bind(main_mod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(main_mod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(main_mod .. " + down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(cfg.focus_left,  hl.dsp.focus({ direction = "left" }))
+hl.bind(cfg.focus_right, hl.dsp.focus({ direction = "right" }))
+hl.bind(cfg.focus_up,    hl.dsp.focus({ direction = "up" }))
+hl.bind(cfg.focus_down,  hl.dsp.focus({ direction = "down" }))
 
 -- Maximize or fullscreen windows
-hl.bind(main_mod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
-hl.bind(main_mod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(cfg.win_fullscreen, hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind(cfg.win_maximize, hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+
+-- Toggle split direction
+hl.bind(cfg.win_split_direction_toggle, hl.dsp.layout('togglesplit'))
 
 -- Move windows within a workspace
-hl.bind(main_mod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left"  }))
-hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
-hl.bind(main_mod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "up"    }))
-hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down"  }))
+hl.bind(cfg.win_mv_left,  hl.dsp.window.move({ direction = "left"  }))
+hl.bind(cfg.win_mv_right, hl.dsp.window.move({ direction = "right" }))
+hl.bind(cfg.win_mv_up,    hl.dsp.window.move({ direction = "up"    }))
+hl.bind(cfg.win_mv_down,  hl.dsp.window.move({ direction = "down"  }))
+
+-- Move windows between workspaces
+hl.bind(cfg.win_mv_to_prev_ws, hl.dsp.window.move({ workspace = "-1" }))
+hl.bind(cfg.win_mv_to_next_ws, hl.dsp.window.move({ workspace = "+1" }))
 
 ------------------
 ---- LAYOUTS -----
@@ -302,18 +344,31 @@ hl.bind(main_mod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" 
 hl.config({
     dwindle = {
         force_split = 2,
+        preserve_split = true,
     },
 })
 ------------------
 ---- SCRIPTS -----
 ------------------
-require("hyprscripts/swap_windows_v2")
 require("hyprscripts/cycle_layouts")
+require("hyprscripts/swap_windows")
 require("hyprscripts/resize_windows")
+
+------------------
+---- TESTING -----
+------------------
 
 ------------------
 ---- NOCTALIA ----
 ------------------
-
 -- For Noctalia Color templates
 require("noctalia").apply_theme()
+
+-- Overwrite inactive borders
+hl.config({
+    general = {
+        col = {
+            inactive_border = "rgba(595959aa)";
+    }
+    }
+})
