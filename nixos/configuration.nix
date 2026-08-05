@@ -168,11 +168,20 @@
 #  services.desktopManager.plasma6.enable = true;
 
   # Enable GNOME Desktop Environment:
-  services.desktopManager.gnome.enable = true;
+  # services.desktopManager.gnome.enable = true;
+
+  # # Enable XFCE desktop environment
+  # services.xserver.desktopManager.xfce.enable = true;
+
+  # # COSMIC DE
+  # services.desktopManager.cosmic.enable = true;
   
   # Set greeter
   # services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
   
+  # # COSMIC greeter
+  # services.displayManager.cosmic-greeter.enable = true;
+
   # SDDM Minimal
   # services.displayManager.sddm.enable = true;
 
@@ -201,12 +210,15 @@
   virtualisation.docker.enable = true;
 
   # Enable niri
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    # package = pkgs-unstable.niri;
+  };
 
   # Enable mango
   programs.mangowc={
     enable = true;
-    # package = pkgs-unstable.mango;
+    package = pkgs-unstable.mango;
   };
   
   # # Enable hyprland
