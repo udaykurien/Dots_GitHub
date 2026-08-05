@@ -221,8 +221,14 @@
     package = pkgs-unstable.mango;
   };
   
-  # # Enable hyprland
+  # Enable hyprland
   # programs.hyprland.enable = true;
+  programs.uwsm.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    # package = pkgs-unstable.hyprland;
+  };
   
   # Enable DMS
   programs.dms-shell.enable = true;
