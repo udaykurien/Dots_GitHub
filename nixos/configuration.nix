@@ -340,13 +340,24 @@
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
   # Give flatpak apps access to gtk theme directories
-  services.flatpak.overrides.settings = {
-    global.Context.filesystems = [
-      "xdg-config/gtk-3.0:ro"
-      "xdg-config/gtk-4.0:ro"
-    ];
+  services.flatpak.overrides = {
+    global = {
+      Context.filesystems = [
+        "xdg-config/gtk-3.0:ro"
+        "xdg-config/gtk-4.0:ro"
+      ];
+      Environment = {
+        QT_QPA_PLATFORMTHEME = "gtk3";
+        QT_STYLE_OVERRIDE = "Adwaita-Dark";
+      };
+    };
   };
 
+  # Link user themes in root dir for non user apps
+  system.activationScripts.gtkThemeSync = ''
+    ln -sfT /home/echoes/.config/gtk-3.0 /etc/gtk-3.0
+    ln -sfT /home/echoes/.config/gtk-4.0 /etc/gtk-4.0
+  '';
   services.flatpak.remotes = [{
     name = "flathub";
     location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
