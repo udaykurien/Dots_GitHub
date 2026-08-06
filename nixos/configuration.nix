@@ -358,6 +358,17 @@
     ln -sfT /home/echoes/.config/gtk-3.0 /etc/gtk-3.0
     ln -sfT /home/echoes/.config/gtk-4.0 /etc/gtk-4.0
   '';
+  
+  # # QT theming
+  # qt = {
+  #   enable = true;
+  #   # platformTheme = "qt6ct";
+  #   style = "breeze";
+  # };
+  
+  environment.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "kde";
+  };
   services.flatpak.remotes = [{
     name = "flathub";
     location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
