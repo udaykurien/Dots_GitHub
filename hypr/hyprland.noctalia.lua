@@ -237,12 +237,13 @@ hl.gesture({
     action = "workspace",
 })
 
--- -- Window switching for scrolling layout
--- hl.gesture({
---     fingers = 3,
---     direction = "horizontal",
---     action = "scroll_move",
--- })
+-- Window switching for scrolling layout
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "scroll_move",
+    scale = 3,
+})
 
 ---------------------
 ---- KEYBINDINGS ----
