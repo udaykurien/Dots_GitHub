@@ -1,87 +1,113 @@
-config_version = 11
+config_version = 12
 
-[bar.default]
-background_opacity = 0.89999997988343239
-capsule = true
-capsule_opacity = 0.84999998100101948
-capsule_radius = 10
-capsule_thickness = 0.69999998807907104
-center = [ "group:g1", "temp", "cpu", "control-center", "disk", "battery", "group:g2" ]
-end = [ "tray", "group:g5", "notes", "group:g6", "group:g4", "session" ]
-font_family = "IBM Plex Sans Text"
-margin_ends = 0
-padding = 8
-radius = 0
-radius_bottom_left = 8
-radius_bottom_right = 8
-scale = 0.90000000596046448
-shadow = false
-start = [ "launcher", "privacy", "clock", "weather", "bar", "group:g3", "workspaces" ]
-thickness = 40
+[bar]
+order = [ "default" ]
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g1"
-    members = [ "ram", "textdot", "swap" ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
+    [bar.default]
+    background_opacity = 0.89999997988343239
+    capsule = true
+    capsule_opacity = 0.59999998658895493
+    capsule_radius = 10
+    capsule_thickness = 0.69999998807907104
+    center = [ "group:g1", "cpu", "temp", "control-center", "disk", "battery", "group:g2" ]
+    end = [ "tray", "group:g5", "notes", "group:g6", "group:g4", "session" ]
+    font_family = "IBM Plex Sans Text"
+    margin_ends = 0
+    padding = 8
+    radius = 0
+    radius_bottom_left = 8
+    radius_bottom_right = 8
+    scale = 0.90000000596046448
+    shadow = false
+    start = [ "launcher", "group:g7", "weather", "bar", "privacy", "group:g3", "toggle", "workspaces" ]
+    thickness = 38
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g2"
-    members = [ "network_rx", "textdot", "network_tx" ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g4"
+        members = [
+            "brightness",
+            "textspace",
+            "input_volume",
+            "textspace",
+            "volume",
+            "textspace",
+            "bluetooth",
+            "textspace",
+            "network"
+        ]
+        opacity = 0.60000002384185791
+        padding = 6.0
+        radius = 10.0
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g3"
-    members = [ "media", "audio_visualizer" ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g5"
+        members = [ "widget", "textspace", "screenshot" ]
+        opacity = 0.60000002384185791
+        padding = 6.0
+        radius = 10.0
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g4"
-    members = [
-        "brightness",
-        "textspace",
-        "input_volume",
-        "textspace",
-        "volume",
-        "textspace",
-        "bluetooth",
-        "textspace",
-        "network"
-    ]
-    opacity = 0.85000002384185791
-    padding = 6.0
-    radius = 10.0
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g6"
+        members = [ "caffeine", "textspace", "notifications" ]
+        opacity = 0.60000002384185791
+        padding = 6.0
+        radius = 10.0
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g5"
-    members = [ "widget", "textspace", "screenshot" ]
-    opacity = 0.84999996423721313
-    padding = 6.0
-    radius = 10.0
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "media", "audio_visualizer" ]
+        opacity = 0.60000002384185791
+        padding = 6.0
+        radius = 10.0
 
-    [[bar.default.capsule_group]]
-    enabled = true
-    fill = "surface_variant"
-    id = "g6"
-    members = [ "caffeine", "textspace", "notifications" ]
-    opacity = 0.84999996423721313
-    padding = 6.0
-    radius = 10.0
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "ram", "textdot", "swap" ]
+        opacity = 0.59999996423721313
+        padding = 6.0
+        radius = 10.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "network_rx", "textdot", "network_tx" ]
+        opacity = 0.59999996423721313
+        padding = 6.0
+        radius = 10.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g7"
+        members = [ "bar_2", "clock" ]
+        opacity = 0.59999996423721313
+        padding = 6.0
+        radius = 10.0
 
 [control_center]
 sidebar = "full"
@@ -115,6 +141,7 @@ pinned = [
     "files",
     "firefox",
     "librewolf",
+    "dev.zed.Zed",
     "net.nokyan.Resources",
     "steam",
     " de.haeckerfelix.Shortwave",
@@ -151,12 +178,7 @@ address = "whitby, canada"
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [
-    "lockscreen-login-box@eDP-1",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002",
-    "lockscreen-widget-0000000000000003"
-]
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -165,7 +187,7 @@ widget_order = [
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
-    box_width = 400.0
+    box_width = 336.0
     cx = 1024.0
     cy = 787.0
     output = "eDP-1"
@@ -213,15 +235,6 @@ widget_order = [
         background = false
         visualization_mode = "all"
 
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 1024.0
-    cy = 992.0
-    output = "eDP-1"
-    rotation = 0.0
-    type = "noctalia/timer:desktop"
-
 [plugins]
 enabled = [
     "noctalia/bongocat",
@@ -229,47 +242,60 @@ enabled = [
     "noctalia/notes",
     "noctalia/screen_recorder",
     "noctalia/timer",
-    "noctalia/wallhaven"
+    "noctalia/wallhaven",
+    "maddingo/hypr-layout-switcher",
+    "noctalia/world_clock"
 ]
 
 [shell]
 font_family = "IBM Plex Sans Text"
+polkit_agent = true
 
     [shell.panel]
     open_near_click_control_center = true
+    transparency_mode = "soft"
 
 [theme]
+builtin = "Noctalia"
+custom_palette = "cogs-minimal-rb"
+mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "mango", "niri", "qt", "starship" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "mango", "niri", "qt" ]
     community_ids = [ "papirus-icons" ]
 
 [wallpaper]
 directory = "/home/echoes/Pictures"
+transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/Cyberpunk-2077-goodies/steelbook_arts/02_voodoo_boys.png"
     theme_mode = "auto"
 
 [widget.audio_visualizer]
-color_1 = "secondary"
-color_2 = "secondary"
+bands = 32
+color_1 = "on_surface"
+color_2 = "on_surface"
 interactive = false
 show_when_idle = true
 
 [widget.bar]
+enabled = false
 type = "noctalia/timer:bar"
+
+[widget.bar_2]
+type = "noctalia/world_clock:bar"
 
 [widget.brightness]
 show_label = false
@@ -331,6 +357,9 @@ visualization = "none"
 [widget.temp]
 visualization = "none"
 
+[widget.toggle]
+type = "maddingo/hypr-layout-switcher:toggle"
+
 [widget.tray]
 match_adjacent_spacing = true
 
@@ -344,4 +373,5 @@ show_condition = false
 type = "oldirtty/color_picker:widget"
 
 [widget.workspaces]
+scroll_repeat = "steps"
 style = "minimal"
