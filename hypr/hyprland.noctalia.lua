@@ -9,10 +9,10 @@ local cfg = require("config")
 ------------------
 
 hl.env("TZDIR", "/etc/zoneinfo")
-hl.env("HYPRCURSOR_THEME", "Adwaita")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("XCURSOR_THEME", "Adwaita")
-hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("HYPRCURSOR_SIZE", "22")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("XCURSOR_SIZE", "22")
 hl.env("QT_QPA_PLATFORM", "wayland")
 -- hl.env("QT_QPA_PLATFORMTHEME", "qt6ct") -- set to kde in nix config
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
