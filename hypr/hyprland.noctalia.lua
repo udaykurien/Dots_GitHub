@@ -204,6 +204,16 @@ hl.layer_rule({
 -- })
 
 ---------------------
+---- WINDOW RULE ----
+---------------------
+
+hl.window_rule({
+    name = "no-maximize-celluloid",
+    match = { class = "^io\\.github\\.celluloid_player\\.Celluloid$" },
+    suppress_event = "maximize",
+})
+
+---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
@@ -276,7 +286,7 @@ hl.bind(cfg.hypr_exit, hl.dsp.exit())
 hl.bind(cfg.terminal_open, hl.dsp.exec_cmd(terminal))
 hl.bind(cfg.win_close, hl.dsp.window.close())
 
--- Laptop multimedia keys for volume and LCD brightness
+-- Laptop multimedia keys for volume, brightness, and screenshots
 hl.bind(cfg.speaker_raise_volume_large, hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind(cfg.speaker_raise_volume_small, hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+"), { locked = true, repeating = true })
 hl.bind(cfg.speaker_lower_volume_large, hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
@@ -287,6 +297,7 @@ hl.bind(cfg.screen_raise_brightness_large,  hl.dsp.exec_cmd("brightnessctl -n2 s
 hl.bind(cfg.screen_raise_brightness_small,  hl.dsp.exec_cmd("brightnessctl -n2 set 1%+"),                  { locked = true, repeating = true })
 hl.bind(cfg.screen_lower_brightness_large,hl.dsp.exec_cmd("brightnessctl -n2 set 5%-"),                  { locked = true, repeating = true })
 hl.bind(cfg.screen_lower_brightness_small,hl.dsp.exec_cmd("brightnessctl -n2 set 1%-"),                  { locked = true, repeating = true })
+hl.bind(cfg.screenshot, hl.dsp.exec_cmd('grim -g "$(slurp)" - | satty --filename -'))
 
 -- Requires playerctl
 hl.bind(cfg.media_next,  hl.dsp.exec_cmd("playerctl next"),       { locked = true })

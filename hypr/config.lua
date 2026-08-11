@@ -45,7 +45,8 @@ return {
     screen_raise_brightness_small = "SHIFT+XF86MonBrightnessUp",
     screen_lower_brightness_large = "XF86MonBrightnessDown",
     screen_lower_brightness_small = "SHIFT+XF86MonBrightnessDown",
-    
+    screenshot = "XF86SelectiveScreenshot",
+
     -------------------
     ------ MEDIA ------
     -------------------
