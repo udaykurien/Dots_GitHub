@@ -53,7 +53,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
     -- hl.exec_cmd("systemctl --user import-environment")
     -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-    hl.exec_cmd("udiskie --tray")
+    -- hl.exec_cmd("udiskie --tray")
     -- hl.exec_cmd("easyeffects --gapplication-service")
     hl.exec_cmd("flatpak run org.signal.Signal --start-in-tray")
     
