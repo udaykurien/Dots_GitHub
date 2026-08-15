@@ -4,8 +4,8 @@
     enable = true;
     history = {
       path = "$HOME/.histfile";
-      size = 1000;
-      save = 2000;
+      size = 20000;
+      save = 20000;
     };
 
     #---------------------------------------
