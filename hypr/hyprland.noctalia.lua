@@ -18,10 +18,12 @@ hl.env("QT_QPA_PLATFORM", "wayland")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 -- hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/gcr/ssh", true)
-hl.env("WLR_NO_HARWARE_CURSORS", "1")
+-- hl.env("WLR_NO_HARWARE_CURSORS", "1")
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Multi-GPU/
 -- hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
+hl.plugin.load(os.getenv("HYPR_PLUGIN_DIR") .. "/lib/libhypr-dynamic-cursors.so")
+-- hl.plugin.load(os.getenv("HYPR_PLUGIN_DIR") .. "/lib/libhyprspace.so")
 ------------------
 ---- MONITORS ----
 ------------------
@@ -56,10 +58,11 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("udiskie --tray")
     -- hl.exec_cmd("easyeffects --gapplication-service")
     hl.exec_cmd("flatpak run org.signal.Signal --start-in-tray")
+    -- hl.exec_cmd("steam -silent")
     
     -- NOTE: Failsafe, incase gcr-ssh-agent doesn't auto enable as per configurations.nix.
     
-    hl.exec_cmd("systemctl --user enable --now gcr-ssh-agent.socket")
+    -- hl.exec_cmd("systemctl --user enable --now gcr-ssh-agent.socket")
     
     -- NOTE: Hyprland polkit should be enabled if shell polkit isn't.
 
@@ -97,9 +100,9 @@ hl.curve( "overshoot", { type = "bezier", points = { {0.5, 0.9}, {0.1, 1.1} } } 
 hl.curve( "easeOutSine", { type = "bezier", points = { {0.61, 1}, {0.88, 1} } })
 hl.curve( "easeInOutCubic", { type = "bezier", points = { {0.65, 0}, {0.35, 1} } })
 -- hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "overshoot" })
-hl.animation({ leaf = "global", enabled = true, speed = 4, bezier = "easeOutSine" })
+hl.animation({ leaf = "global", enabled = true, speed = 2, bezier = "easeOutSine" })
 hl.animation({ leaf = "border", enabled = true, speed = 1.5, bezier = "easeOutSine" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "easeOutSine", style = "slidevert" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "easeOutSine", style = "slidevert" })
 
 -- -- Mango style animations
 -- -- Curves matching mango's animation_curve values (cubic-bezier control points)
@@ -176,13 +179,49 @@ hl.config({
         rounding = 8,
         blur = {
             enabled   = true,
-            size      = 6,
-            passes    = 3,
+            size      = 8,
+            passes    = 4,
             vibrancy  = 0.1696,
             -- ignore_opacity = true,
         },
     },
+    plugin = {
+        dynamic_cursors = {
+            enabled = true,
+            mode = "stretch",
+            rotate = {
+                -- length in px of the simulated stick used to rotate the cursor
+                -- most realistic if this is your actual cursor size
+                length = 20,
+                -- clockwise offset applied to the angle in degrees (applies to ALL shapes)
+                offset = 0.0,
+              },
+            shake = {
+                enabled = true,
+                -- controls how soon a shake is detected; lower = sooner
+                threshold = 4.0,
+                -- magnification level immediately after shake starts
+                base = 2.0,
+                -- magnification increase per second while continuing to shake
+                speed = 4.0,
+                -- how much speed is influenced by current shake intensity
+                influence = 0.0,
+                -- max magnification the cursor can reach (values below 1 disable the limit)
+                limit = 0.0,
+                -- time in ms cursor stays magnified after shake ends
+                timeout = 2000,
+                -- show tilt/rotate/etc behaviour while shaking
+                effects = true,
+                -- enable IPC events for shake (spammy, off by default)
+                ipc = false,
+            },
+        },
+    },
 })
+
+hl.plugin.dynamic_cursors.shape_rule { shape = "text", mode = "none" }
+hl.plugin.dynamic_cursors.shape_rule { shape = "grab", mode = "none" }
+hl.plugin.dynamic_cursors.shape_rule { shape = "pointer", mode = "none" }
 
 hl.layer_rule({
   name = "noctalia",
@@ -349,6 +388,11 @@ hl.bind(cfg.win_mv_down,  hl.dsp.window.move({ direction = "down"  }))
 -- Move windows between workspaces
 hl.bind(cfg.win_mv_to_prev_ws, hl.dsp.window.move({ workspace = "-1" }))
 hl.bind(cfg.win_mv_to_next_ws, hl.dsp.window.move({ workspace = "+1" }))
+
+-- -- Hyprspace
+-- hl.bind("SUPER + grave", function()
+--     hl.exec_cmd("hyprctl dispatch overview:toggle")
+-- end)
 
 ------------------
 ---- LAYOUTS -----

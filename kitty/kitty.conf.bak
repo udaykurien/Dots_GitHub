@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
 # BEGIN_KITTY_THEME
-# neobones_dark
+# GitHub Dark
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -274,6 +274,7 @@ font_size 11
 #: Text cursor customization {{{
 
 # cursor #cccccc
+# cursor #f57c00
 
 #: Default text cursor color. If set to the special value none the
 #: cursor will be rendered with a "reverse video" effect. Its color
@@ -1655,7 +1656,8 @@ inactive_tab_font_style normal
 
 #: The foreground and background colors.
 
-background_opacity 1.00
+# background_opacity 1.0
+background_opacity 0.95
 
 #: The opacity of the terminal background color. A number between zero
 #: and one, where one is opaque and zero is fully transparent. This

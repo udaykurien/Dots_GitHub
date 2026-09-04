@@ -51,7 +51,6 @@
       Type = "oneshot";
       RemainAfterExit = true;
     };
-
     script = ''
       # Wait until cpufreq is present
       for i in {1..50}; do
@@ -73,12 +72,10 @@
     options = "--delete-older-than 7d";
   };
 
-
   # Nvidia driver.
   hardware.graphics.enable = true;
-
   services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
-
+  
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -87,7 +84,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
+  
   hardware.nvidia.prime = {
     offload = {
       enable = true;
@@ -107,7 +104,7 @@
   # External drives / USB disks
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-  services.tumbler.enable = true; #For Thunar, XFCE
+  # services.tumbler.enable = true; #For Thunar, XFCE
 
   # Power / battery
   services.upower.enable = true;
@@ -122,6 +119,7 @@
   # Sushi - Nautilus image previewer
   services.gnome.sushi.enable = true;
 
+  # Networking
   networking.hostName = "SpiritBox"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -129,8 +127,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
   networking.networkmanager.enable = true;
+  
+  # Set up custom DNS
   networking.networkmanager.dns = "none";
   networking.nameservers = [ "127.0.0.1" ];
 
@@ -153,6 +152,7 @@
     };
   };
 
+
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
@@ -165,7 +165,7 @@
 
 #  # Enable the KDE Plasma Desktop Environment.
 #  services.displayManager.sddm.enable = true;
-#  services.desktopManager.plasma6.enable = true;
+ # services.desktopManager.plasma6.enable = true;
 
   # Enable GNOME Desktop Environment:
   # services.desktopManager.gnome.enable = true;
@@ -173,10 +173,11 @@
   # # Enable XFCE desktop environment
   # services.xserver.desktopManager.xfce.enable = true;
 
-  # # COSMIC DE
+  # COSMIC DE
   # services.desktopManager.cosmic.enable = true;
   
   # Set greeter
+  # GDM
   # services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
   
   # # COSMIC greeter
@@ -229,23 +230,37 @@
     withUWSM = true;
     # package = pkgs-unstable.hyprland;
   };
+
+  environment.sessionVariables.HYPR_PLUGIN_DIR = pkgs.symlinkJoin {
+    name = "hyprland-plugins";
+    paths = [ pkgs.hyprlandPlugins.hypr-dynamic-cursors ];
+  };
+
   
-  # Enable DMS
-  programs.dms-shell.enable = true;
-  programs.dsearch = {
+  # NOTE: DMS START >
+  # # Enable DMS with dsearch for files
+  # programs.dms-shell = {
+  #   enable = true;
+  #   package = pkgs-unstable.dms-shell;
+  # };
+  # programs.dsearch = {
+  #   enable = true;
+  #   systemd.enable = true;
+  #   package = pkgs-unstable.dsearch;
+  # };
+  #
+  # # Stop dms service from autostarting so it doesn't collide with noctalia
+  # # and doesn't double start due to WM config via exec-once or equivalen
+  # systemd.user.services.dms = {
+  #   wantedBy = lib.mkForce [ ];
+  # };
+  # NOTE: < DMS END
+
+  # Enable noctalia v5
+  programs.noctalia = {
     enable = true;
-    systemd.enable = true;
+    recommendedServices.enable = true;
   };
-
-  systemd.user.services.dms = {
-    wantedBy = lib.mkForce [ ];
-  };
-
-#  # Enable fractional scaling (Gnome < 50).
-#  services.desktopManager.gnome.extraGSettingsOverrides = ''
-#    [org.gnome.mutter]
-#    experimental-features=['scale-monitor-framebuffer']
-#  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -255,6 +270,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  
+  # Enable polkit
+  security.polkit.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -281,9 +299,6 @@
         {
           type = "pipewire";
           name = "My PipeWire Output";
-#          type = "pulse";
-#          name = "Pulseaudio";
-#          server = "127.0.0.1";
         }
       ];
     };
@@ -315,7 +330,7 @@
     ];
   };
 
-  # Nix settings.
+  # Nix build and remote binary cache settings.
   nix.settings = {
     max-jobs = 3;
     cores = 4;
@@ -328,6 +343,12 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
+    extra-substituters = [ 
+      "https://noctalia.cachix.org" 
+    ];
+    extra-trusted-public-keys = [ 
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
     download-buffer-size = 524288000;
   };
 
@@ -336,8 +357,8 @@
   services.flatpak.update.onActivation = true;
   
   # Niri module already adss these xdg's, so no need to include them here
-  # xdg.portal.enable = true;
-  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
   # Give flatpak apps access to gtk theme directories
   services.flatpak.overrides = {
@@ -345,6 +366,9 @@
       Context.filesystems = [
         "xdg-config/gtk-3.0:ro"
         "xdg-config/gtk-4.0:ro"
+        "xdg-data/icons:ro"     # covers ~/.local/share/icons
+        "~/.icons:ro"
+        "/nix/store:ro"
       ];
       Environment = {
         QT_QPA_PLATFORMTHEME = "gtk3";
@@ -369,20 +393,33 @@
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "kde";
   };
-  services.flatpak.remotes = [{
-    name = "flathub";
-    location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-  }];
+
+  # For time and zone
+  environment.etc."environment.d/90-tzdir.conf".text = ''
+    TZDIR=/etc/zoneinfo
+  '';
+
+
+  # Link libexec into /run/current-system/sw for gnome-polit to work
+  environment.pathsToLink = [ "/libexec" ];
+
+  # Add flatpak remote address
+  services.flatpak.remotes = [
+    {
+      name = "flathub";
+      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    }
+    {
+      name = "GeForceNOW";
+      location = "https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo";
+    }
+  ];
 
   # Session variables are set on first log in
   environment.sessionVariables = {
     XDG_DATA_DIRS = [ 
       "/var/lib/flatpak/exports/share" 
       "$HOME/.local/share/flatpak/exports/share" 
-      # NOTE: > Temporary fix for firefox render problem begin ---
-      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
-      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
-      # NOTE: --- Temporary fix for firefox render problem end <
     ];
     AI_PROVIDER = "sky"; # Tgpt, update it when there is a better provider
     CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
@@ -397,7 +434,7 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c965", MODE="0666"
     # Power off NVIDIA GPU when not in use
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
-'';
+  '';
 
   # Systemd service for auto kbl
   systemd.services.l5p-autobl = {
@@ -421,12 +458,15 @@
         Locked = true;
       };
     };
+    preferences = {
+      "widget.gtk.libadwaita-colors.enabled" = false;
+    };
   };
 
   # Install z-oxide
   programs.zoxide = {
     enable = true;
-    enableBashIntegration = true; # or enableZshIntegration / enableFishIntegration
+    enableZshIntegration = true; # or enableZshIntegration / enableFishIntegration
   };
 
   # Allow unfree packages
@@ -452,12 +492,21 @@
     ];
   };
 
+  # Fonts.
+  fonts.packages = with pkgs; [
+    ibm-plex
+    fira-code
+    nerd-fonts.fira-code
+    inter
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (python3.withPackages (ps: with ps; [ evdev pyusb ]))
     adw-gtk3
     adwaita-icon-theme
+    bibata-cursors
     binutils
     blanket
     brightnessctl
@@ -475,8 +524,16 @@
     cudaPackages.libcusolver
     cudaPackages.libcusparse
     curl
+    dconf-editor
     deja-dup
     # discord
+    kdePackages.plasma-integration
+  kdePackages.frameworkintegration
+    kdePackages.dolphin
+    kdePackages.qt6ct
+    kdePackages.breeze
+    kdePackages.breeze-icons
+    kdePackages.plasma-workspace
     ## DOOM EMACS dependencies ##
     emacs
     ripgrep
@@ -532,13 +589,15 @@
     gnome-tweaks
     gnumake
     gparted
-    # grim
+    grim
     # grimblast
     helix
     hicolor-icon-theme
     htop
+    hyprpolkitagent
     hyprpicker
     id3v2
+    imagemagick
     imv
     jdk21
     jq
@@ -548,11 +607,14 @@
     libnotify
     libreoffice
     librewolf
+    libsecret # Needed by same apps to talk to secret service api
     localsend
     lynis
     macchanger
     mpc
+    mpv
     ncmpcpp
+    ntfs3g
     lazygit
     lshw
     nasm
@@ -562,10 +624,12 @@
     nvme-cli
     # nwg-look
     obs-studio
+    papirus-icon-theme
     pciutils
     pdfarranger
     planify
     playerctl
+    polkit_gnome
     psmisc
     pyradio
     python3
@@ -576,37 +640,38 @@
     ranger
     rubberband
 #   signal-desktop-bin
-#   slurp
+    satty
     sddm-astronaut
+    slurp
+    songrec
     starship
+    superfile
     tcpdump
+    tesseract
     tgpt
     thunar
     tmux
     tree
     tree-sitter
     tuxguitar
+    udiskie
     unzip
     usbutils
     vimPlugins.vim-plug
     vlc
+    wev
     wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
     wget
     wl-clipboard
+    xdg-utils
     xwayland-satellite
     yaru-theme
     yt-dlp
 #    pkgs-unstable.zed-editor
     zathura
+    zbar
     zed-editor
     zsh
-  ];
-
-  # Fonts.
-  fonts.packages = with pkgs; [
-    ibm-plex
-    fira-code
-    nerd-fonts.fira-code
   ];
 
   # Flatpak apps.
