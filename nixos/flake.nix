@@ -12,11 +12,12 @@
       url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
    };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-    };
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia-shell/v5.0.1";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, noctalia, silentSDDM, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, silentSDDM, ... }:
   let
     system = "x86_64-linux";
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -26,7 +27,7 @@
       specialArgs = { inherit pkgs-unstable; };
       modules = [
         ./configuration.nix
-        noctalia.nixosModules.default
+        # noctalia.nixosModules.default
         silentSDDM.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager

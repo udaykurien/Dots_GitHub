@@ -108,6 +108,7 @@
 
   # Power / battery
   services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # Key rings and PAM
   services.gnome.gnome-keyring.enable = true; # Daemon itself
@@ -256,11 +257,11 @@
   # };
   # NOTE: < DMS END
 
-  # Enable noctalia v5
-  programs.noctalia = {
-    enable = true;
-    recommendedServices.enable = true;
-  };
+  # # Enable noctalia v5
+  # programs.noctalia = {
+  #   enable = true;
+  #   recommendedServices.enable = true;
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -620,6 +621,7 @@
     nasm
     ncdu
     neovim
+    noctalia
     nodejs
     nvme-cli
     # nwg-look
