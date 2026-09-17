@@ -1,25 +1,24 @@
-config_version = 13
+config_version = 14
 
 [bar]
 order = [ "default" ]
 
     [bar.default]
-    background_opacity = 0.89999997988343239
     capsule = true
-    capsule_opacity = 0.0
-    capsule_radius = 10
-    capsule_thickness = 0.69999998807907104
+    capsule_padding = 8.0
+    capsule_radius = 8
+    capsule_thickness = 0.59999999031424522
     center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx", "widget" ]
-    end = [ "tray", "widget_2", "notes", "group:g6", "group:g4", "session" ]
+    end = [ "group:g3", "tray", "group:g1", "group:g4", "session" ]
     font_family = "IBM Plex Sans Text"
     margin_ends = 0
     padding = 8
     radius = 0
-    radius_bottom_left = 8
-    radius_bottom_right = 8
+    radius_bottom_left = 12
+    radius_bottom_right = 12
     scale = 0.90000000596046448
     shadow = false
-    start = [ "launcher", "group:g5", "weather", "privacy", "group:g3", "toggle", "workspaces" ]
+    start = [ "launcher", "group:g5", "weather", "privacy", "toggle", "workspaces" ]
     thickness = 38
 
         [[bar.default.capsule_group]]
@@ -39,22 +38,13 @@ order = [ "default" ]
             "textspace",
             "bluetooth",
             "textspace",
-            "network"
+            "network",
+            "textspace",
+            "notifications"
         ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 10.0
-
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        enabled = true
-        fill = "surface_variant"
-        id = "g6"
-        members = [ "caffeine", "textspace", "notifications" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 10.0
+        opacity = 1.0
+        padding = 8.0
+        radius = 8.0
 
         [[bar.default.capsule_group]]
         accordion = false
@@ -63,9 +53,9 @@ order = [ "default" ]
         fill = "surface_variant"
         id = "g3"
         members = [ "media", "audio_visualizer" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 10.0
+        opacity = 1.0
+        padding = 8.0
+        radius = 8.0
 
         [[bar.default.capsule_group]]
         accordion = false
@@ -74,9 +64,20 @@ order = [ "default" ]
         fill = "surface_variant"
         id = "g5"
         members = [ "bar_2", "clock" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 10.0
+        opacity = 1.0
+        padding = 8.0
+        radius = 8.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "widget_2", "textspace", "notes", "textspace", "caffeine" ]
+        opacity = 1.0
+        padding = 8.0
+        radius = 8.0
 
 [control_center]
 sidebar = "full"
@@ -257,13 +258,13 @@ polkit_agent = true
 
     [shell.panel]
     open_near_click_control_center = true
+    shadow = false
     transparency_mode = "soft"
 
 [theme]
 builtin = "Noctalia"
-community_palette = "Flexoki"
+community_palette = "Neon Surf"
 custom_palette = "cogs-minimal-rb"
-mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
@@ -277,13 +278,13 @@ fill_color = "#000000"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
 
 [widget.audio_visualizer]
 bands = 32
@@ -291,6 +292,7 @@ color_1 = "on_surface"
 color_2 = "on_surface"
 interactive = false
 show_when_idle = true
+width = 48
 
 [widget.bar_2]
 type = "noctalia/world_clock:bar"
@@ -326,11 +328,11 @@ show_label = false
     scroll_up = "mic-volume-up 1"
 
 [widget.launcher]
-enabled = false
 glyph = "menu-2"
 
 [widget.media]
 album_art_only = true
+max_length = 134
 
 [widget.network]
 show_label = false
@@ -390,5 +392,8 @@ type = "alexander/screen-toolkit:widget"
 
 [widget.workspaces]
 active_pill_size = 1.75
+empty_color = "on_surface"
+focused_output_only = true
+occupied_color = "on_surface"
 scroll_repeat = "steps"
 style = "minimal"
