@@ -563,6 +563,7 @@
     papers
     gnome-calculator
     gnome-calendar
+    gnome-maps
     snapshot
     gnome-clocks
     gnome-characters
