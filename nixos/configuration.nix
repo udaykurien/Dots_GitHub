@@ -668,6 +668,7 @@
     wl-clipboard
     xdg-utils
     xwayland-satellite
+    xxd
     yaru-theme
     yt-dlp
 #    pkgs-unstable.zed-editor
