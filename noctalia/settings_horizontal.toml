@@ -7,18 +7,16 @@ order = [ "default" ]
     capsule = true
     capsule_padding = 8.0
     capsule_radius = 8
-    capsule_thickness = 0.59999999031424522
+    capsule_thickness = 0.61999998986721039
     center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx", "widget" ]
-    end = [ "group:g3", "tray", "group:g1", "group:g4", "session" ]
+    end = [ "tray", "group:g3", "group:g1", "group:g4", "session" ]
     font_family = "IBM Plex Sans Text"
     margin_ends = 0
     padding = 8
     radius = 0
-    radius_bottom_left = 12
-    radius_bottom_right = 12
     scale = 0.90000000596046448
     shadow = false
-    start = [ "launcher", "group:g5", "weather", "privacy", "toggle", "workspaces" ]
+    start = [ "launcher", "privacy", "group:g5", "weather", "toggle", "workspaces" ]
     thickness = 38
 
         [[bar.default.capsule_group]]
@@ -278,13 +276,13 @@ fill_color = "#000000"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/smoothis-blue-wallhaven-og6jkp.png"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
 [widget.audio_visualizer]
 bands = 32
