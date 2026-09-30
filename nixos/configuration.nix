@@ -153,6 +153,8 @@
     };
   };
 
+  # Set up wireshark
+  programs.wireshark.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
@@ -359,7 +361,7 @@
   
   # Niri module already adss these xdg's, so no need to include them here
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-wlr ];
 
   # Give flatpak apps access to gtk theme directories
   services.flatpak.overrides = {
