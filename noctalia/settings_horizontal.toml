@@ -1,22 +1,26 @@
 config_version = 14
 
+[audio]
+enable_overdrive = true
+
 [bar]
 order = [ "default" ]
 
     [bar.default]
     capsule = true
+    capsule_opacity = 0.0
     capsule_padding = 8.0
     capsule_radius = 8
     capsule_thickness = 0.61999998986721039
     center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx", "widget" ]
-    end = [ "tray", "group:g3", "group:g1", "group:g4", "session" ]
+    end = [ "notifications", "privacy", "tray", "bar_2", "group:g1", "group:g4", "session" ]
     font_family = "IBM Plex Sans Text"
     margin_ends = 0
     padding = 8
     radius = 0
     scale = 0.90000000596046448
     shadow = false
-    start = [ "launcher", "privacy", "group:g5", "weather", "toggle", "workspaces" ]
+    start = [ "launcher", "clock", "weather", "media", "toggle", "workspaces", "btn" ]
     thickness = 38
 
         [[bar.default.capsule_group]]
@@ -36,33 +40,9 @@ order = [ "default" ]
             "textspace",
             "bluetooth",
             "textspace",
-            "network",
-            "textspace",
-            "notifications"
+            "network"
         ]
-        opacity = 1.0
-        padding = 8.0
-        radius = 8.0
-
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        enabled = true
-        fill = "surface_variant"
-        id = "g3"
-        members = [ "media", "audio_visualizer" ]
-        opacity = 1.0
-        padding = 8.0
-        radius = 8.0
-
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        enabled = true
-        fill = "surface_variant"
-        id = "g5"
-        members = [ "bar_2", "clock" ]
-        opacity = 1.0
+        opacity = 0.0
         padding = 8.0
         radius = 8.0
 
@@ -73,7 +53,7 @@ order = [ "default" ]
         fill = "surface_variant"
         id = "g1"
         members = [ "widget_2", "textspace", "notes", "textspace", "caffeine" ]
-        opacity = 1.0
+        opacity = 0.0
         padding = 8.0
         radius = 8.0
 
@@ -110,10 +90,10 @@ widget_order = []
     [desktop_widgets.widget]
 
 [dock]
-background_opacity = 0.79999998211860657
+background_opacity = 0.99999997764825821
 cross_axis_padding = 4
 enabled = true
-icon_size = 32
+icon_size = 28
 inactive_opacity = 0.99999997764825821
 main_axis_padding = 8
 pinned = [
@@ -122,15 +102,21 @@ pinned = [
     "firefox",
     "librewolf",
     "dev.zed.Zed",
-    "net.nokyan.Resources",
+    "org.gnome.Resources",
     "steam",
     "de.haeckerfelix.Shortwave",
     "com.stremio.Stremio",
     "org.signal.Signal",
     "re.fossplant.songrec",
-    "com.github.wwmm.easyeffects"
+    "com.github.wwmm.easyeffects",
+    "org.wireshark.Wireshark",
+    "dev.noctalia.Noctalia"
 ]
-radius = 12
+radius = 0
+radius_bottom_left = 8
+radius_bottom_right = 8
+radius_top_left = 8
+radius_top_right = 8
 reserve_space = false
 show_dots = true
 smart_auto_hide = true
@@ -223,7 +209,11 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         visualization_mode = "all"
 
 [notification]
-background_opacity = 0.9499999787658453
+background_opacity = 0.99999997764825821
+position = "top_center"
+
+[osd]
+background_opacity = 0.99999997764825821
 
 [plugin_settings."alexander/screen-toolkit"]
 panel_open_near_click = true
@@ -233,6 +223,20 @@ x02-expiry = "1h"
 [plugin_settings."aristides/udiskie"]
 manager_open_near_click = true
 manager_placement = "attached"
+
+[plugin_settings."ezequiel/mango_layouts"]
+list_mode = true
+panel_open_near_click = true
+panel_placement = "attached"
+panel_position = "center"
+show_deck = false
+show_monocle = false
+show_right_tile = false
+show_vertical_deck = false
+show_vertical_fair = false
+show_vertical_grid = false
+show_vertical_scroller = false
+show_vertical_tile = false
 
 [plugins]
 enabled = [
@@ -246,7 +250,8 @@ enabled = [
     "alexander/screen-toolkit",
     "aristides/udiskie",
     "tmelik/system-monitor",
-    "piero-93/battery-power-management"
+    "piero-93/battery-power-management",
+    "ezequiel/mango_layouts"
 ]
 
 [shell]
@@ -256,13 +261,12 @@ polkit_agent = true
 
     [shell.panel]
     open_near_click_control_center = true
-    shadow = false
-    transparency_mode = "soft"
 
 [theme]
-builtin = "Noctalia"
-community_palette = "Neon Surf"
+builtin = "Ayu"
+community_palette = "Monochrome"
 custom_palette = "cogs-minimal-rb"
+mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
@@ -276,18 +280,141 @@ fill_color = "#000000"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
+    path = "/home/echoes/Pictures/black-white-wallpaper-missing-wallhaven-yxqzy7.png"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
+    path = "/home/echoes/Pictures/black-white-wallpaper-missing-wallhaven-yxqzy7.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
+    path = "/home/echoes/Pictures/black-white-wallpaper-missing-wallhaven-yxqzy7.png"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Ayu"
+    palette_source = "builtin"
+    path = "/home/echoes/Pictures/osaka-jade-bg.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/neon-genesis-evangellion-wallhaven-8g9wyy.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/geometric-figures-wallhaven-vg6wql.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/cat-minimalism-wallpaper-78568cfa2f7c27791e609942c2099b60.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/volkswagen-van-adventure-in-anime-style-art-backiee-4K.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/osaka-jade-bg-2.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/black-white-wallpaper-missing-wallhaven-yxqzy7.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-gpmv53.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/minimal-black-circle-wallhaven-g8klkl.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-4xdz13.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/b-562.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/Favorites/b-586.jpg"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-4vgxl3.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/zdizdislaw-2561197.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/Blank-20260116T054414Z-3-001/Blank/PNG/Jammy-Jellyfish_WP_4096x2304_Grey_Blank.png"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Blank-20260116T054414Z-3-001/Blank/PNG/Jammy-Jellyfish_WP_4096x2304_blank.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/minimal-dark-wp5679143-black-oled-4k-wallpapers.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/minimal-dark-wp5848436-black-minimalist-hd-wallpapers.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/death-stranding-wallhaven-ey5pwk.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-monochrome"
 
 [widget.audio_visualizer]
 bands = 32
 color_1 = "on_surface"
 color_2 = "on_surface"
+enabled = false
 interactive = false
 show_when_idle = true
 width = 48
@@ -302,12 +429,16 @@ show_label = false
     scroll_down = "brightness-down 1"
     scroll_up = "brightness-up 1"
 
+[widget.btn]
+show_text = true
+type = "ezequiel/mango_layouts:btn"
+
 [widget.clock]
 format = "{:%H:%M}  •  {:%a}, {:%d}"
 
 [widget.control-center]
 anchor = true
-color = "primary"
+color = "on_surface_variant"
 glyph = "badges-filled"
 
 [widget.cpu]
@@ -326,11 +457,15 @@ show_label = false
     scroll_up = "mic-volume-up 1"
 
 [widget.launcher]
+enabled = false
 glyph = "menu-2"
 
 [widget.media]
-album_art_only = true
-max_length = 134
+artist_first = true
+max_length = 118
+min_length = 118
+show_progress = true
+title_scroll = "always"
 
 [widget.network]
 show_label = false
@@ -367,6 +502,7 @@ visualization = "none"
 visualization = "none"
 
 [widget.toggle]
+enabled = false
 type = "maddingo/hypr-layout-switcher:toggle"
 
 [widget.tray]
@@ -392,6 +528,5 @@ type = "alexander/screen-toolkit:widget"
 active_pill_size = 1.75
 empty_color = "on_surface"
 focused_output_only = true
-occupied_color = "on_surface"
 scroll_repeat = "steps"
 style = "minimal"
