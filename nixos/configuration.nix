@@ -325,7 +325,7 @@
     isNormalUser = true;
     description = "echoes";
     uid = 1000;
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "input" ]; # input - for evdev in autokbl
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "input" "wireshark" ]; # input - for evdev in autokbl
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  kdePackages.kate
