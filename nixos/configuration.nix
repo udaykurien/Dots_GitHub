@@ -509,6 +509,9 @@
     (python3.withPackages (ps: with ps; [ evdev pyusb ]))
     adw-gtk3
     adwaita-icon-theme
+    pkgs-unstable.audacity
+    
+    # -- Bb
     bibata-cursors
     binutils
     blanket
