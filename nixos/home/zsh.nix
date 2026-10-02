@@ -29,7 +29,7 @@
       # Nix flake updates
       editNixFlake = "sudo nvim /etc/nixos/flake.nix";
       editNixConfig = "sudo nvim /etc/nixos/configuration.nix";
-      nixRebuild = "dotsNix && sudo nixos-rebuild switch --flake .#SpiritBox";
+      nixrs = "dotsNix && sudo nixos-rebuild switch --flake .#SpiritBox";
       nixUpdate = "dotsNix && sudo nix flake update && nixRebuild && cd -";
 
       # Ports for localsend
