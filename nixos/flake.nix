@@ -12,10 +12,6 @@
       url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
    };
-    # noctalia = {
-    #   url = "github:noctalia-dev/noctalia-shell/v5.0.1";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, nix-flatpak, home-manager, silentSDDM, ... }:
   let

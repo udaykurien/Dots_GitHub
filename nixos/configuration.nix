@@ -177,7 +177,7 @@
   # services.xserver.desktopManager.xfce.enable = true;
 
   # COSMIC DE
-  # services.desktopManager.cosmic.enable = true;
+  services.desktopManager.cosmic.enable = true;
   
   # Set greeter
   # GDM
@@ -192,7 +192,7 @@
   # Themed (silent) SDDM
   programs.silentSDDM = {
     enable = true;
-    theme = "nord";
+    theme = "nord"; # nord
     settings = {
       General = {
         scale = 1.25;
@@ -201,7 +201,7 @@
         shape = "circle";
       };
       "LoginScreen.VirtualKeyboard" = {
-        start-hidden = false;
+        start-hidden = true;
       };
     };
   };
@@ -360,9 +360,35 @@
   services.flatpak.update.onActivation = true;
   
   # Niri module already adss these xdg's, so no need to include them here
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-wlr ];
-
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-wlr ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+    # config = {
+    #   # General fallback
+    #   common.default = [ "gtk" ];
+    #
+    #   # Niri
+    #   niri.default = [ "gnome" "gtk" ];
+    #
+    #   # Hyprland
+    #   Hyprland.default = [ "hyprland" "gtk" ];
+    #
+    #   # MangoWC (using the WLR portal)
+    #   sway = {
+    #     default = [ "gtk" ];
+    #     "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+    #     "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+    #   };
+    # };
+  };
+  
   # Give flatpak apps access to gtk theme directories
   services.flatpak.overrides = {
     global = {
@@ -478,6 +504,9 @@
   # Install steam
   programs.steam.enable = true;
 
+  # Install geary
+  programs.geary.enable = true;
+
   # To fix numpy and dll errors.
   programs.nix-ld = {
     enable = true;
@@ -507,18 +536,24 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (python3.withPackages (ps: with ps; [ evdev pyusb ]))
+    # -- Aa
     adw-gtk3
     adwaita-icon-theme
     pkgs-unstable.audacity
     
     # -- Bb
+    bemenu
     bibata-cursors
     binutils
     blanket
     brightnessctl
     btop
+    
+    # -- Cc
     cava
     celluloid
+    # Manually download deb and and it to store for this to work: nix-store --add-fixed sha256 ~/Stuff/Cisco/CiscoPacketTracer_901_Ubuntu_64bit.deb
+    cisco-packet-tracer_9
     cmatrix
     cmus
     cudaPackages.cuda_cudart
@@ -530,11 +565,13 @@
     cudaPackages.libcusolver
     cudaPackages.libcusparse
     curl
+    
+    # -- Dd
     dconf-editor
     deja-dup
     # discord
     kdePackages.plasma-integration
-  kdePackages.frameworkintegration
+    kdePackages.frameworkintegration
     kdePackages.dolphin
     kdePackages.qt6ct
     kdePackages.breeze
@@ -547,17 +584,24 @@
     gnutls
     (aspellWithDicts (dicts: with dicts; [ en ]))
     #############################
+    
+    # -- Ee
     easyeffects
     eloquent
     exfatprogs
     exiftool
     eza
+
+    # -- Ff
     fastfetch
     ffmpeg
     file
     flat-remix-icon-theme
     foliate
-#    gamescope 
+    fuchsia-cursor
+
+    # -- Gg
+    # gamescope 
     gcc
     ghostty
     gnumake
@@ -584,54 +628,76 @@
     gnome-boxes
     gnome-control-center
     gnome-disk-utility
-    gnomeExtensions.appindicator
-    gnome-extension-manager
-    gnomeExtensions.caffeine
-    gnomeExtensions.clipboard-history
-    gnomeExtensions.color-picker
-    gnomeExtensions.gtile
-    gnomeExtensions.just-perfection
-    gnomeExtensions.vitals
-    gnomeExtensions.user-themes
+    # gnomeExtensions.appindicator
+    # gnome-extension-manager
+    # gnomeExtensions.caffeine
+    # gnomeExtensions.clipboard-history
+    # gnomeExtensions.color-picker
+    # gnomeExtensions.gtile
+    # gnomeExtensions.just-perfection
+    # gnomeExtensions.vitals
+    # gnomeExtensions.user-themes
     gnome-tweaks
+    gns3-gui
+    gns3-server
     gnumake
     gparted
     grim
     # grimblast
+
+    # -- Hh
     helix
     hicolor-icon-theme
     htop
     hyprpolkitagent
     hyprpicker
+    
+    # -- Ii
     id3v2
     imagemagick
     imv
+    iw
+
+    # -- Jj
     jdk21
     jq
+
+    # -- Kk
     # kooha
     kitty
     kdePackages.qtstyleplugin-kvantum
+
+    # -- Ll
+    lazygit
     libnotify
     libreoffice
     librewolf
     libsecret # Needed by same apps to talk to secret service api
     localsend
+    lshw
     lynis
+
+    # -- Mm
     macchanger
     mpc
     mpv
-    ncmpcpp
-    ntfs3g
-    lazygit
-    lshw
+
+    # -- Nn
     nasm
     ncdu
+    ncmpcpp
     neovim
+    nmap
     noctalia
     nodejs
+    ntfs3g
     nvme-cli
     # nwg-look
+
+    # -- Oo
     obs-studio
+
+    # -- Pp
     papirus-icon-theme
     pciutils
     pdfarranger
@@ -643,41 +709,59 @@
     python3
     python313Packages.yt-dlp-ejs
     pywalfox-native
+
+    # -- Qq
     libsForQt5.qt5ct
     qt6Packages.qt6ct
+
+    # -- Rr
     ranger
     rubberband
-#   signal-desktop-bin
+
+    # -- Ss
+    # signal-desktop-bin
     satty
     sddm-astronaut
     slurp
     songrec
     starship
     superfile
+
+    # -- Tt
     tcpdump
     tesseract
     tgpt
-    thunar
     tmux
     tree
     tree-sitter
     tuxguitar
+
+    # -- Uu
     udiskie
     unzip
     usbutils
+
+    # -- Vv
     vimPlugins.vim-plug
     vlc
+
+    # -- Ww
     wev
     wgnord # Follow instructions from here: https://github.com/phirecc/wgnord
     wget
+    wireshark
     wl-clipboard
+
+    # -- Xx
     xdg-utils
     xwayland-satellite
     xxd
+
+    # -- Yy
     yaru-theme
     yt-dlp
-#    pkgs-unstable.zed-editor
-    zathura
+
+    # -- Zz
     zbar
     zed-editor
     zsh
@@ -697,8 +781,6 @@
     { appId = "org.signal.Signal"; origin = "flathub"; }
     { appId = "io.github.Foldex.AdwSteamGtk"; origin = "flathub"; }
     # { appId = "io.github.celluloid_player.Celluloid"; origin = "flathub"; }
-    # { appId = "com.brave.Browser"; origin = "flathub"; }
-    # { appId = "io.gitlab.librewolf-community"; origin = "flathub"; } 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
