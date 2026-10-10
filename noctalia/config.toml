@@ -25,3 +25,8 @@ interactive = false
 # Hide network/wifi applet and bluemand from sys tray as there are already dedicated widgets for them
 [widget.tray]
 hidden = ["blueman", "network"]
+
+# Set up default location for screenshots so that it meets screen-toolkit plugin expectations
+[shell.screenshot]
+directory = "/home/echoes/Pictures/Screenshots"
+save_to_file = true
