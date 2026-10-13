@@ -112,6 +112,7 @@ pinned = [
     "org.gnome.Nautilus",
     "firefox",
     "librewolf",
+    "app.zen_browser.zen",
     "dev.zed.Zed",
     "org.gnome.Resources",
     "steam",
@@ -277,9 +278,9 @@ polkit_agent = true
 [theme]
 builtin = "Ayu"
 community_palette = "Atuel"
-custom_palette = "scenery-from-a-dream-wallhaven-mod"
+custom_palette = "cogs-minimal-rb"
 mode = "dark"
-source = "custom"
+source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
@@ -293,13 +294,13 @@ transition = [ "disc", "fade", "wipe", "zoom" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/coldrain-vena-wallhaven-eozxpl.png"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/coldrain-vena-wallhaven-eozxpl.png"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/coldrain-vena-wallhaven-eozxpl.png"
+    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
 
     [[wallpaper.favorite]]
     builtin_palette = "Ayu"
@@ -326,10 +327,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-monochrome"
 
     [[wallpaper.favorite]]
-    custom_palette = "scenery-from-a-dream-wallhaven-mod"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/volkswagen-van-adventure-in-anime-style-art-backiee-4K.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -356,20 +357,22 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/Favorites/b-586.jpg"
     theme_mode = "auto"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "scenery-from-a-dream-wallhaven-mod"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/wallhaven-4vgxl3.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/zdizdislaw-2561197.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
 
     [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/Blank-20260116T054414Z-3-001/Blank/PNG/Jammy-Jellyfish_WP_4096x2304_Grey_Blank.png"
@@ -409,7 +412,7 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/satellite-1785113660859854.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-content"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/wallpapersden.com_dark-starfield-hd-minimal-space_3840x2025.jpg"
