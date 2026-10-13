@@ -597,6 +597,7 @@
     ffmpeg
     file
     flat-remix-icon-theme
+    floorp-bin
     foliate
     fuchsia-cursor
 
@@ -716,6 +717,7 @@
 
     # -- Rr
     ranger
+    rich-cli
     rubberband
 
     # -- Ss
@@ -738,6 +740,7 @@
 
     # -- Uu
     udiskie
+    ungoogled-chromium
     unzip
     usbutils
 
@@ -780,6 +783,7 @@
     # { appId = "com.vscodium.codium"; origin = "flathub"; }
     { appId = "org.signal.Signal"; origin = "flathub"; }
     { appId = "io.github.Foldex.AdwSteamGtk"; origin = "flathub"; }
+    { appId = "app.zen_browser.zen"; origin = "flathub"; }
     # { appId = "io.github.celluloid_player.Celluloid"; origin = "flathub"; }
   ];
 
