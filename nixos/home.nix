@@ -4,6 +4,7 @@
   imports = [
     #    ./home/neovim.nix
     ./home/zsh.nix
+    ./home/portal.nix
   ];
   
   # qt = {
@@ -19,10 +20,10 @@
   home.sessionPath = [
     "$HOME/.config/emacs/bin"
   ];
-
+  
   # let Home Manager manage itself
   programs.home-manager.enable = true;
-  
+
   # Default fonts / icons
   dconf.enable = true;
   dconf.settings."org/gnome/desktop/interface" = {
@@ -31,7 +32,7 @@
     monospace-font-name = "FiraCode Nerd Font 10";
     icon-theme = "Flat-Remix-Black-Dark";
   };
-
+  
   gtk.enable = true;   # keep this if you want GTK theming managed by HM, just not the font
 
   fonts.fontconfig.enable = true;
