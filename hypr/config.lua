@@ -71,6 +71,12 @@ return {
     win_split_direction_toggle =  main_mod .. " +J",
 
     -------------------
+    ---- SCROLLER  ----
+    -------------------
+    cycle_active_col_size_plus = main_mod .. " + L",
+    cycle_active_col_size_minus = main_mod .. " + H",
+
+    -------------------
     ---- OPEN APPS ----
     -------------------
     terminal_open = main_mod .. " + T",

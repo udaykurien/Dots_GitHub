@@ -9,10 +9,10 @@ local cfg = require("config")
 ------------------
 
 hl.env("TZDIR", "/etc/zoneinfo")
-hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
-hl.env("HYPRCURSOR_SIZE", "22")
-hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
-hl.env("XCURSOR_SIZE", "22")
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Amber")
+hl.env("HYPRCURSOR_SIZE", "20")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Amber")
+hl.env("XCURSOR_SIZE", "20")
 hl.env("QT_QPA_PLATFORM", "wayland")
 -- hl.env("QT_QPA_PLATFORMTHEME", "qt6ct") -- set to kde in nix config
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
@@ -57,7 +57,7 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
     -- hl.exec_cmd("udiskie --tray")
     -- hl.exec_cmd("easyeffects --gapplication-service")
-    hl.exec_cmd("flatpak run org.signal.Signal --start-in-tray")
+    -- hl.exec_cmd("flatpak run org.signal.Signal --start-in-tray")
     -- hl.exec_cmd("steam -silent")
     
     -- NOTE: Failsafe, incase gcr-ssh-agent doesn't auto enable as per configurations.nix.
@@ -176,7 +176,7 @@ hl.config({
         },
     },
     decoration = {
-        rounding = 8,
+        rounding = 0,
         blur = {
             enabled   = true,
             size      = 8,
@@ -389,6 +389,10 @@ hl.bind(cfg.win_mv_down,  hl.dsp.window.move({ direction = "down"  }))
 hl.bind(cfg.win_mv_to_prev_ws, hl.dsp.window.move({ workspace = "-1" }))
 hl.bind(cfg.win_mv_to_next_ws, hl.dsp.window.move({ workspace = "+1" }))
 
+-- Resize active scrolling column width
+hl.bind(cfg.cycle_active_col_size_plus, hl.dsp.layout("colresize +conf"))
+hl.bind(cfg.cycle_active_col_size_minus, hl.dsp.layout("colresize -conf"))
+
 -- -- Hyprspace
 -- hl.bind("SUPER + grave", function()
 --     hl.exec_cmd("hyprctl dispatch overview:toggle")
@@ -402,6 +406,9 @@ hl.config({
         force_split = 2,
         preserve_split = true,
     },
+    scrolling = {
+        explicit_column_widths = "0.25,0.5,0.75,1.00"
+    }
 })
 ------------------
 ---- SCRIPTS -----
@@ -425,6 +432,7 @@ hl.config({
     general = {
         col = {
             inactive_border = "rgba(595959aa)";
-    }
+            -- active_border = "rgba(ccccccff)";
+        }
     }
 })
