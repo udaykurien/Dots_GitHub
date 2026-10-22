@@ -1,7 +1,8 @@
-config_version = 14
+config_version = 15
 
 [audio]
 enable_overdrive = true
+sound_theme = "Yaru"
 
 [bar]
 order = [ "default" ]
@@ -12,20 +13,23 @@ order = [ "default" ]
     capsule_padding = 8.0
     capsule_radius = 8
     capsule_thickness = 0.61999998986721039
-    center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx", "widget" ]
-    end = [ "notifications", "tray", "bar_2", "group:g1", "group:g4", "session" ]
-    font_family = "IBM Plex Sans Text"
+    center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx" ]
+    end = [ "tray", "bar_2", "group:g1", "group:g4", "session" ]
+    font_family = "IBM Plex Sans Medm"
     margin_ends = 0
     padding = 8
     radius = 0
+    radius_bottom_left = 6
+    radius_bottom_right = 6
     scale = 0.90000000596046448
     shadow = false
-    start = [ "launcher", "privacy", "clock", "weather", "media", "group:g2" ]
+    start = [ "launcher", "clock", "weather", "privacy", "notifications", "media", "toggle", "group:g2" ]
     thickness = 38
 
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g4"
@@ -49,6 +53,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g1"
@@ -60,6 +65,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g2"
@@ -101,6 +107,7 @@ widget_order = []
     [desktop_widgets.widget]
 
 [dock]
+active_monitor_only = true
 background_opacity = 0.99999997764825821
 cross_axis_padding = 4
 enabled = true
@@ -130,6 +137,7 @@ radius_bottom_right = 8
 radius_top_left = 8
 radius_top_right = 8
 reserve_space = false
+shadow = false
 show_dots = true
 smart_auto_hide = true
 
@@ -153,6 +161,10 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
 [location]
 address = "toronto, canada"
+
+[lockscreen]
+grace_period_seconds = 2
+transition = [ "diamond", "disc", "fade", "golden", "melt", "pixel", "vortex", "wipe", "zoom" ]
 
 [lockscreen_widgets]
 enabled = true
@@ -225,7 +237,7 @@ background_opacity = 0.99999997764825821
 position = "top_center"
 
 [osd]
-background_opacity = 0.99999997764825821
+hide_delay_ms = 2000
 
 [plugin_settings."alexander/screen-toolkit"]
 panel_open_near_click = true
@@ -272,20 +284,60 @@ avatar_path = "/home/echoes/Pictures/DP/faces/cat.jpg"
 font_family = "IBM Plex Sans Medm"
 polkit_agent = true
 
+    [shell.launcher]
+    show_session_button = false
+    show_settings_button = false
+
     [shell.panel]
     open_near_click_control_center = true
+    session_position = "center"
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
 
 [theme]
 builtin = "Ayu"
-community_palette = "Atuel"
-custom_palette = "cogs-minimal-rb"
+community_palette = "ADW"
+custom_palette = "scenery-from-a-dream-wallhaven-mod"
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "mango", "niri", "qt" ]
-    community_ids = [ "zed", "steam", "papirus-icons" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "niri", "qt" ]
+    community_ids = [ "zed", "steam" ]
 
 [wallpaper]
 directory = "/home/echoes/Pictures"
@@ -294,19 +346,19 @@ transition = [ "disc", "fade", "wipe", "zoom" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/satellite-1785113660859854.png"
+    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
 
     [[wallpaper.favorite]]
-    builtin_palette = "Ayu"
-    palette_source = "builtin"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/osaka-jade-bg.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -346,12 +398,6 @@ transition_on_startup = true
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/wallhaven-4xdz13.png"
-    theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
-
-    [[wallpaper.favorite]]
-    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/Favorites/b-562.jpg"
     theme_mode = "dark"
     wallpaper_scheme = "m3-rainbow"
@@ -363,10 +409,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
-    custom_palette = "scenery-from-a-dream-wallhaven-mod"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/wallhaven-4vgxl3.png"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -431,9 +477,49 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    community_palette = "Jiva Paper"
-    palette_source = "community"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/cat-minimalism-wallpaper-78568cfa2f7c27791e609942c2099b60.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Light/persona5-888559.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Wallpapers/mixed-colors-mod1.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/mixed-colors.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big blur dark.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/Favourites/whale-under-boat-wallhaven-q2kx2l.png"
     theme_mode = "dark"
 
 [widget.audio_visualizer]
@@ -481,12 +567,14 @@ show_label = false
     scroll_up = "mic-volume-up 1"
 
 [widget.launcher]
+enabled = false
 glyph = "menu-2"
 
 [widget.media]
 artist_first = true
-max_length = 118
+max_length = 119
 min_length = 0
+rotate_album_art = true
 show_progress = true
 title_scroll = "always"
 
@@ -524,6 +612,10 @@ visualization = "none"
 
 [widget.temp]
 visualization = "none"
+
+[widget.toggle]
+enabled = false
+type = "maddingo/hypr-layout-switcher:toggle"
 
 [widget.tray]
 match_adjacent_spacing = true
