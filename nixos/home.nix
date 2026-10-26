@@ -24,6 +24,20 @@
   # let Home Manager manage itself
   programs.home-manager.enable = true;
 
+  # # Enable XDG autostart applications for Mango's graphical session
+  # systemd.user.targets.mango-session = {
+  #   Unit = {
+  #     Description = "Mango graphical session";
+  #     BindsTo = [ "graphical-session.target" ];
+  #     Wants = [
+  #       "graphical-session-pre.target"
+  #       "xdg-desktop-autostart.target"
+  #     ];
+  #     After = [ "graphical-session-pre.target" ];
+  #     Before = [ "xdg-desktop-autostart.target" ];
+  #   };
+  # };
+
   # Default fonts / icons
   dconf.enable = true;
   dconf.settings."org/gnome/desktop/interface" = {

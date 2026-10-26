@@ -15,17 +15,17 @@
     kernelPackages = pkgs.linuxPackages; # Default kernel
     # kernelPackages = pkgs.linuxPackages_zen; # Zen kernel
     consoleLogLevel = 0;
-    
+
     initrd = {
       verbose = false;
       systemd.enable = true;
       kernelModules = [ "amdgpu" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     };
-    
+
     kernelParams = [ "acpi_backlight=native" "quiet" "splash" "udev.log_priority=3" "rd.systemd.show_status=false" "nvidia-drm.modeset=1" "amd_pstate=active" ];
     # kernel.sysfs.devices.system.cpu.cpufreq.boost = "0"; # Disable Ryzen 7 5800H boost - but also locks power management from within linux
 
-    loader = { 
+    loader = {
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 5;
       efi.canTouchEfiVariables = true;
@@ -75,7 +75,7 @@
   # Nvidia driver.
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
-  
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -84,7 +84,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  
+
   hardware.nvidia.prime = {
     offload = {
       enable = true;
@@ -113,10 +113,10 @@
   # Key rings and PAM
   services.gnome.gnome-keyring.enable = true; # Daemon itself
   services.gnome.gcr-ssh-agent.enable = false; # For ssh since it's been shifted out of gnome-keyring. Set to false for ssh.startAgent to run without conflicts
-  programs.ssh.startAgent = true; 
+  programs.ssh.startAgent = true;
   security.pam.services.sddm.enableGnomeKeyring = true; # Unlock gnome-keyring when authenticated by sddm
   programs.seahorse.enable = true; # GUI to inspect/manage keys
-  
+
   # Sushi - Nautilus image previewer
   services.gnome.sushi.enable = true;
 
@@ -129,7 +129,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking.networkmanager.enable = true;
-  
+
   # Set up custom DNS
   networking.networkmanager.dns = "none";
   networking.nameservers = [ "127.0.0.1" ];
@@ -177,12 +177,12 @@
   # services.xserver.desktopManager.xfce.enable = true;
 
   # COSMIC DE
-  services.desktopManager.cosmic.enable = true;
-  
+  # services.desktopManager.cosmic.enable = true;
+
   # Set greeter
   # GDM
   # services.displayManager.gdm.enable = true; #GDM required for GNOME screen locking too
-  
+
   # # COSMIC greeter
   # services.displayManager.cosmic-greeter.enable = true;
 
@@ -197,11 +197,11 @@
       General = {
         scale = 1.25;
       };
-      "LoginScreen.LoginArea.Avatar" = { 
+      "LoginScreen.LoginArea.Avatar" = {
         shape = "circle";
       };
       "LoginScreen.VirtualKeyboard" = {
-        start-hidden = true;
+        start-hidden = false;
       };
     };
   };
@@ -216,22 +216,22 @@
   # Enable niri
   programs.niri = {
     enable = true;
-    # package = pkgs-unstable.niri;
+    # package = pkgs.unstable.niri;
   };
 
   # Enable mango
   programs.mangowc={
     enable = true;
-    package = pkgs-unstable.mango;
+    package = pkgs.unstable.mango;
   };
-  
+
   # Enable hyprland
   # programs.hyprland.enable = true;
   programs.uwsm.enable = true;
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    # package = pkgs-unstable.hyprland;
+    # package = pkgs.unstable.hyprland;
   };
 
   environment.sessionVariables.HYPR_PLUGIN_DIR = pkgs.symlinkJoin {
@@ -239,24 +239,26 @@
     paths = [ pkgs.hyprlandPlugins.hypr-dynamic-cursors ];
   };
 
-  
+
   # NOTE: DMS START >
-  # # Enable DMS with dsearch for files
-  # programs.dms-shell = {
-  #   enable = true;
-  #   package = pkgs-unstable.dms-shell;
-  # };
-  # programs.dsearch = {
-  #   enable = true;
-  #   systemd.enable = true;
-  #   package = pkgs-unstable.dsearch;
-  # };
   #
+  # Enable DMS with dsearch for files
+  programs.dms-shell = {
+    enable = true;
+    package = pkgs.unstable.dms-shell;
+  };
+  programs.dsearch = {
+    enable = true;
+    systemd.enable = true;
+    package = pkgs.unstable.dsearch;
+  };
+
   # # Stop dms service from autostarting so it doesn't collide with noctalia
   # # and doesn't double start due to WM config via exec-once or equivalen
-  # systemd.user.services.dms = {
-  #   wantedBy = lib.mkForce [ ];
-  # };
+  systemd.user.services.dms = {
+    wantedBy = lib.mkForce [ ];
+  };
+
   # NOTE: < DMS END
 
   # # Enable noctalia v5
@@ -273,7 +275,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  
+
   # Enable polkit
   security.polkit.enable = true;
 
@@ -346,49 +348,40 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
-    # extra-substituters = [ 
-    #   "https://noctalia.cachix.org" 
-    # ];
-    # extra-trusted-public-keys = [ 
-    #   "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-    # ];
+    extra-substituters = [
+      "https://noctalia.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
     download-buffer-size = 524288000;
   };
 
   # Set up flatpaks
   services.flatpak.enable = true;
   services.flatpak.update.onActivation = true;
-  
+
+  # Portals
   # Niri module already adss these xdg's, so no need to include them here
-  # xdg.portal.enable = true;
-  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-wlr ];
   xdg.portal = {
     enable = true;
+
+    # wlr = {
+    #   enable = true;
+    #   # Set screen share picker to noctalia dmenu on mangowc
+    #   settings.screencast = {
+    #     chooser_type = "dmenu";
+    #     chooser_cmd = "noctalia dmenu -p \"Select Screen\"";
+    #   };
+    # };
+
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
       xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland
     ];
-    # config = {
-    #   # General fallback
-    #   common.default = [ "gtk" ];
-    #
-    #   # Niri
-    #   niri.default = [ "gnome" "gtk" ];
-    #
-    #   # Hyprland
-    #   Hyprland.default = [ "hyprland" "gtk" ];
-    #
-    #   # MangoWC (using the WLR portal)
-    #   sway = {
-    #     default = [ "gtk" ];
-    #     "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-    #     "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-    #   };
-    # };
   };
-  
   # Give flatpak apps access to gtk theme directories
   services.flatpak.overrides = {
     global = {
@@ -411,14 +404,14 @@
     ln -sfT /home/echoes/.config/gtk-3.0 /etc/gtk-3.0
     ln -sfT /home/echoes/.config/gtk-4.0 /etc/gtk-4.0
   '';
-  
-  # # QT theming
-  # qt = {
-  #   enable = true;
-  #   # platformTheme = "qt6ct";
-  #   style = "breeze";
-  # };
-  
+
+  # QT theming
+  qt = {
+    enable = true;
+    # platformTheme = "qt6ct";
+    style = "breeze";
+  };
+
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "kde";
   };
@@ -446,9 +439,9 @@
 
   # Session variables are set on first log in
   environment.sessionVariables = {
-    XDG_DATA_DIRS = [ 
-      "/var/lib/flatpak/exports/share" 
-      "$HOME/.local/share/flatpak/exports/share" 
+    XDG_DATA_DIRS = [
+      "/var/lib/flatpak/exports/share"
+      "$HOME/.local/share/flatpak/exports/share"
     ];
     AI_PROVIDER = "sky"; # Tgpt, update it when there is a better provider
     CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
@@ -500,7 +493,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Install steam
   programs.steam.enable = true;
 
@@ -511,7 +504,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv.cc.cc.lib   # provides libstdc++.so.6
+      unstable.stdenv.cc.cc.lib   # provides libstdc++.so.6
       zlib
       libusb1
       cudaPackages.cuda_cudart
@@ -539,8 +532,8 @@
     # -- Aa
     adw-gtk3
     adwaita-icon-theme
-    pkgs-unstable.audacity
-    
+    audacity
+
     # -- Bb
     bemenu
     bibata-cursors
@@ -548,7 +541,7 @@
     blanket
     brightnessctl
     btop
-    
+
     # -- Cc
     cava
     celluloid
@@ -565,7 +558,7 @@
     cudaPackages.libcusolver
     cudaPackages.libcusparse
     curl
-    
+
     # -- Dd
     dconf-editor
     deja-dup
@@ -584,7 +577,7 @@
     gnutls
     (aspellWithDicts (dicts: with dicts; [ en ]))
     #############################
-    
+
     # -- Ee
     easyeffects
     eloquent
@@ -602,7 +595,7 @@
     fuchsia-cursor
 
     # -- Gg
-    # gamescope 
+    # gamescope
     gcc
     ghostty
     gnumake
@@ -652,7 +645,7 @@
     htop
     hyprpolkitagent
     hyprpicker
-    
+
     # -- Ii
     id3v2
     imagemagick
