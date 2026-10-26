@@ -784,6 +784,7 @@
     { appId = "org.signal.Signal"; origin = "flathub"; }
     { appId = "io.github.Foldex.AdwSteamGtk"; origin = "flathub"; }
     { appId = "app.zen_browser.zen"; origin = "flathub"; }
+    { appId = "io.github.plrigaux.sysd-manager"; origin = "flathub"; }
     # { appId = "io.github.celluloid_player.Celluloid"; origin = "flathub"; }
   ];
 
