@@ -42,7 +42,7 @@
     };
   };
 
-  # Disable CPU boost on start up
+  # Disable(0)/Enable(1) CPU boost on start up
   systemd.services.disable-cpu-boost = {
     description = "Disable CPU boost via sysfs at boot";
     wantedBy = [ "graphical.target" ];
@@ -55,7 +55,7 @@
       # Wait until cpufreq is present
       for i in {1..50}; do
         if [ -e /sys/devices/system/cpu/cpufreq/boost ]; then
-          echo 0 > /sys/devices/system/cpu/cpufreq/boost
+          echo 1 > /sys/devices/system/cpu/cpufreq/boost
           exit 0
         fi
         sleep 0.1
