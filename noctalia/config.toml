@@ -12,6 +12,11 @@ type = "sysmon"
 stat = "disk_used_pct"
 glyph = "storage"
 
+[widget.cpu_freq]
+type = "sysmon"
+stat = "cpu_freq"
+glyph = "activity"
+
 [widget.textdot]
 type = "text"
 text = "•"
