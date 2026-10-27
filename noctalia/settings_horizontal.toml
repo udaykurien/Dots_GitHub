@@ -1,4 +1,4 @@
-config_version = 15
+config_version = 16
 
 [audio]
 enable_overdrive = true
@@ -13,8 +13,21 @@ order = [ "default" ]
     capsule_padding = 8.0
     capsule_radius = 8
     capsule_thickness = 0.61999998986721039
-    center = [ "cpu", "temp", "ram", "swap", "control-center", "disk", "battery", "network_rx", "network_tx" ]
-    end = [ "tray", "bar_2", "group:g1", "group:g4", "session" ]
+    center = [ "cpu", "cpu_freq", "temp", "ram", "control-center", "disk", "battery", "network_rx", "network_tx" ]
+    end = [
+        "notifications",
+        "privacy",
+        "tray",
+        "widget_2",
+        "caffeine",
+        "status",
+        "input_volume",
+        "brightness",
+        "volume",
+        "bluetooth",
+        "network",
+        "session"
+    ]
     font_family = "IBM Plex Sans Medm"
     margin_ends = 0
     padding = 8
@@ -23,53 +36,33 @@ order = [ "default" ]
     radius_bottom_right = 6
     scale = 0.90000000596046448
     shadow = false
-    start = [ "launcher", "clock", "weather", "privacy", "notifications", "media", "toggle", "group:g2" ]
+    show_tooltip = false
+    start = [ "launcher", "group:g1", "weather", "media", "toggle", "group:g2", "btn" ]
     thickness = 38
 
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        border_width = 1.0
-        enabled = true
-        fill = "surface_variant"
-        id = "g4"
-        members = [
-            "status",
-            "textspace",
-            "brightness",
-            "textspace",
-            "input_volume",
-            "textspace",
-            "volume",
-            "textspace",
-            "bluetooth",
-            "textspace",
-            "network"
-        ]
-        opacity = 0.0
-        padding = 8.0
-        radius = 8.0
+        [bar.default.dead_zone.actions]
+        right = "none"
 
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
-        id = "g1"
-        members = [ "widget_2", "textspace", "notes", "textspace", "caffeine" ]
-        opacity = 0.0
-        padding = 8.0
-        radius = 8.0
-
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        border_width = 1.0
-        enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g2"
-        members = [ "btn", "workspaces" ]
+        members = [ "workspaces" ]
+        opacity = 0.0
+        padding = 8.0
+        radius = 8.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        border_width = 1.0
+        enabled = true
+        fill = "surface_container"
+        id = "g1"
+        members = [ "bar_2", "clock" ]
         opacity = 0.0
         padding = 8.0
         radius = 8.0
@@ -79,9 +72,6 @@ sidebar = "full"
 
     [[control_center.shortcuts]]
     type = "wifi"
-
-    [[control_center.shortcuts]]
-    type = "bluetooth"
 
     [[control_center.shortcuts]]
     type = "caffeine"
@@ -94,6 +84,9 @@ sidebar = "full"
 
     [[control_center.shortcuts]]
     type = "system"
+
+    [[control_center.shortcuts]]
+    type = "noctalia/wallhaven:shortcut"
 
 [desktop_widgets]
 schema_version = 2
@@ -117,7 +110,6 @@ main_axis_padding = 8
 pinned = [
     "com.mitchellh.ghostty",
     "org.gnome.Nautilus",
-    "firefox",
     "librewolf",
     "app.zen_browser.zen",
     "dev.zed.Zed",
@@ -131,11 +123,9 @@ pinned = [
     "org.wireshark.Wireshark",
     "dev.noctalia.Noctalia"
 ]
-radius = 0
-radius_bottom_left = 8
-radius_bottom_right = 8
-radius_top_left = 8
-radius_top_right = 8
+radius = 6
+radius_bottom_left = 12
+radius_bottom_right = 12
 reserve_space = false
 shadow = false
 show_dots = true
@@ -164,7 +154,7 @@ address = "toronto, canada"
 
 [lockscreen]
 grace_period_seconds = 2
-transition = [ "diamond", "disc", "fade", "golden", "melt", "pixel", "vortex", "wipe", "zoom" ]
+transition = [ "diamond", "disc", "fade", "golden", "melt", "vortex", "wipe" ]
 
 [lockscreen_widgets]
 enabled = true
@@ -188,7 +178,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -237,7 +227,8 @@ background_opacity = 0.99999997764825821
 position = "top_center"
 
 [osd]
-hide_delay_ms = 2000
+background_opacity = 0.99999997764825821
+hide_delay_ms = 2200
 
 [plugin_settings."alexander/screen-toolkit"]
 panel_open_near_click = true
@@ -252,8 +243,6 @@ manager_placement = "attached"
 list_mode = true
 panel_open_near_click = true
 panel_placement = "attached"
-panel_position = "center"
-show_center_tile = false
 show_deck = false
 show_monocle = false
 show_right_tile = false
@@ -285,6 +274,8 @@ font_family = "IBM Plex Sans Medm"
 polkit_agent = true
 
     [shell.launcher]
+    categories = false
+    show_app_actions = true
     show_session_button = false
     show_settings_button = false
 
@@ -330,9 +321,10 @@ polkit_agent = true
 [theme]
 builtin = "Ayu"
 community_palette = "ADW"
-custom_palette = "scenery-from-a-dream-wallhaven-mod"
+custom_palette = "satellite-1785113660859854-rb"
 mode = "dark"
 source = "wallpaper"
+sync_color_scheme = false
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
@@ -342,7 +334,7 @@ wallpaper_scheme = "m3-rainbow"
 [wallpaper]
 directory = "/home/echoes/Pictures"
 fill_color = "#000000"
-transition = [ "disc", "fade", "wipe", "zoom" ]
+transition = [ "disc", "fade", "melt", "vortex", "wipe" ]
 transition_on_startup = true
 
     [wallpaper.default]
@@ -388,7 +380,7 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/osaka-jade-bg-2.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -489,8 +481,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/persona5-n11amg4bebrd1.jpeg"
     theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -522,6 +516,51 @@ transition_on_startup = true
     path = "/home/echoes/Pictures/Favourites/whale-under-boat-wallhaven-q2kx2l.png"
     theme_mode = "dark"
 
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/PreviousPictures/wallpaper-1dd2a8.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/PreviousPictures/Waves Dark 6016x6016.jpg"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/wallhaven-5gwvz5_2.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big sur dark.png"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big sur day.png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big blur day..png"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Waves Wallpapers/Waves Dark 6016x6016.jpg"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/PreviousPictures/Zips/Waves Wallpapers/Waves Light 6016x6016.jpg"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/the_veiled_monolith.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/b-423.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
 [widget.audio_visualizer]
 bands = 32
 color_1 = "on_surface"
@@ -541,7 +580,9 @@ show_label = false
     scroll_up = "brightness-up 1"
 
 [widget.btn]
+show_text = true
 type = "ezequiel/mango_layouts:btn"
+update_interval = 100
 
 [widget.clock]
 format = "{:%H:%M}  •  {:%a}, {:%d}"
@@ -589,15 +630,13 @@ visualization = "none"
 network_speed_compact = true
 visualization = "none"
 
-[widget.notes]
-type = "noctalia/notes:notes"
-
 [widget.privacy]
 active_color = "error"
 hide_inactive = true
 icon_spacing = 18
 
 [widget.ram]
+glyph = "cpu-2"
 stat = "ram_pct"
 visualization = "none"
 
@@ -606,9 +645,6 @@ enabled = false
 
 [widget.status]
 type = "aristides/udiskie:status"
-
-[widget.swap]
-visualization = "none"
 
 [widget.temp]
 visualization = "none"
@@ -634,9 +670,8 @@ show_condition = false
 type = "alexander/screen-toolkit:widget"
 
 [widget.workspaces]
-active_pill_size = 1.75
-empty_color = "on_surface"
+active_pill_size = 1.9000000000000001
 focused_output_only = true
-hide_when_empty = true
+occupied_color = "primary"
 scroll_repeat = "steps"
-style = "minimal"
+style = "focus_hint"
