@@ -13,7 +13,7 @@ order = [ "default" ]
     capsule_padding = 8.0
     capsule_radius = 8
     capsule_thickness = 0.61999998986721039
-    center = [ "cpu", "cpu_freq", "temp", "ram", "control-center", "disk", "battery", "network_rx", "network_tx" ]
+    center = [ "cpu", "cpu_freq", "temp", "ram", "control-center", "swap", "disk", "network_rx", "network_tx" ]
     end = [
         "notifications",
         "privacy",
@@ -25,6 +25,7 @@ order = [ "default" ]
         "brightness",
         "volume",
         "bluetooth",
+        "battery",
         "network",
         "session"
     ]
@@ -104,14 +105,14 @@ active_monitor_only = true
 background_opacity = 0.99999997764825821
 cross_axis_padding = 4
 enabled = true
-icon_size = 28
+icon_size = 26
 inactive_opacity = 0.99999997764825821
 main_axis_padding = 8
 pinned = [
     "com.mitchellh.ghostty",
     "org.gnome.Nautilus",
-    "librewolf",
     "app.zen_browser.zen",
+    "librewolf",
     "dev.zed.Zed",
     "org.gnome.Resources",
     "steam",
@@ -124,8 +125,8 @@ pinned = [
     "dev.noctalia.Noctalia"
 ]
 radius = 6
-radius_bottom_left = 12
-radius_bottom_right = 12
+radius_bottom_left = 10
+radius_bottom_right = 10
 reserve_space = false
 shadow = false
 show_dots = true
@@ -154,7 +155,7 @@ address = "toronto, canada"
 
 [lockscreen]
 grace_period_seconds = 2
-transition = [ "diamond", "disc", "fade", "golden", "melt", "vortex", "wipe" ]
+transition = [ "disc", "fade", "golden", "melt", "vortex", "wipe" ]
 
 [lockscreen_widgets]
 enabled = true
@@ -168,9 +169,9 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
-    box_width = 336.0
+    box_width = 400.0
     cx = 1024.0
-    cy = 787.0
+    cy = 797.0
     output = "eDP-1"
     placement_height = 1280.0
     placement_width = 2048.0
@@ -189,6 +190,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -206,12 +208,15 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
         background = false
+        clock_style = "digital"
+        color = "on_surface"
+        shadow = false
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
-    box_height = 560.0
-    box_width = 640.0
-    cx = 1018.0
-    cy = 290.0
+    box_height = 256.0
+    box_width = 256.0
+    cx = 1024.0
+    cy = 448.0
     output = "eDP-1"
     placement_height = 1280.0
     placement_width = 2048.0
@@ -220,7 +225,12 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
         background = false
-        visualization_mode = "all"
+        background_color = "on_surface"
+        background_opacity = 0.80000000000000004
+        primary_color = "primary"
+        rotation_speed = 0.80000000000000004
+        secondary_color = "surface"
+        visualization_mode = "bars_rings"
 
 [notification]
 background_opacity = 0.99999997764825821
@@ -321,9 +331,9 @@ polkit_agent = true
 [theme]
 builtin = "Ayu"
 community_palette = "ADW"
-custom_palette = "satellite-1785113660859854-rb"
+custom_palette = "1805968-rb"
 mode = "dark"
-source = "wallpaper"
+source = "custom"
 sync_color_scheme = false
 wallpaper_scheme = "m3-rainbow"
 
@@ -338,13 +348,13 @@ transition = [ "disc", "fade", "melt", "vortex", "wipe" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
+    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
+    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
+    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -359,16 +369,16 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/geometric-figures-wallhaven-vg6wql.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -386,7 +396,7 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/wallhaven-gpmv53.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -404,7 +414,7 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/wallhaven-4vgxl3.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-content"
+    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -523,7 +533,10 @@ transition_on_startup = true
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/PreviousPictures/Waves Dark 6016x6016.jpg"
+    theme_mode = "dark"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -547,7 +560,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Waves Wallpapers/Waves Dark 6016x6016.jpg"
+    theme_mode = "auto"
 
     [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Waves Wallpapers/Waves Light 6016x6016.jpg"
@@ -561,6 +577,30 @@ transition_on_startup = true
     theme_mode = "dark"
     wallpaper_scheme = "m3-rainbow"
 
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/geometric-figures-wallhaven-vg6wql_mod01.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/ismail-inceoglu-signal-not-found.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/elizer-morcillos-watchtoweronthe-silkrox-calloutwolrdengine.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    custom_palette = "satellite-1785113660859854-rb"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/elizer-morcillos-watchtoweronthe-silkrox-calloutwolrdengine-mod01.jpg"
+    theme_mode = "dark"
+
 [widget.audio_visualizer]
 bands = 32
 color_1 = "on_surface"
@@ -571,6 +611,9 @@ width = 48
 
 [widget.bar_2]
 type = "noctalia/world_clock:bar"
+
+[widget.battery]
+show_label = false
 
 [widget.brightness]
 show_label = false
@@ -593,6 +636,9 @@ color = "primary"
 glyph = "badges-filled"
 
 [widget.cpu]
+visualization = "none"
+
+[widget.cpu_freq]
 visualization = "none"
 
 [widget.disk]
@@ -624,10 +670,12 @@ show_label = false
 
 [widget.network_rx]
 network_speed_compact = true
+network_speed_unit = "mb"
 visualization = "none"
 
 [widget.network_tx]
 network_speed_compact = true
+network_speed_unit = "mb"
 visualization = "none"
 
 [widget.privacy]
@@ -645,6 +693,9 @@ enabled = false
 
 [widget.status]
 type = "aristides/udiskie:status"
+
+[widget.swap]
+visualization = "none"
 
 [widget.temp]
 visualization = "none"
