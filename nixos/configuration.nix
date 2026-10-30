@@ -253,8 +253,8 @@
     package = pkgs.unstable.dsearch;
   };
 
-  # # Stop dms service from autostarting so it doesn't collide with noctalia
-  # # and doesn't double start due to WM config via exec-once or equivalen
+  # Stop dms service from autostarting so it doesn't collide with noctalia
+  # and doesn't double start due to WM config via exec-once or equivalen
   systemd.user.services.dms = {
     wantedBy = lib.mkForce [ ];
   };
@@ -570,12 +570,12 @@
     kdePackages.breeze
     kdePackages.breeze-icons
     kdePackages.plasma-workspace
-    ## DOOM EMACS dependencies ##
-    emacs
-    ripgrep
-    fd
-    gnutls
-    (aspellWithDicts (dicts: with dicts; [ en ]))
+    # ## DOOM EMACS dependencies ##
+    # emacs
+    # ripgrep
+    # fd
+    # gnutls
+    # (aspellWithDicts (dicts: with dicts; [ en ]))
     #############################
 
     # -- Ee
@@ -590,7 +590,7 @@
     ffmpeg
     file
     flat-remix-icon-theme
-    floorp-bin
+    # floorp-bin
     foliate
     fuchsia-cursor
 
