@@ -1,11 +1,12 @@
 window-decoration = client
 
-theme = Hybrid
+theme = Aizen Dark
 # theme = Hybrid
 #theme = Neobones Dark
 # theme = dankcolors
 font-size = 11
 font-family = "FiraCode Nerd Font Mono"
+adjust-cursor-thickness = 3
 background-opacity=1
 background = #111111
 
