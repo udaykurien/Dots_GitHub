@@ -245,12 +245,12 @@
   # Enable DMS with dsearch for files
   programs.dms-shell = {
     enable = true;
-    package = pkgs.unstable.dms-shell;
+    package = pkgs.unstable.dux-shell;
   };
   programs.dsearch = {
     enable = true;
     systemd.enable = true;
-    package = pkgs.unstable.dsearch;
+    package = pkgs.unstable.dux-search;
   };
 
   # Stop dms service from autostarting so it doesn't collide with noctalia
