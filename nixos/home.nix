@@ -116,4 +116,13 @@
       "x-scheme-handler/unknown" = "firefox.desktop";
     };
   };
+
+  xdg.desktopEntries.cmatrix = {
+    name = "CMatrix";
+    comment = "Terminal matrix effect";
+    exec = "ghostty -e cmatrix -a -b -C blue";
+    icon = "utilities-terminal";
+    terminal = false;
+    categories = [ "System" "TerminalEmulator" ];
+  };
 }
