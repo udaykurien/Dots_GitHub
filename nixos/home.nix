@@ -125,4 +125,18 @@
     terminal = false;
     categories = [ "System" "TerminalEmulator" ];
   };
+  
+  xdg.desktopEntries.cava = {
+    type = "Application";
+    name = "Cava";
+    genericName = "Audio Visualizer";
+    comment = "Console-based Audio Visualizer for ALSA";
+    exec = "ghostty -e cava";
+    terminal = false;
+    categories = [ "Audio" "Video" ];
+    icon = "utilities-terminal";
+    settings = {
+      Keywords = "audio;visualizer;tui;";
+    };
+  };
 }
