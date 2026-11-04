@@ -85,7 +85,7 @@ min_workspaces = 5
 #
 [appearance]
 border_width = 3
-# outer_border_width = 1
+outer_border_width = 2
 
 [appearance.blur]
 enabled = true
@@ -218,12 +218,14 @@ size = 24
 "Shift+XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down 1", allow_when_locked = true }
 "XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
 "XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioMicMute" = { action = "spawn noctalia msg mic-mute", allow_when_locked = true, repeat = false }
 "XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
 "XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
 "XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up 5", allow_when_locked = true }
 "XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down 5", allow_when_locked = true }
 "Shift+XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up 1", allow_when_locked = true }
 "Shift+XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down 1", allow_when_locked = true }
+"XF86Calculator" = { action = "spawn gnome-calculator", allow_when_locked = false, repeat = false }
 
 # Focus and movement
 "Mod+Left" = "window-focus-left"
