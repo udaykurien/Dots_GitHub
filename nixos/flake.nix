@@ -16,6 +16,7 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
     };
+    umbriel.url = "github:noctalia-dev/umbriel";
   };
 
   outputs = inputs@{
@@ -25,6 +26,7 @@
     nix-flatpak,
     home-manager,
     silentSDDM,
+    umbriel,
     ...
   }:
   let
@@ -43,6 +45,7 @@
         silentSDDM.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
+        umbriel.nixosModules.default
 
         {
           nixpkgs.overlays = [
