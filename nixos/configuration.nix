@@ -480,6 +480,26 @@
     };
   };
 
+  # Systemd service to change refresh rate based on AC connected state
+  systemd.user.services.refresh-rate = {
+    description = "Automatically adjust display refresh rate based on AC power";
+
+    serviceConfig = {
+      Type = "simple";
+      
+      ExecStart = "${pkgs.bash}/bin/bash /home/echoes/Stuff/Github/SystemPrograms/l5p-auto-refresh-rate/refresh-rate.sh";
+
+      Environment = "PATH=${pkgs.lib.makeBinPath [
+        pkgs.coreutils
+        pkgs.wlr-randr
+        pkgs.upower
+      ]}";
+
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+  };
+
   # Install firefox.
   programs.firefox = {
     enable = true;
