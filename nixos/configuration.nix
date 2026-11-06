@@ -487,7 +487,7 @@
     serviceConfig = {
       Type = "simple";
       
-      ExecStart = "${pkgs.bash}/bin/bash /home/echoes/Stuff/Github/SystemPrograms/l5p-auto-refresh-rate/refresh-rate.sh";
+      ExecStart = "${pkgs.bash}/bin/bash /home/echoes/Stuff/Github/SystemPrograms/l5p-auto-refresh-rate/refresh-rate-event-driven.sh";
 
       Environment = "PATH=${pkgs.lib.makeBinPath [
         pkgs.coreutils
