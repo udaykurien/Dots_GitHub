@@ -764,6 +764,7 @@
     udiskie
     ungoogled-chromium
     unzip
+    upower
     usbutils
 
     # -- Vv
@@ -776,6 +777,7 @@
     wget
     wireshark
     wl-clipboard
+    wlr-randr
 
     # -- Xx
     xdg-utils
