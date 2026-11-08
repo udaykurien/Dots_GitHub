@@ -16,7 +16,7 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
     };
-    umbriel.url = "github:noctalia-dev/umbriel";
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
   };
 
   outputs = inputs@{
