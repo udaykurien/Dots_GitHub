@@ -27,7 +27,13 @@ files = ["noctalia.toml"]
 # https://docs.noctalia.dev/umbriel/configuration/#general
 #
 [general]
-autostart = ["noctalia"]
+autostart = [
+	"noctalia",
+	"flatpak run org.signal.Signal --start-in-tray",
+	"sh -c 'sleep 5; easyeffects --gapplication-service'",
+	"systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+	"systemctl --user start refresh-rate.service"
+	]
 # xwayland = false
 # Sharp X11 apps and games on scaled outputs; they see physical resolutions.
 # xwayland_native_resolution = true
@@ -76,7 +82,34 @@ vrr = "fullscreen"
 hdr = "auto"
 sdr_transfer = "gamma22" # Or "srgb" for piecewise SDR decoding in HDR.
 workspaces = "dynamic"
-min_workspaces = 5
+min_workspaces = 6
+
+# ==============================================================================
+# Workspaces
+[[workspace]]
+output = "eDP-1"
+index = 1
+layout.mode = "dwindle"
+
+[[workspace]]
+output = "eDP-1"
+index = 2
+layout.mode = "scrolling"
+
+[[workspace]]
+output = "eDP-1"
+index = 3
+layout.mode = "scrolling"
+
+[[workspace]]
+output = "eDP-1"
+index = 4
+layout.mode = "master"
+
+[[workspace]]
+output = "eDP-1"
+index = 5
+layout.mode = "stacking"
 
 # ==============================================================================
 # Appearance
@@ -86,6 +119,12 @@ min_workspaces = 5
 [appearance]
 border_width = 3
 outer_border_width = 2
+prefer_no_csd = true
+
+[colors.border]
+# focused = "#EEEEEEFF"
+unfocused = "#000000FF"
+outer = "#333333FF"
 
 [appearance.blur]
 enabled = true
@@ -96,6 +135,11 @@ noise = 0.04
 brightness = 0.9
 contrast = 0.9
 saturation = 1.1
+
+[appearance.title_bar]
+mode = "negotiated"
+height = 28
+buttons = ["minimize", "maximize", "close"]
 
 # Optional title bar with modifier-free dragging and floating frame resizing.
 # [appearance.title_bar]
@@ -183,7 +227,7 @@ natural_scroll = true
 
 # Set cursor theme
 [input.cursor]
-theme = "Bibata-Modern-Classic"
+theme = "Bibata-Modern-Amber"
 size = 24
 
 # Confine touch input to one display.
@@ -255,7 +299,7 @@ size = 24
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
 "Mod+bracketleft" = "window-consume-or-expel-left"
 "Mod+bracketright" = "window-consume-or-expel-right"
-"Mod+Period" = "window-consume-right"
+# "Mod+Period" = "window-consume-right"
 "Mod+Ctrl+Comma" = "window-consume-from-left"
 "Mod+Ctrl+Period" = "window-consume-from-right"
 # Needs layout.mode = "dwindle".
@@ -305,6 +349,14 @@ size = 24
 "Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
 "Mod+Tab" = "scratchpad-focus-next"
 
+# Layout related
+# Push window to primary on master
+"Mod+Return" = "window-move-left"
+"Mod+Shift+Return" = "window-move-right"
+# Switch layouts
+"Mod+Shift+Period" = "workspace-set-layout toggle scrolling dwindle master"
+"Mod+Period" = "spawn noctalia msg panel-toggle noctalia/umbriel-companion:panel"
+
 # ==============================================================================
 # Layout
 # New scrolling-layout windows start at half the output width. Without this
@@ -314,20 +366,28 @@ size = 24
 [layout]
 # mode = "scrolling" # "scrolling", "dwindle", "master", or "stacking".
 extent_presets = [0.333, 0.5, 0.667]
-gap = 4
+gap = 5
 # What a tiled window's own maximize button does: "column" fills the column,
 # "edges" fills the usable area without struts, gaps, or borders. The
 # window-toggle-maximize action is unaffected.
 # client_maximize = "column"
 
 [layout.stacking]
-# drop_zones = false # Disable edge and corner drop zones when dragging in the stacking layout.
+drop_zones = true # Enable edge and corner drop zones when dragging in the stacking layout.
+# [appearance.title_bar]
+# mode = "on"
 
 [layout.scrolling]
 default_extent_fraction = 0.5
 center_underfull_strip = false
 # Center the window picked in the overview, as column-center would.
 # center_on_overview_select = true
+
+[layout.master]
+position = "left"
+default_width_fraction = 0.60
+new_on_top = true
+new_becomes_master = true
 
 # A tab group shows one window at a time below a bar of titles, and stacks and
 # resizes like any row of its column. Mod+W tabs the focused window with the
@@ -450,6 +510,18 @@ default_pinned = true
 
 # ==============================================================================
 # Animations
+[animation]
+enabled = true
+
+[animation.windows_in]
+enabled = true
+curve = "spring:1,400"
+style = "zoom"
+
+[animation.windows_out]
+enabled = true
+curve = "spring:1,400"
+style = "zoom"
 
 # ==============================================================================
 # Layer rules
