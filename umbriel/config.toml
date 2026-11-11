@@ -316,6 +316,10 @@ size = 24
 "Mod+L" = "window-modify-primary-extent 0.05"
 "Mod+J" = "window-modify-secondary-extent -0.05"
 "Mod+K" = "window-modify-secondary-extent 0.05"
+"Mod+Shift+H" = "window-modify-primary-extent -0.01"
+"Mod+Shift+L" = "window-modify-primary-extent 0.01"
+"Mod+Shift+J" = "window-modify-secondary-extent -0.01"
+"Mod+Shift+K" = "window-modify-secondary-extent 0.01"
 
 # Workspaces
 # Move the whole workspace, retaining its name, layout, and windows.
