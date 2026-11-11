@@ -1,8 +1,10 @@
-config_version = 16
+config_version = 20
 
 [audio]
 enable_overdrive = true
 sound_theme = "Yaru"
+sound_volume = 0.74999998323619366
+spectrum_frame_rate = 30
 
 [bar]
 order = [ "default" ]
@@ -17,12 +19,13 @@ order = [ "default" ]
     end = [
         "notifications",
         "privacy",
+        "bar",
         "tray",
         "widget_2",
         "caffeine",
         "status",
-        "input_volume",
         "brightness",
+        "input_volume",
         "volume",
         "bluetooth",
         "battery",
@@ -33,12 +36,12 @@ order = [ "default" ]
     margin_ends = 0
     padding = 8
     radius = 0
-    radius_bottom_left = 6
-    radius_bottom_right = 6
+    radius_bottom_left = 8
+    radius_bottom_right = 8
     scale = 0.90000000596046448
     shadow = false
     show_tooltip = false
-    start = [ "launcher", "group:g1", "weather", "media", "toggle", "group:g2", "btn" ]
+    start = [ "launcher", "group:g1", "weather", "group:g2", "toggle", "workspaces", "bar_3", "btn" ]
     thickness = 38
 
         [bar.default.dead_zone.actions]
@@ -50,8 +53,8 @@ order = [ "default" ]
         border_width = 1.0
         enabled = true
         fill = "surface_container"
-        id = "g2"
-        members = [ "workspaces" ]
+        id = "g1"
+        members = [ "bar_2", "clock" ]
         opacity = 0.0
         padding = 8.0
         radius = 8.0
@@ -62,8 +65,8 @@ order = [ "default" ]
         border_width = 1.0
         enabled = true
         fill = "surface_container"
-        id = "g1"
-        members = [ "bar_2", "clock" ]
+        id = "g2"
+        members = [ "media", "audio_visualizer" ]
         opacity = 0.0
         padding = 8.0
         radius = 8.0
@@ -111,6 +114,7 @@ main_axis_padding = 8
 pinned = [
     "com.mitchellh.ghostty",
     "org.gnome.Nautilus",
+    "firefox",
     "app.zen_browser.zen",
     "librewolf",
     "dev.zed.Zed",
@@ -171,7 +175,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     box_height = 70.0
     box_width = 400.0
     cx = 1024.0
-    cy = 797.0
+    cy = 797.00018310546875
     output = "eDP-1"
     placement_height = 1280.0
     placement_width = 2048.0
@@ -190,6 +194,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_media_controls = true
         show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
@@ -216,7 +221,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     box_height = 256.0
     box_width = 256.0
     cx = 1024.0
-    cy = 448.0
+    cy = 448.00009155273438
     output = "eDP-1"
     placement_height = 1280.0
     placement_width = 2048.0
@@ -275,7 +280,9 @@ enabled = [
     "aristides/udiskie",
     "piero-93/battery-power-management",
     "ezequiel/mango_layouts",
-    "alexander/screen-toolkit"
+    "alexander/screen-toolkit",
+    "noctalia/umbriel-companion",
+    "oldirtty/color_picker"
 ]
 
 [shell]
@@ -292,6 +299,7 @@ polkit_agent = true
     [shell.panel]
     open_near_click_control_center = true
     session_position = "center"
+    shadow = false
 
     [[shell.session.actions]]
     action = "lock"
@@ -330,15 +338,16 @@ polkit_agent = true
 
 [theme]
 builtin = "Ayu"
-community_palette = "ADW"
-custom_palette = "1805968-rb"
-mode = "dark"
-source = "custom"
+community_palette = "ADW-green"
+custom_palette = "muted-orange"
+mode = "auto"
+shell_mode = "dark"
+source = "wallpaper"
 sync_color_scheme = false
 wallpaper_scheme = "m3-rainbow"
 
     [theme.templates]
-    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "niri", "qt" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "hyprland", "kcolorscheme", "niri", "qt", "umbriel" ]
     community_ids = [ "zed", "steam" ]
 
 [wallpaper]
@@ -348,13 +357,13 @@ transition = [ "disc", "fade", "melt", "vortex", "wipe" ]
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
     [wallpaper.last]
-    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
+    path = "/home/echoes/Pictures/gnome-disco-d-7a00e7d5f2fbf744f6888d5a634281ce7da9c671.webp"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -369,16 +378,16 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/geometric-figures-wallhaven-vg6wql.png"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/makima-chainsawy-man-reddit-9zbavxlqcyu91.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -393,10 +402,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "very-pale-green"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/wallhaven-gpmv53.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -417,14 +426,16 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
+    custom_palette = "muted-amber"
     palette_source = "custom"
     path = "/home/echoes/Pictures/zdizdislaw-2561197.jpg"
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/Blank-20260116T054414Z-3-001/Blank/PNG/Jammy-Jellyfish_WP_4096x2304_Grey_Blank.png"
     theme_mode = "auto"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -439,10 +450,10 @@ transition_on_startup = true
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "light-orange"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/PreviousPictures/minimal-dark-wp5848436-black-minimalist-hd-wallpapers.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-monochrome"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -454,23 +465,23 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/minimal-black-circle-wallhaven-g8klkl.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/satellite-1785113660859854.png"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     path = "/home/echoes/Pictures/wallpapersden.com_dark-starfield-hd-minimal-space_3840x2025.jpg"
     theme_mode = "auto"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "muted-orange"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/PreviousPictures/death-stranding-wallhaven-ey5pwk.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -479,10 +490,10 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    palette_source = "wallpaper"
+    custom_palette = "light-orange"
+    palette_source = "custom"
     path = "/home/echoes/Pictures/cat-minimalism-wallpaper-78568cfa2f7c27791e609942c2099b60.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -500,7 +511,7 @@ transition_on_startup = true
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/abstract-colors-8k-gradient-art_bWVlZ2WUmZqaraWkpJRpbWllrWdpZWU-2114031612.jpg"
     theme_mode = "dark"
-    wallpaper_scheme = "m3-rainbow"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -515,7 +526,7 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
+    custom_palette = "muted-red"
     palette_source = "custom"
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big blur dark.png"
     theme_mode = "dark"
@@ -527,10 +538,10 @@ transition_on_startup = true
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/PreviousPictures/wallpaper-1dd2a8.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -539,25 +550,28 @@ transition_on_startup = true
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/wallhaven-5gwvz5_2.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big sur dark.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big sur day.png"
     theme_mode = "auto"
-    wallpaper_scheme = "m3-rainbow"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Big Sur Wallpapers by niivu/big blur day..png"
     theme_mode = "auto"
-    wallpaper_scheme = "m3-rainbow"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -569,13 +583,16 @@ transition_on_startup = true
     path = "/home/echoes/Pictures/PreviousPictures/Zips/Waves Wallpapers/Waves Light 6016x6016.jpg"
 
     [[wallpaper.favorite]]
-    path = "/home/echoes/Pictures/the_veiled_monolith.jpg"
-
-    [[wallpaper.favorite]]
     palette_source = "wallpaper"
-    path = "/home/echoes/Pictures/Favorites/b-423.jpg"
+    path = "/home/echoes/Pictures/the_veiled_monolith.jpg"
     theme_mode = "dark"
     wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    custom_palette = "muted-orange"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/Favorites/b-423.jpg"
+    theme_mode = "dark"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -584,16 +601,16 @@ transition_on_startup = true
     wallpaper_scheme = "m3-rainbow"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/ismail-inceoglu-signal-not-found.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
-    custom_palette = "satellite-1785113660859854-rb"
-    palette_source = "custom"
+    palette_source = "wallpaper"
     path = "/home/echoes/Pictures/elizer-morcillos-watchtoweronthe-silkrox-calloutwolrdengine.jpg"
     theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
 
     [[wallpaper.favorite]]
     custom_palette = "satellite-1785113660859854-rb"
@@ -601,16 +618,93 @@ transition_on_startup = true
     path = "/home/echoes/Pictures/elizer-morcillos-watchtoweronthe-silkrox-calloutwolrdengine-mod01.jpg"
     theme_mode = "dark"
 
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-6ozkzl.jpg"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-z8dp1v.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/minimalist-macos-warm-color-palette-2025-best-ultra-hd-high-resolution-4k-desktop-backgrounds-wallpapers-for-mac-linux-and-windows-pc-11-03-2025-1741731580-hd-wallpaper.jpeg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/deathstar-ascii-wallhaven-jxg9qw.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    custom_palette = "very-pale-green"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/Favorites/b-1213.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    custom_palette = "green-darker-surface"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/3840x2160-v0-dx8849u2frud1.webp"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    custom_palette = "light-orange"
+    palette_source = "custom"
+    path = "/home/echoes/Pictures/wallhaven-3q77p6.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/Favorites/abstract-dreamscope-dimensions-u5.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/vector-design-retro-4k-fh.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+    [[wallpaper.favorite]]
+    path = "/home/echoes/Pictures/wallhaven-x687ll.png"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/echoes/Pictures/wallhaven-1k79v3.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "m3-rainbow"
+
+[widget.active_window]
+max_length = 80
+title_scroll = "always"
+
 [widget.audio_visualizer]
-bands = 32
-color_1 = "on_surface"
-color_2 = "on_surface"
+bands = 15
+color_1 = "secondary"
+color_2 = "secondary"
+enabled = false
 interactive = false
+reversed = true
 show_when_idle = true
-width = 48
+width = 72
+
+[widget.bar]
+show_idle_on_horizontal = false
+type = "noctalia/timer:bar"
 
 [widget.bar_2]
 type = "noctalia/world_clock:bar"
+
+[widget.bar_3]
+show_layout_name = true
+type = "noctalia/umbriel-companion:bar"
 
 [widget.battery]
 show_label = false
@@ -623,6 +717,7 @@ show_label = false
     scroll_up = "brightness-up 1"
 
 [widget.btn]
+enabled = false
 show_text = true
 type = "ezequiel/mango_layouts:btn"
 update_interval = 100
@@ -705,6 +800,7 @@ enabled = false
 type = "maddingo/hypr-layout-switcher:toggle"
 
 [widget.tray]
+colorize_icons = true
 match_adjacent_spacing = true
 
 [widget.volume]
@@ -722,6 +818,7 @@ type = "alexander/screen-toolkit:widget"
 
 [widget.workspaces]
 active_pill_size = 1.9000000000000001
+empty_color = "on_surface"
 focused_output_only = true
 occupied_color = "primary"
 scroll_repeat = "steps"
