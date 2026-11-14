@@ -533,6 +533,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+      glib
       unstable.stdenv.cc.cc.lib   # provides libstdc++.so.6
       zlib
       libusb1
@@ -561,7 +562,9 @@
     # -- Aa
     adw-gtk3
     adwaita-icon-theme
-    audacity
+    apostrophe
+    appimage-run
+    pkgs.unstable.audacity
 
     # -- Bb
     bemenu
@@ -574,10 +577,12 @@
     # -- Cc
     cava
     celluloid
+    cheese
     # Manually download deb and and it to store for this to work: nix-store --add-fixed sha256 ~/Stuff/Cisco/CiscoPacketTracer_901_Ubuntu_64bit.deb
     cisco-packet-tracer_9
     cmatrix
     cmus
+    constrict
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvcc
     cudaPackages.cudnn
@@ -665,6 +670,7 @@
     gns3-server
     gnumake
     gparted
+    # gradia
     grim
     # grimblast
 
@@ -722,6 +728,7 @@
 
     # -- Pp
     papirus-icon-theme
+    parabolic
     pciutils
     pdfarranger
     planify
@@ -762,7 +769,7 @@
 
     # -- Uu
     udiskie
-    ungoogled-chromium
+    # ungoogled-chromium
     unzip
     upower
     usbutils
