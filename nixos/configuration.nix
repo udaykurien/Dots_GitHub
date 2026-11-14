@@ -248,23 +248,23 @@
 
 
   # NOTE: DMS START >
-  #
-  # Enable DMS with dsearch for files
-  programs.dms-shell = {
-    enable = true;
-    package = pkgs.unstable.dux-shell;
-  };
-  programs.dsearch = {
-    enable = true;
-    systemd.enable = true;
-    package = pkgs.unstable.dux-search;
-  };
 
-  # Stop dms service from autostarting so it doesn't collide with noctalia
-  # and doesn't double start due to WM config via exec-once or equivalen
-  systemd.user.services.dms = {
-    wantedBy = lib.mkForce [ ];
-  };
+  # # Enable DMS with dsearch for files
+  # programs.dms-shell = {
+  #   enable = true;
+  #   package = pkgs.unstable.dux-shell;
+  # };
+  # programs.dsearch = {
+  #   enable = true;
+  #   systemd.enable = true;
+  #   package = pkgs.unstable.dux-search;
+  # };
+  #
+  # # Stop dms service from autostarting so it doesn't collide with noctalia
+  # # and doesn't double start due to WM config via exec-once or equivalen
+  # systemd.user.services.dms = {
+  #   wantedBy = lib.mkForce [ ];
+  # };
 
   # NOTE: < DMS END
 
