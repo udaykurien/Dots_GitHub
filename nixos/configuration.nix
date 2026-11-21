@@ -578,8 +578,8 @@
     cava
     celluloid
     cheese
-    # Manually download deb and and it to store for this to work: nix-store --add-fixed sha256 ~/Stuff/Cisco/CiscoPacketTracer_901_Ubuntu_64bit.deb
-    cisco-packet-tracer_9
+    # # Manually download deb and and it to store for this to work: nix-store --add-fixed sha256 ~/Stuff/Cisco/CiscoPacketTracer_901_Ubuntu_64bit.deb
+    # cisco-packet-tracer_9
     cmatrix
     cmus
     constrict
