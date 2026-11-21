@@ -44,7 +44,7 @@
     font-name = "IBM Plex Sans Medium 10";
     document-font-name = "IBM Plex Sans Text 10";
     monospace-font-name = "FiraCode Nerd Font 10";
-    icon-theme = "Flat-Remix-Black-Dark";
+    # icon-theme = "Flat-Remix-Blue-Dark";
   };
   
   gtk.enable = true;   # keep this if you want GTK theming managed by HM, just not the font
@@ -57,7 +57,7 @@
 
   # Icon themes
   gtk.iconTheme = {
-    name = "Flat-Remix-Black-Dark";
+    name = "Adwaita";
   };
 
   # Defafult apps
@@ -93,6 +93,7 @@
       "image/gif" = "org.gnome.Loupe.desktop";
       "image/webp" = "org.gnome.Loupe.desktop";
       "image/svg+xml" = "org.gnome.Loupe.desktop";
+      "image/jxl" = "org.gnome.Loupe.desktop";
 
 
       # Text files — GNOME Text Editor
