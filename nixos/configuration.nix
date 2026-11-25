@@ -206,6 +206,9 @@
     };
   };
 
+  # Set default session
+  services.displayManager.defaultSession = "umbriel";
+
   # Enable virtualization.
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
